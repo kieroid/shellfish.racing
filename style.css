@@ -1,0 +1,43 @@
+@font-face {
+    font-family: Creepster;
+    src: url(Creepster-Regular.ttf);
+}
+
+body {
+    background-image: url(bg.gif);
+    background-size: cover;
+    background-repeat:inherit;
+    color: white;
+    font-family: 'Courier New', monospace, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-attachment: fixed;
+}
+
+a {
+    color: rgb(255, 255, 255);
+}
+
+section {
+    text-align: center;
+}
+
+#body_fonts {
+    font-style:italic;
+    font-weight: bolder;
+    font-size: 1.5em;
+    line-height: 0.5
+}
+
+#site_header {
+    padding-bottom: 2em;
+    padding-top: 3em;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+#side_picture {
+    padding-bottom: 2em;
+    padding-top: 4em;
+    text-align: center;
+    font-size: 1.5em;
+}
+
