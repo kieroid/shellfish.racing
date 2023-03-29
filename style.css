@@ -3,6 +3,11 @@
     src: url(Creepster-Regular.ttf);
 }
 
+@font-face {
+    font-family: Z003;
+    src: url(Z003-MediumItalic.otf);
+}
+
 body {
     background-image: url(bg.gif);
     background-size: cover;
