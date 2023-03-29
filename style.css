@@ -33,13 +33,19 @@ section {
 }
 
 #site_header {
-    padding-bottom: 2em;
-    padding-top: 2em;
+    padding-bottom: 0.7em;
+    padding-top: 0.7em;
     text-align: center;
     font-size: 1.5em;
 }
 
+#mobile_notification {
+    display: inherit;
+}
 
+#silly_fonts {
+    font-family: Z003, monospace, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 @media screen and (min-width: 500px) {
     #blockLocation {
         position: relative;
@@ -52,5 +58,9 @@ section {
         padding-top: 3em;
         text-align: center;
         font-size: 1.5em;
+    }
+
+    #mobile_notification {
+        display: none;
     }
 }
