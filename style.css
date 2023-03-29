@@ -21,10 +21,11 @@ section {
 }
 
 #body_fonts {
+    position:relative;
     font-style:italic;
     font-weight: bolder;
     font-size: 1.5em;
-    line-height: 0.5
+    line-height: 0.5;
 }
 
 #site_header {
@@ -37,15 +38,35 @@ section {
 #mobile_notification {
     display: inherit;
 }
+#blockLocation_2 {
+    display: none;
+}
 
 #silly_fonts {
     font-family: Z003, monospace, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.5em;
 }
 @media screen and (min-width: 500px) {
-    #blockLocation {
+    #blockLocation_1 {
+        display: initial;
         position: relative;
-        bottom: 12em;
-        right: -25em;
+        right: -29em;
+    }
+
+    #blockLocation_2 {
+        display: initial;
+        position: relative;
+        bottom: 20em;
+        right: 27em;
+    }
+
+    #body_fonts {
+        position:relative;
+        font-style:italic;
+        font-weight: bolder;
+        font-size: 1.5em;
+        line-height: 0.5;
+        bottom: 22em;
     }
 
     #site_header {
