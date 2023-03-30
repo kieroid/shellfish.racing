@@ -56,7 +56,7 @@ section {
 #special_introduction {
     display: none;
 }
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 900px) {
     #blockLocation_1 {
         pointer-events: none;
         position:relative;
