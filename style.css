@@ -3,7 +3,7 @@
     src: url(fonts/Z003-MediumItalic.otf);
 }
 
-html, body{overflow:hidden;}
+html, body{overflow: hidden; text-align: center;}
 
 body {
     background-image: url(images/bg.gif);
@@ -12,14 +12,11 @@ body {
     color: white;
     font-family: 'Courier New', monospace, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-attachment: fixed;
+
 }
 
 a {
     color: rgb(255, 255, 255);
-}
-
-section {
-    text-align: center;
 }
 
 #body_fonts {
@@ -40,11 +37,8 @@ section {
 #mobile_notification {
     display: inherit;
 }
-#blockLocation_2 {
-    display: none;
-}
 
-#ascii_art {
+#blockLocation_2, #ascii_art {
     display: none;
 }
 
@@ -58,40 +52,50 @@ section {
 }
 @media screen and (min-width: 900px) {
     #blockLocation_1 {
-        pointer-events: none;
-        position:relative;
-        right: -32em;
-        bottom: 30em
+
+        position:absolute;
+        text-align: center;
+
+        left: 11in;
+        right: 0;
+        top: 1.5in;
     }
 
     #blockLocation_2 {
-        pointer-events: none;
+
         display: initial;
-        position:relative;
-        bottom: 50em;
-        right: 40em;
+        position:absolute;
+        text-align: center;
+
+        left: 0;
+        right: 13in;
+        top: 1in;
     }
+
     #special_introduction {
         display:initial;
-        font-size: 2.5em;
         font-style:italic;
         font-weight: bolder;
     }
 
     #body_fonts {
-        position:relative;
+        position:absolute;
         font-style:italic;
         font-weight: bolder;
         font-size: 2em;
-        right: -17em;
+
+        left: 10in;
+        right: 0;
+        top: 5in;
     }
 
     #ascii_art {
         display:initial;
-        position: relative;
+        position: fixed;
         font-size: 3px;
-        bottom: 8.4in;
-        right: -5in
+        left: 0;
+        right: 12in;
+        top: 6.5in;
     }
 
     #site_header {
