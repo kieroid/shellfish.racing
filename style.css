@@ -3,6 +3,8 @@
     src: url(fonts/Z003-MediumItalic.otf);
 }
 
+html, body{overflow:hidden;}
+
 body {
     background-image: url(images/bg.gif);
     background-size: cover;
@@ -42,31 +44,54 @@ section {
     display: none;
 }
 
+#ascii_art {
+    display: none;
+}
+
 #silly_fonts {
     font-family: Z003, monospace, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 1.5em;
 }
+
+#special_introduction {
+    display: none;
+}
 @media screen and (min-width: 500px) {
     #blockLocation_1 {
-        display: initial;
-        position: relative;
-        right: -29em;
+        pointer-events: none;
+        position:relative;
+        right: -32em;
+        bottom: 30em
     }
 
     #blockLocation_2 {
+        pointer-events: none;
         display: initial;
-        position: relative;
-        bottom: 20em;
-        right: 27em;
+        position:relative;
+        bottom: 50em;
+        right: 40em;
+    }
+    #special_introduction {
+        display:initial;
+        font-size: 2.5em;
+        font-style:italic;
+        font-weight: bolder;
     }
 
     #body_fonts {
         position:relative;
         font-style:italic;
         font-weight: bolder;
-        font-size: 1.5em;
-        line-height: 0.5;
-        bottom: 22em;
+        font-size: 2em;
+        right: -17em;
+    }
+
+    #ascii_art {
+        display:initial;
+        position: relative;
+        font-size: 3px;
+        bottom: 8.4in;
+        right: -5in
     }
 
     #site_header {
