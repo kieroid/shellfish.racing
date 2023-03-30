@@ -32,9 +32,7 @@
 <header id="site_header">
     <h1>
         kir
-        <sub style="margin-left: -45px;">
-            eran
-        </sub>
+        <sub id="spam" style="margin-left: -45px;"></sub>
     </h1>
 </header>
 
@@ -172,6 +170,15 @@ Oo   oo  oO  o888888888888888O           8888888888888888o   88     :O
     </span>
 </section>
 
-
+<script>
+    var kieran = [
+        "ra n"
+        , "kieran"
+        , "ran"
+        , "roeran"
+    ];
+    var kieran_id = Math.floor(Math.random() * kieran.length);
+    document.getElementById('spam').innerHTML = kieran[kieran_id];
+</script>
 
 </html> 
