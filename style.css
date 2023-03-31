@@ -19,6 +19,10 @@ a {
     color: rgb(255, 255, 255);
 }
 
+#blockLocation_1, #blockLocation_2, #ascii_art {
+    pointer-events: none;
+}
+
 #body_fonts {
     position:relative;
     font-style:italic;
@@ -72,7 +76,6 @@ a {
 
 @media screen and (min-width: 1200px) {
     #blockLocation_1 {
-
         position:absolute;
 
         left: 9in;
@@ -81,7 +84,6 @@ a {
     }
 
     #blockLocation_2 {
-
         display: initial;
         position:absolute;
 
