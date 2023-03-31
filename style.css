@@ -34,10 +34,6 @@ a {
     font-size: 1.5em;
 }
 
-#mobile_notification {
-    display: inherit;
-}
-
 #blockLocation_2, #ascii_art {
     display: none;
 }
@@ -50,7 +46,8 @@ a {
 #special_introduction {
     display: none;
 }
-@media screen and (min-width: 900px) {
+
+@media screen and (min-width: 1200px) {
     #blockLocation_1 {
 
         position:absolute;
@@ -103,9 +100,5 @@ a {
         padding-top: 3em;
         text-align: center;
         font-size: 1.5em;
-    }
-
-    #mobile_notification {
-        display: none;
     }
 }
