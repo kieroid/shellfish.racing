@@ -3,7 +3,7 @@
     src: url(fonts/Z003-MediumItalic.otf);
 }
 
-html, body{overflow: hidden; text-align: center;}
+html, body, #site_header, #blockLocation_1, #blockLocation_2, #ascii_art{text-align: center;}
 
 body {
     background-image: url(images/bg.gif);
@@ -27,33 +27,55 @@ a {
     line-height: 0.5;
 }
 
-#site_header {
-    padding-bottom: 0.7em;
-    padding-top: 0.7em;
-    text-align: center;
-    font-size: 1.5em;
-}
-
-#blockLocation_2, #ascii_art {
+#blockLocation_2, #ascii_art, #special_introduction {
     display: none;
 }
 
-#silly_fonts {
-    font-family: Z003, monospace, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 1.5em;
+@media screen and (max-width: 767px) {
+    #site_header {
+        padding-bottom: 0.7em;
+        padding-top: 0.7em;
+        font-size: 1.5em;
+    }
+
+    #silly_fonts {
+        font-family: Z003, monospace, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 1.5em;
+    }
 }
 
-#special_introduction {
-    display: none;
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    #blockLocation_1 {
+        display: initial;
+        position:absolute;
+
+        left: 4in;
+        right: 0;
+        top: 4.4in;
+    }
+
+    #ascii_art {
+        display:initial;
+        position: fixed;
+        font-size: 3px;
+        left: 0;
+        right: 4in;
+        top: 4.4in;
+    }
+
+    #site_header {
+        padding-bottom: 1em;
+        padding-top: 2em;
+        font-size: 1.8em;
+    }
 }
 
 @media screen and (min-width: 1200px) {
     #blockLocation_1 {
 
         position:absolute;
-        text-align: center;
 
-        left: 11in;
+        left: 9in;
         right: 0;
         top: 1.5in;
     }
@@ -62,10 +84,9 @@ a {
 
         display: initial;
         position:absolute;
-        text-align: center;
 
         left: 0;
-        right: 13in;
+        right: 11in;
         top: 1in;
     }
 
@@ -98,35 +119,6 @@ a {
     #site_header {
         padding-bottom: 2em;
         padding-top: 3em;
-        text-align: center;
         font-size: 1.5em;
-    }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1199px) {
-    #blockLocation_1 {
-
-        position:absolute;
-        text-align: center;
-
-        left: 5in;
-        right: 0;
-        top: 5in;
-    }
-
-    #ascii_art {
-        display:initial;
-        position: fixed;
-        font-size: 3px;
-        left: 0;
-        right: 5in;
-        top: 5in;
-    }
-
-    #site_header {
-        padding-bottom: 1em;
-        padding-top: 2em;
-        text-align: center;
-        font-size: 1.8em;
     }
 }
