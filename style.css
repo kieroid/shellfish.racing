@@ -19,7 +19,7 @@ a {
     color: rgb(255, 255, 255);
 }
 
-#blockLocation_1, #blockLocation_2, #ascii_art {
+#blockLocation_1, #blockLocation_2,#blockLocation_3, #ascii_art {
     pointer-events: none;
 }
 
@@ -31,7 +31,7 @@ a {
     line-height: 0.5;
 }
 
-#blockLocation_2, #ascii_art, #special_introduction {
+#blockLocation_2,#blockLocation_3, #ascii_art, #special_introduction {
     display: none;
 }
 
@@ -48,11 +48,10 @@ a {
     }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1199px) {
+@media screen and (min-width: 768px) and (max-width: 1249px) {
     #blockLocation_1 {
         display: initial;
         position:absolute;
-
         left: 4in;
         right: 0;
         top: 4.4in;
@@ -74,10 +73,9 @@ a {
     }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1250px) {
     #blockLocation_1 {
         position:absolute;
-
         left: 9in;
         right: 0;
         top: 1.5in;
@@ -86,9 +84,16 @@ a {
     #blockLocation_2 {
         display: initial;
         position:absolute;
-
         left: 0;
-        right: 11in;
+        right: 9in;
+        top: 1in;
+    }
+
+    #blockLocation_3 {
+        display: initial;
+        position:absolute;
+        left: 0;
+        right: 9in;
         top: 1in;
     }
 
@@ -103,19 +108,18 @@ a {
         font-style:italic;
         font-weight: bolder;
         font-size: 2em;
-
         left: 0;
         right: 0;
-        top: 5.75in;
+        top: 5.5in;
     }
 
     #ascii_art {
         display:initial;
-        position: fixed;
+        position: absolute;
         font-size: 3px;
-        left: 6in;
+        left: 7in;
         right: 0;
-        top: 4in;
+        top: 3.5in;
     }
 
     #site_header {
