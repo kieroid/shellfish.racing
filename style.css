@@ -23,7 +23,7 @@ a {
     pointer-events: none;
 }
 
-#body_fonts {
+#link_sheet {
     position:relative;
     font-style:italic;
     font-weight: bolder;
@@ -98,29 +98,29 @@ a {
         font-weight: bolder;
     }
 
-    #body_fonts {
+    #link_sheet {
         position:absolute;
         font-style:italic;
         font-weight: bolder;
         font-size: 2em;
 
-        left: 10in;
+        left: 0;
         right: 0;
-        top: 5in;
+        top: 5.75in;
     }
 
     #ascii_art {
         display:initial;
         position: fixed;
         font-size: 3px;
-        left: 0;
-        right: 12in;
-        top: 6.5in;
+        left: 6in;
+        right: 0;
+        top: 4in;
     }
 
     #site_header {
-        padding-bottom: 2em;
-        padding-top: 3em;
+        padding-bottom: 1.5em;
+        padding-top: 1.5em;
         font-size: 1.5em;
     }
 }
