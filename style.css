@@ -35,6 +35,7 @@ body {
     align-self: start;
     margin: 0 auto 0 auto;
     position: relative;
+    color: white;
 }
 #block0 {
     grid-area: 0 / 1 / 2 / 2;
