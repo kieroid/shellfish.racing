@@ -11,6 +11,7 @@ html {
     background-image: url(images/bg.gif);
     background-size: cover;
     background-attachment: fixed;
+    background-color: black;
 }
 
 body {
@@ -26,6 +27,8 @@ body {
 
     position: relative;
     height: auto;
+
+    color: white;
 }
 #block0,#block1,#block2,#block3 {
     justify-self: start;
@@ -53,4 +56,31 @@ body {
     width: 380px;
     height: 380px;
     left: 30em;
+}
+#block4 {
+    display: none;
+}
+
+@media screen and (max-width: 767px)  {
+    #block3 {
+        display: none;
+    }
+    #problemArea {
+        display: none;
+    }
+    #block2 {
+        left: 0;
+        grid-area: 3 / 1 / 4 / 2;
+        top: -40px;
+    }
+    #block4 {
+        display: initial;
+        grid-area: 4 / 1 / 5 / 2;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1249px) {
+    #block4 {
+        display: initial;
+        grid-area: 3 / 1 / 4 / 2;
+    }
 }
