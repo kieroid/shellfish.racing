@@ -21,8 +21,8 @@ body {
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: repeat(1, min-content) 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
 
     position: relative;
     height: auto;
@@ -30,7 +30,7 @@ body {
 #block0,#block1,#block2,#block3 {
     justify-self: start;
     align-self: start;
-    margin: 0px auto 0px auto;
+    margin: 0 auto 0 auto;
     position: relative;
 }
 #block0 {
