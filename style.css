@@ -65,9 +65,6 @@ body {
     #block3 {
         display: none;
     }
-    #problemArea {
-        display: none;
-    }
     #block2 {
         left: 0;
         grid-area: 3 / 1 / 4 / 2;
