@@ -1,6 +1,6 @@
 @keyframes bgScroll {
     0% {
-        background-position : 0px 0px
+        background-position : 0 0
     }
     100% {
         background-position : 1500px -1500px
