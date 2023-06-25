@@ -1,6 +1,6 @@
 @font-face {
     font-family: Z003;
-    src: url(Z003-MediumItalic.otf);
+    src: url(fonts/Z003-MediumItalic.otf);
 }
 
 a {
@@ -8,7 +8,7 @@ a {
 }
 
 html {
-    background-image: url(bg.gif);
+    background-image: url(images/bg.gif);
     background-size: cover;
     background-attachment: fixed;
     background-color: black;
@@ -30,7 +30,7 @@ body {
 
     color: white;
 }
-#block0,#block1,#block2,#block3 {
+#block0,#block1,#block3 {
     justify-self: start;
     align-self: start;
     margin: 0 auto 0 auto;
@@ -46,17 +46,11 @@ body {
 #block1 {
     grid-area: 2 / 1 / 3 / 2;
 }
-#block2 {
-    grid-area: 2 / 1 / 4 / 2;
-    font-size: 1em;
-    left: -25em;
-    line-height: 0.8em;
-}
+
 #block3 {
-    grid-area: 2 / 1 / 4 / 2;
+    grid-area: 3 / 1 / 4 / 2;
     width: 380px;
     height: 380px;
-    left: 30em;
 }
 #block4 {
     display: none;
