@@ -1,6 +1,6 @@
 @font-face {
     font-family: Z003;
-    src: url(fonts/Z003-MediumItalic.otf);
+    src: url(Z003-MediumItalic.otf);
 }
 
 a {
@@ -8,7 +8,7 @@ a {
 }
 
 html {
-    background-image: url(images/bg.gif);
+    background-image: url(bg.gif);
     background-size: cover;
     background-attachment: fixed;
     background-color: black;
