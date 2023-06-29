@@ -1,3 +1,57 @@
+//so if you didn't know, this is my first time doing javascript.
+//yeah, no. im kind of dumb. you will see many errors, many
+//repeatitive if statements, and a slow webpage. oh well.
+//feel free to take my code. its on the github too.
+//like you'd want it anyway...
+
+function exit(args) {
+    //help flag
+    if (args.includes("--help")) {
+        return html(`exit: exit<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Exit the shell.<br>&nbsp;&nbsp;&nbsp;&nbsp;(This isn't for you. This is for me.)`)
+    }
+
+    //password menu
+    let overall = document.getElementById('parent')
+    while (overall.hasChildNodes()) {
+        overall.removeChild(overall.firstChild)
+    }
+    let labelElement = document.createElement("label")
+    let passwordElement = document.createElement("input")
+    overall.appendChild(labelElement)
+    overall.appendChild(passwordElement)
+    labelElement.innerHTML = "Password: "
+    passwordElement.setAttribute("id","passwordElement")
+    passwordElement.focus()
+
+    //variety of answers. the average person wont see this but there is a face reveal.
+    //if u find this pls dont tell anyone. i like keeping it a secret.
+    document.addEventListener("keyup", function(e) {
+        if (e.key === 'Enter') {
+            if (passwordElement.value === "dread") { //i like this song. makes me sad
+                window.location.href = 'https://www.youtube.com/watch?v=ZwxDm1p-7To';
+            }
+            if (passwordElement.value === "2016") { //seventh grade was a mystery
+                window.location.href = 'https://www.youtube.com/watch?v=QF_rMivCwmk';
+            }
+            if (passwordElement.value === "2022") { //this was for my english class. kind of sucks
+                window.location.href = 'https://www.youtube.com/watch?v=b_S-ecnq6j4';
+            }
+            if (passwordElement.value === "dumb") { //omg!! you are so smart. im not. im dumb. im stupid
+                window.location.href = 'https://governor.nc.gov/news/press-releases/2021/06/03/18-nc-high-school-students-named-national-cyber-scholars-after-winning-nationwide-cybersecurity';
+            }
+            if (passwordElement.value === "lena") { //lenas page
+                window.location.href = '/lena/index.html';
+            }
+            if (passwordElement.value === "ari") { //lenas page
+                window.location.href = '/lena/index.html';
+            }
+            if (passwordElement.value === "glaggle") { //lenas page
+                window.location.href = '/glaggle/index.html';
+            }
+        }
+    })
+}
 function version() {
     return text("shellfish.racing v2.0.0 - 20230629")
 }
