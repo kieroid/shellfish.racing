@@ -2,7 +2,9 @@ function version() {
     return text("shellfish.racing v2.0.0 - 20230629")
 }
 function help(args) {
-    if ()
+    if (args[0] == '--help') {
+        return text('HEEEELP ME HEEEELP HEEELP HEEELP I AM STUCK HEEEEEEEELP HELP ME HEEEELP')
+    }
     return text(Object.keys(commands).join(", ") +"\n\nuse --help to get more help on a specific command")
 }
 function echo(args) {return text(args.join(" "))}
@@ -28,30 +30,36 @@ function sudo(args) {
 }
 function neofetch(args) {
     if (args.includes("--help")) {
-        return text(`Usage: neofetch [OPTION]...
-Neofetch is a CLI system information tool written in BASH. Neofetch
-displays information about your system next to an image, your OS logo,
-or any ASCII file of your choice.`)
-    } else {
-        return html(`
-            <div class="neofetch">
-                <img class="neofetch-img u-logo" src="k/images/hand.jpg" width="128" height="128">
-                <div class="neofetch-text">
-                    <b class=""><a href="/k/gpgpub.txt">kiroid</a></b>@<b class="magenta">shellfish.racing</b><br>
-                    ------------------------<br>
-                    hey there. i am "big k" "special k" or whatever u call me.
-                    the internet is crazy, and so i got bored one day so i made this. <br>
-                    on the topic of THIS stuff, i know a few programming languages (i think.) 
-                    <b>python, java, javascript, css</b>(?), <b>html</b>(?), <b>bash</b>(?)
-                    i dunno really. whatever it is, feel free to take a look.
-                    <br><br>
-                    <b>pronouns: </b>they/them<br>
-                    <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a> <a href="/k/gpgpub.txt">pgp</a><br>
-                    <b>contact: </b><a href="https://discord.com/invite/HynFCu5eax">discord</a> <a href="mailto: k@shellfish.racing">email</a>  <a href="https://matrix.im/#/@kiramu">matrix.org</a>
-                </div>
-            </div>
-        `);
+        // language=HTML
+        return html(`Usage: neofetch [OPTION]...<br>
+        Neofetch is a CLI system information tool written in BASH. Neofetch<br>
+        displays information about your system next to an image, your OS logo,<br>
+        or any ASCII file of your choice.<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;--fart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shittin and fartin`)
     }
+    if (args.includes("--fart")) {
+        return text("i dont really know what to put here but i wanted another option for neofetch so i mean... yk.. stuff")
+    }
+    return html(`
+        <div class="neofetch">
+            <img class="neofetch-img u-logo" src="k/images/hand.jpg" width="128" height="128">
+            <div class="neofetch-text">
+                <b class=""><a href="/k/gpgpub.txt">kiroid</a></b>@<b class="magenta">shellfish.racing</b><br>
+                ------------------------<br>
+                hey there. i am "big k" "special k" or whatever u call me.
+                the internet is crazy, and so i got bored one day so i made this. <br>
+                on the topic of THIS stuff, i know a few programming languages (i think.) 
+                <b>python, java, javascript, css</b>(?), <b>html</b>(?), <b>bash</b>(?)
+                i dunno really. whatever it is, feel free to take a look.
+                <br><br>
+                <b>pronouns: </b>they/them<br>
+                <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a> <a href="/k/gpgpub.txt">pgp</a><br>
+                <b>contact: </b><a href="https://discord.com/invite/HynFCu5eax">discord</a> <a href="mailto: k@shellfish.racing">email</a>  <a href="https://matrix.im/#/@kiramu">matrix.org</a>
+            </div>
+        </div>
+    `);
+
+
 
 
 }
