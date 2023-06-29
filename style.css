@@ -12,7 +12,6 @@ html {
 }
 
 html, button, input, optgroup, select, textarea {
-
     font-family: monospace;
     outline: none;
     border-color: transparent;
