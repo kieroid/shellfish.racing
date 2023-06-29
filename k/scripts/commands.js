@@ -151,5 +151,6 @@ const commands = {
     "clear": clear,
     "sudo": sudo,
     "neofetch": neofetch,
-    "version": version
+    "version": version,
+    "exit": exit
 };
