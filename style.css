@@ -1,0 +1,38 @@
+* {
+    background-color: transparent;
+    color: white;
+
+}
+
+html {
+    background-image: url(k/images/bg.gif);
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: black;
+}
+
+html, button, input, optgroup, select, textarea {
+    font-size: 100%;
+    font-family: monospace;
+    outline: none;
+    border-color: transparent;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+input {
+    border: 0;
+    outline: 0;
+}
+.neofetch {
+    display: flex;
+    flex-direction: row;
+    height: min-content;
+    padding: 1em;
+    gap: 1em;
+}
+.neofetch-text {
+    max-width: 600px;
+
+}
