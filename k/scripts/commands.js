@@ -16,11 +16,14 @@ function clear(args) {
     return text("")
 }
 function sudo(args) {
+    if (args[0] == ("--help")) {
+        return text("what am i supposed to say here?")
+    }
     if (args != "") {
         try {
             let sCommand = args[0];
             let sArgs = args.slice(1);
-            return text(commands[sCommand](sArgs))
+            return commands[sCommand](sArgs)
         } catch(err) {
             return text(`bash: sudo ${args}: command not found`)
         }
