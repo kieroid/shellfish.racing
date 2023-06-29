@@ -53,7 +53,7 @@ function exit(args) {
     })
 }
 function version() {
-    return text("shellfish.racing v2.0.0 - 20230629")
+    return text("shellfish.racing v3.0.0 - 20230629")
 }
 function help(args) {
     if (args[0] === '--help') {
