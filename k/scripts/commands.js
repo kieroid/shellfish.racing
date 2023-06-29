@@ -2,13 +2,13 @@ function version() {
     return text("shellfish.racing v2.0.0 - 20230629")
 }
 function help(args) {
-    if (args[0] == '--help') {
+    if (args[0] === '--help') {
         return text('HEEEELP ME HEEEELP HEEELP HEEELP I AM STUCK HEEEEEEEELP HELP ME HEEEELP')
     }
     return text(Object.keys(commands).join(", ") +"\n\nuse --help to get more help on a specific command")
 }
 function echo(args) {return text(args.join(" "))}
-function clear(args) {
+function clear() {
     let history = document.getElementById('history')
     while (history.hasChildNodes()) {
         history.removeChild(history.firstChild)
@@ -16,7 +16,7 @@ function clear(args) {
     return text("")
 }
 function sudo(args) {
-    if (args[0] == ("--help")) {
+    if (args[0] === ("--help")) {
         return text("what am i supposed to say here?")
     }
     if (args != "") {
@@ -45,7 +45,7 @@ function neofetch(args) {
     }
     return html(`
         <div class="neofetch">
-            <img class="neofetch-img u-logo" src="k/images/hand.jpg" width="128" height="128">
+            <img class="neofetch-img u-logo" src="/k/images/hand.jpg" width="128" height="128" alt="">
             <div class="neofetch-text">
                 <b class=""><a href="/k/gpgpub.txt">kiroid</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
@@ -77,12 +77,12 @@ function html(t) {
     return div;
 }
 function executeCommand(inputText,node) {
-    node.appendChild(document.createTextNode(`~ ${inputText}`))
+    node.appendChild(document.createTextNode(`kira@shellfish.racing ~ $ ${inputText}`))
     node.appendChild(document.createElement("br"))
 
     const command = inputText.trim().split(' ')[0];
     let args = inputText.trim().split(' ').slice(1);
-    if (command != "") {
+    if (command !== "") {
         try {
             node.appendChild(commands[command](args))
         } catch(err) {

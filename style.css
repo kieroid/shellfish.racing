@@ -24,6 +24,7 @@ html, button, input, optgroup, select, textarea {
 input {
     border: 0;
     outline: 0;
+
 }
 .neofetch {
     display: flex;
@@ -31,8 +32,15 @@ input {
     height: min-content;
     padding: 1em;
     gap: 1em;
+
 }
 .neofetch-text {
     max-width: 600px;
 
+}
+
+@media screen and (max-width: 767px)  {
+    .neofetch {
+        display: block;
+    }
 }
