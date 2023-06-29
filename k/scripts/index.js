@@ -22,7 +22,7 @@ document.addEventListener("keyup", function(e) {
         document.getElementById("history").appendChild(node);
 
         //remove start text
-        if (n == 0) {
+        if (n === 0) {
             document.getElementById("inputMessage").style.visibility = "hidden";
             n = 1;
         }
