@@ -4,7 +4,10 @@
 //feel free to take my code. its on the github too.
 //like you'd want it anyway...
 function cat(args) {
-
+    if (args.includes("--help")) {
+        return html(`Usage: cat [OPTION]... [FILE]...<br>
+Concatenate FILE(s) to standard output.`)
+    }
 }
 function ls(args) {
     if (args.includes("--help")) {
@@ -26,7 +29,7 @@ function exit(args) {
     //help flag
     if (args.includes("--help")) {
         return html(`exit: exit<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;Exit the shell.<br>&nbsp;&nbsp;&nbsp;&nbsp;(This isn't for you. This is for me.)`)
+        Exit the shell.`)
     }
 
     //password menu
@@ -42,9 +45,10 @@ function exit(args) {
     passwordElement.setAttribute("id","passwordElement")
     passwordElement.focus()
 
-    //variety of answers. the average person wont see this but there is a face reveal.
+    //variety of answers. the average person wont see this but my face is in one of them.
     //if u find this pls dont tell anyone. i like keeping it a secret.
     document.addEventListener("keyup", function(e) {
+
         if (e.key === 'Enter') {
             if (passwordElement.value === "dread") { //i like this song. makes me sad
                 window.location.href = 'https://www.youtube.com/watch?v=ZwxDm1p-7To';
@@ -67,6 +71,7 @@ function exit(args) {
             if (passwordElement.value === "glaggle") { //lenas page
                 window.location.href = '/glaggle/index.html';
             }
+            passwordElement.value = "";
         }
     })
 }
@@ -173,5 +178,6 @@ const commands = {
     "version": version,
     "exit": exit,
     "ls": ls,
-    "cd": cd
+    "cd": cd,
+    "cat": cat
 };
