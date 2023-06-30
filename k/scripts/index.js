@@ -6,7 +6,7 @@ executeCommand('neofetch',neofetchFirst)
 messageHistory.push("neofetch")
 document.getElementById("history").appendChild(neofetchFirst)
 
-document.addEventListener("keyup", function(e) {
+document.addEventListener("keydown", function(e) {
     if (e.key === 'Enter') {
         //input
         let input = document.getElementById("commandinput")
