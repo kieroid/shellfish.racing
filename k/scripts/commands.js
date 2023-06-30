@@ -3,6 +3,9 @@
 //repeatitive if statements, and a slow webpage. oh well.
 //feel free to take my code. its on the github too.
 //like you'd want it anyway...
+function cat(args) {
+
+}
 function ls(args) {
     if (args.includes("--help")) {
         return html(`Usage: ls [OPTION]... [FILE]...<br>
@@ -19,8 +22,6 @@ Mandatory arguments to long options are mandatory for short options too.<br>
 
     return html(`judgement<br>health`)
 }
-function cd(args) {return html("im too lazy to add a real file system.<br>¯\\_(ツ)_/¯")}
-
 function exit(args) {
     //help flag
     if (args.includes("--help")) {
@@ -69,38 +70,11 @@ function exit(args) {
         }
     })
 }
-function version() {
-    return text("shellfish.racing v3.0.0 - 20230629")
-}
 function help(args) {
     if (args[0] === '--help') {
         return text('HEEEELP ME HEEEELP HEEELP HEEELP I AM STUCK HEEEEEEEELP HELP ME HEEEELP')
     }
     return text(Object.keys(commands).join(", ") +"\n\nuse --help to get more help on a specific command")
-}
-function echo(args) {return text(args.join(" "))}
-function clear() {
-    let history = document.getElementById('history')
-    while (history.hasChildNodes()) {
-        history.removeChild(history.firstChild)
-    }
-    return text("")
-}
-function sudo(args) {
-    if (args[0] === ("--help")) {
-        return text("what am i supposed to say here?")
-    }
-    if (args != "") {
-        try {
-            let sCommand = args[0];
-            let sArgs = args.slice(1);
-            return commands[sCommand](sArgs)
-        } catch(err) {
-            return text(`bash: sudo ${args}: command not found`)
-        }
-    } else {
-        return text("")
-    }
 }
 function neofetch(args) {
     if (args.includes("--help")) {
@@ -137,6 +111,34 @@ function neofetch(args) {
 
 
 }
+function echo(args) {return text(args.join(" "))}
+function sudo(args) {
+    if (args[0] === ("--help")) {
+        return text("what am i supposed to say here?")
+    }
+    if (args != "") {
+        try {
+            let sCommand = args[0];
+            let sArgs = args.slice(1);
+            return commands[sCommand](sArgs)
+        } catch(err) {
+            return text(`bash: sudo ${args}: command not found`)
+        }
+    } else {
+        return text("")
+    }
+}
+function clear() {
+    let history = document.getElementById('history')
+    while (history.hasChildNodes()) {
+        history.removeChild(history.firstChild)
+    }
+    return text("")
+}
+function version() {
+    return text("shellfish.racing v3.0.0 - 20230629")
+}
+function cd() {return html("im too lazy to add a real file system.<br>¯\\_(ツ)_/¯")}
 function text(t) {
     const div = document.createElement('div');
     div.innerText = t;
