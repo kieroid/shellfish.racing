@@ -3,7 +3,20 @@
 //repeatitive if statements, and a slow webpage. oh well.
 //feel free to take my code. its on the github too.
 //like you'd want it anyway...
-
+function ls(args) {
+    if (args.includes("--help")) {
+        return html(`Usage: ls [OPTION]... [FILE]...<br>
+List information about the FILEs (the current directory by default).<br><br>
+Mandatory arguments to long options are mandatory for short options too.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-a, --all do not ignore entries starting with .`)
+    }
+    if (args.includes("--help")) {
+        return html(`Usage: ls [OPTION]... [FILE]...<br>
+List information about the FILEs (the current directory by default).<br><br>
+Mandatory arguments to long options are mandatory for short options too.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-a, --all do not ignore entries starting with .`)
+    }
+}
 function exit(args) {
     //help flag
     if (args.includes("--help")) {
