@@ -10,13 +10,17 @@ List information about the FILEs (the current directory by default).<br><br>
 Mandatory arguments to long options are mandatory for short options too.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;-a, --all do not ignore entries starting with .`)
     }
-    if (args.includes("--help")) {
-        return html(`Usage: ls [OPTION]... [FILE]...<br>
-List information about the FILEs (the current directory by default).<br><br>
-Mandatory arguments to long options are mandatory for short options too.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-a, --all do not ignore entries starting with .`)
+    if (args.includes("-a") || args.includes("--all"))  {
+        return html(`judgement<br>health<br>.death`)
     }
+    if (args != "") {
+        return html("im too lazy to add a real file system.<br>¯\\_(ツ)_/¯")
+    }
+
+    return html(`judgement<br>health`)
 }
+function cd(args) {return html("im too lazy to add a real file system.<br>¯\\_(ツ)_/¯")}
+
 function exit(args) {
     //help flag
     if (args.includes("--help")) {
@@ -165,5 +169,7 @@ const commands = {
     "sudo": sudo,
     "neofetch": neofetch,
     "version": version,
-    "exit": exit
+    "exit": exit,
+    "ls": ls,
+    "cd": cd
 };
