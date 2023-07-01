@@ -117,7 +117,24 @@ function neofetch(args) {
         &nbsp;&nbsp;&nbsp;&nbsp;--fart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shittin and fartin`)
     }
     if (args.includes("--fart")) {
-        return text("i dont really know what to put here but i wanted another option for neofetch so i mean... yk.. stuff")
+        return html(`
+        <div class="neofetch">
+            <img class="neofetch-img u-logo" src="/k/images/groggy.png" width="128" height="128" alt="">
+            <div class="neofetch-text">
+                <b class=""><a href="/k/gpgpub.txt">kiroid</a></b>@<b class="magenta">shellfish.racing</b><br>
+                ------------------------<br>
+                fart fart fart, poop poop. fart poop.<br>
+                poop is funny<br>
+                poop and fart poop<br>
+                farting is funny (farts are funny) fart fart<br>
+                fart
+                <br><br>
+                <b>pronouns: </b>they/them<br>
+                <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a> <a href="/k/gpgpub.txt">pgp</a><br>
+                <b>contact: </b><a href="https://discord.com/invite/HynFCu5eax">discord</a> <a href="mailto: k@shellfish.racing">email</a> <a href="https://matrix.to/#/@kiramu:matrix.org">matrix.org</a>
+            </div>
+        </div>
+        `)
     }
     return html(`
         <div class="neofetch">
