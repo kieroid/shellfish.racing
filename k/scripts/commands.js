@@ -8,6 +8,32 @@ function cat(args) {
         return html(`Usage: cat [OPTION]... [FILE]...<br>
 Concatenate FILE(s) to standard output.`)
     }
+    if (args.includes("albums"))  {
+        return html(`favorite albums:<br>
+            Dr. Dog - Shame, Shame<br>
+            Ryo Fukui - Scenery<br>
+            black midi - Hellfire<br>
+            Radiohead - OK Computer<br>
+            Radiohead - A Moon Shaped Pool<br>
+            Foster The People - Supermodel<br>
+            CASIOPEA - CASIOPEA<br>
+            Tally Hall - Marvin's Marvelous Mechanical Museum<br>
+            Rav - I'm on to Me<br>
+            Mac DeMarco - One Wayne G<br>
+            Sufjan  Stevens - Illinois<br>
+            Black Country, New Road - Ants From Up There<br>
+            Kero Kero Bonito - Civilisation`)
+    }
+    if (args.includes("really"))  {
+        return text(`i love you`)
+    }
+    if (args.includes(".whois"))  {
+        return html(`hey so im kira. thats my name. thats what im gonna be called.<br>i dunno what to say. yes, im trans.<br>"since when?!" you might be asking yourself in my mind right now. well, years.<br>ive known ive been trans since 2019 and always experienced weird thoughts all my life.<br>so dont be angry. you dont need to be angry.<br>im the one that has to be angry here. ive always hated myself, still do.<br>im hoping this will help me for the better.<br><br>i know ive been hiding this for years.<br>oh well.`)
+    }
+    if (args != "") {
+        return text(`cat: file ${args[0]} does not exist`)
+    }
+    return text("cat: missing file operand")
 }
 function ls(args) {
     if (args.includes("--help")) {
@@ -17,13 +43,13 @@ Mandatory arguments to long options are mandatory for short options too.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;-a, --all do not ignore entries starting with .`)
     }
     if (args.includes("-a") || args.includes("--all"))  {
-        return html(`judgement<br>health<br>.death`)
+        return html(`really<br>albums<br>.whois`)
     }
     if (args != "") {
         return html("im too lazy to add a real file system.<br>¯\\_(ツ)_/¯")
     }
 
-    return html(`judgement<br>health`)
+    return html(`really<br>albums`)
 }
 function exit(args) {
     //help flag
@@ -66,7 +92,7 @@ function exit(args) {
                 window.location.href = '/lena/index.html';
             }
             if (passwordElement.value === "ari") { //lenas page
-                window.location.href = '/lena/index.html';
+                window.location.href = '/ari/index.html';
             }
             if (passwordElement.value === "glaggle") { //lenas page
                 window.location.href = '/glaggle/index.html';
@@ -141,7 +167,7 @@ function clear() {
     return text("")
 }
 function version() {
-    return text("shellfish.racing v3.0.0 - 20230629")
+    return text("shellfish.racing v3.2.0 - 20230701")
 }
 function cd() {return html("im too lazy to add a real file system.<br>¯\\_(ツ)_/¯")}
 function text(t) {
