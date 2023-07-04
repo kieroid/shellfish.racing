@@ -71,32 +71,19 @@ function exit(args) {
     passwordElement.setAttribute("id","passwordElement")
     passwordElement.focus()
 
-    //variety of answers. the average person wont see this but my face is in one of them.
-    //if u find this pls dont tell anyone. i like keeping it a secret.
-    document.addEventListener("keyup", function(e) {
-
+    //do not look (secret)
+    const locations = {
+        "dread": 'https://www.youtube.com/watch?v=ZwxDm1p-7To',
+        "2016": 'https://www.youtube.com/watch?v=QF_rMivCwmk',
+        "2022": 'https://www.youtube.com/watch?v=b_S-ecnq6j4',
+        "dumb": 'https://governor.nc.gov/news/press-releases/2021/06/03/18-nc-high-school-students-named-national-cyber-scholars-after-winning-nationwide-cybersecurity',
+        "lena": '/lena/index.html',
+        "ari": '/ari/index.html',
+        "glaggle": '/glaggle/index.html'
+    };
+    document.addEventListener("keydown", function(e) {
         if (e.key === 'Enter') {
-            if (passwordElement.value === "dread") { //i like this song. makes me sad
-                window.location.href = 'https://www.youtube.com/watch?v=ZwxDm1p-7To';
-            }
-            if (passwordElement.value === "2016") { //seventh grade was a mystery
-                window.location.href = 'https://www.youtube.com/watch?v=QF_rMivCwmk';
-            }
-            if (passwordElement.value === "2022") { //this was for my english class. kind of sucks
-                window.location.href = 'https://www.youtube.com/watch?v=b_S-ecnq6j4';
-            }
-            if (passwordElement.value === "dumb") { //omg!! you are so smart. im not. im dumb. im stupid
-                window.location.href = 'https://governor.nc.gov/news/press-releases/2021/06/03/18-nc-high-school-students-named-national-cyber-scholars-after-winning-nationwide-cybersecurity';
-            }
-            if (passwordElement.value === "lena") { //lenas page
-                window.location.href = '/lena/index.html';
-            }
-            if (passwordElement.value === "ari") { //lenas page
-                window.location.href = '/ari/index.html';
-            }
-            if (passwordElement.value === "glaggle") { //lenas page
-                window.location.href = '/glaggle/index.html';
-            }
+            if (locations[passwordElement.value] != undefined) {window.location.href = locations[passwordElement.value]}
             passwordElement.value = "";
         }
     })
