@@ -39,9 +39,12 @@ input {
     max-width: 600px;
 }
 
-@media screen and (max-width: 767px)  {
+@media screen and (max-width: 790px)  {
     .neofetch {
         display: block;
+    }
+    .neofetch-text {
+        max-width: 415px;
     }
     * {
         font-size: 11px;
