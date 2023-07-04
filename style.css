@@ -31,8 +31,8 @@ input {
     display: flex;
     flex-direction: row;
     height: min-content;
-    padding: 1em;
-    gap: 1em;
+    padding: 16px;
+    gap: 16px;
 
 }
 .neofetch-text {
