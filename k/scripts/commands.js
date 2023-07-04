@@ -171,7 +171,7 @@ function clear() {
     return text("")
 }
 function version() {
-    return text("shellfish.racing v3.2.0 - 20230701")
+    return text("shellfish.racing v3.2.1 - 20230704")
 }
 function cd() {return html("im too lazy to add a real file system.<br>¯\\_(ツ)_/¯")}
 function text(t) {
