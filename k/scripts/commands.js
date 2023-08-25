@@ -77,9 +77,6 @@ function exit(args) {
         "2016": 'https://www.youtube.com/watch?v=QF_rMivCwmk',
         "2022": 'https://www.youtube.com/watch?v=b_S-ecnq6j4',
         "dumb": 'https://governor.nc.gov/news/press-releases/2021/06/03/18-nc-high-school-students-named-national-cyber-scholars-after-winning-nationwide-cybersecurity',
-        "lena": '/lena/index.html',
-        "ari": '/ari/index.html',
-        "glaggle": '/glaggle/index.html'
     };
     document.addEventListener("keydown", function(e) {
         if (e.key === 'Enter') {
@@ -185,7 +182,7 @@ function html(t) {
     return div;
 }
 function executeCommand(inputText,node) {
-    node.appendChild(document.createTextNode(`kira@shellfish.racing ~ $ ${inputText}`))
+    node.appendChild(document.createTextNode(`keeb@shellfish.racing ~ $ ${inputText}`))
     node.appendChild(document.createElement("br"))
 
     const command = inputText.trim().split(' ')[0];
