@@ -167,10 +167,6 @@ function clear() {
     }
     return text("")
 }
-function version() {
-    return text("shellfish.racing v3.2.1 - 20230704")
-}
-function cd() {return html("im too lazy to add a real file system.<br>¯\\_(ツ)_/¯")}
 function text(t) {
     const div = document.createElement('div');
     div.innerText = t;
@@ -202,9 +198,7 @@ const commands = {
     "clear": clear,
     "sudo": sudo,
     "neofetch": neofetch,
-    "version": version,
     "exit": exit,
     "ls": ls,
-    "cd": cd,
     "cat": cat
 };
