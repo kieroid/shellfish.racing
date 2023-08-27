@@ -132,7 +132,6 @@ function neofetch(args) {
                 <b>python, java, javascript, css</b>(?), <b>html</b>(?), <b>bash</b>(?)
                 i dunno really. whatever it is, feel free to take a look.
                 <br><br>
-                <b>pronouns: </b>they/them<br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a> <a href="/k/gpgpub.txt">pgp</a><br>
                 <b>contact: </b><a href="https://discord.com/invite/HynFCu5eax">discord</a> <a href="mailto: k@shellfish.racing">email</a> <a href="https://matrix.to/#/@kiramu:matrix.org">matrix.org</a>
             </div>
