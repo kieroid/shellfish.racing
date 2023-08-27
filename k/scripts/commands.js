@@ -105,7 +105,7 @@ function neofetch(args) {
         <div class="neofetch">
             <img class="neofetch-img u-logo" src="/k/images/groggy.png" width="128" height="128" alt="">
             <div class="neofetch-text">
-                <b class=""><a href="/k/gpgpub.txt">kiroid</a></b>@<b class="magenta">shellfish.racing</b><br>
+                <b class=""><a href="/k/gpgpub.txt">kieran</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
                 fart fart fart, poop poop. fart poop.<br>
                 poop is funny<br>
@@ -124,7 +124,7 @@ function neofetch(args) {
         <div class="neofetch">
             <img class="neofetch-img u-logo" src="/k/images/hand.jpg" width="128" height="128" alt="">
             <div class="neofetch-text">
-                <b class=""><a href="/k/gpgpub.txt">kiroid</a></b>@<b class="magenta">shellfish.racing</b><br>
+                <b class=""><a href="/k/gpgpub.txt">kieran</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
                 hey there. i am "big k" "special k" or whatever u call me.
                 the internet is crazy, and so i got bored one day so i made this. <br>
