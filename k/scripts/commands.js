@@ -87,9 +87,9 @@ function exit(args) {
 }
 function help(args) {
     if (args[0] === '--help') {
-        return text('HEEEELP ME HEEEELP HEEELP HEEELP I AM STUCK HEEEEEEEELP HELP ME HEEEELP')
+        return html('HEEEELP ME HEEEELP HEEELP HEEELP I AM STUCK HEEEEEEEELP HELP ME HEEEELP')
     }
-    return text(Object.keys(commands).join(", ") +"\n\nuse --help to get more help on a specific command")
+    return html(Object.keys(commands).join(", ") +"\n\nuse --help to get more help on a specific command")
 }
 function neofetch(args) {
     if (args.includes("--help")) {
