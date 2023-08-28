@@ -25,15 +25,15 @@ Concatenate FILE(s) to standard output.`)
             Kero Kero Bonito - Civilisation`)
     }
     if (args.includes("really"))  {
-        return text(`i love you`)
+        return html(`i love you`)
     }
     if (args.includes(".whois"))  {
         return html(`hey so im kira. thats my name. thats what im gonna be called.<br>i dunno what to say. yes, im trans.<br>"since when?!" you might be asking yourself in my mind right now. well, years.<br>ive known ive been trans since 2019 and always experienced weird thoughts all my life.<br>so dont be angry. you dont need to be angry.<br>im the one that has to be angry here. ive always hated myself, still do.<br>im hoping this will help me for the better.<br><br>i know ive been hiding this for years.<br>oh well.`)
     }
     if (args != "") {
-        return text(`cat: file ${args[0]} does not exist`)
+        return html(`cat: file ${args[0]} does not exist`)
     }
-    return text("cat: missing file operand")
+    return html("cat: missing file operand")
 }
 function ls(args) {
     if (args.includes("--help")) {
@@ -142,10 +142,10 @@ function neofetch(args) {
 
 
 }
-function echo(args) {return text(args.join(" "))}
+function echo(args) {return html(args.join(" "))}
 function sudo(args) {
     if (args[0] === ("--help")) {
-        return text("what am i supposed to say here?")
+        return html("what am i supposed to say here?")
     }
     if (args != "") {
         try {
@@ -153,10 +153,10 @@ function sudo(args) {
             let sArgs = args.slice(1);
             return commands[sCommand](sArgs)
         } catch(err) {
-            return text(`bash: sudo ${args}: command not found`)
+            return html(`bash: sudo ${args}: command not found`)
         }
     } else {
-        return text("")
+        return html("")
     }
 }
 function clear() {
@@ -164,12 +164,7 @@ function clear() {
     while (history.hasChildNodes()) {
         history.removeChild(history.firstChild)
     }
-    return text("")
-}
-function text(t) {
-    const div = document.createElement('div');
-    div.innerText = t;
-    return div;
+    return html("")
 }
 function html(t) {
     const div = document.createElement('div');
@@ -190,7 +185,6 @@ function executeCommand(inputText,node) {
         }
     }
 }
-
 const commands = {
     "help": help,
     "echo": echo,
