@@ -28,7 +28,7 @@ Concatenate FILE(s) to standard output.`)
         return html(`i love you`)
     }
     if (args.includes(".whois"))  {
-        return html(`hey so im kira. thats my name. thats what im gonna be called.<br>i dunno what to say. yes, im trans.<br>"since when?!" you might be asking yourself in my mind right now. well, years.<br>ive known ive been trans since 2019 and always experienced weird thoughts all my life.<br>so dont be angry. you dont need to be angry.<br>im the one that has to be angry here. ive always hated myself, still do.<br>im hoping this will help me for the better.<br><br>i know ive been hiding this for years.<br>oh well.`)
+        return html(`you have no idea who i am.`)
     }
     if (args != "") {
         return html(`cat: file ${args[0]} does not exist`)
