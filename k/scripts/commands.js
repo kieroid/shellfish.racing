@@ -115,7 +115,7 @@ function neofetch(args) {
                 <br><br>
                 <b>pronouns: </b>they/them<br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a> <a href="/k/gpgpub.txt">pgp</a><br>
-                <b>contact: </b><a href="https://discord.gg/H4JZbBc98f">discord</a> <a href="mailto: k@shellfish.racing">email</a> <a href="https://matrix.to/#/@kiramu:matrix.org">matrix.org</a>
+                <b>contact: </b><a href="https://discord.gg/Jxt345xFVk">discord</a> <a href="mailto: k@shellfish.racing">email</a> <a href="https://matrix.to/#/@kiramu:matrix.org">matrix.org</a>
             </div>
         </div>
         `)
