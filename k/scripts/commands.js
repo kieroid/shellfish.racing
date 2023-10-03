@@ -114,7 +114,7 @@ function neofetch(args) {
                 fart
                 <br><br>
                 <b>pronouns: </b>they/them<br>
-                <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a> <a href="/k/gpgpub.txt">pgp</a><br>
+                <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
                 <b>contact: </b><a href="https://discord.gg/Jxt345xFVk">discord</a> <a href="mailto: k@shellfish.racing">email</a> <a href="https://matrix.to/#/@kiramu:matrix.org">matrix.org</a>
             </div>
         </div>
@@ -122,17 +122,17 @@ function neofetch(args) {
     }
     return html(`
         <div class="neofetch">
-            <img class="neofetch-img u-logo" src="/k/images/hand.jpg" width="128" height="128" alt="">
+            <img class="neofetch-img u-logo" src="/k/images/096.jpg" width="128" height="128" alt="">
             <div class="neofetch-text">
                 <b class=""><a href="/k/gpgpub.txt">kieran</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
-                hey there. i am "big k" "special k" or whatever u call me.
-                the internet is crazy, and so i got bored one day so i made this. <br>
-                on the topic of THIS stuff, i know a few programming languages (i think.) 
-                <b>python, java, javascript, css</b>(?), <b>html</b>(?), <b>bash</b>(?)
-                i dunno really. whatever it is, feel free to take a look.
+                hello i am KIERAN. aka CEO OF SWAG. aka the real D. B. Cooper.
+                welcome to my Website. i am the person on the left. <br>
+                since you're here, why not let me rant about my knowledge of Programming.
+                i know python, C, common command languages (bash, sh), common markup languages.
+                i dont know what else to say.
                 <br><br>
-                <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a> <a href="/k/gpgpub.txt">pgp</a><br>
+                <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
                 <b>contact: </b><a href="https://discord.gg/Jxt345xFVk">discord</a> <a href="mailto: k@shellfish.racing">email</a> <a href="https://matrix.to/#/@kiramu:matrix.org">matrix.org</a>
             </div>
         </div>
