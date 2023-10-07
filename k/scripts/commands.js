@@ -115,25 +115,24 @@ function neofetch(args) {
                 <br><br>
                 <b>pronouns: </b>they/them<br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
-                <b>contact: </b><a href="https://discord.gg/Jxt345xFVk">discord</a> <a href="mailto: k@shellfish.racing">email</a> <a href="https://matrix.to/#/@kiramu:matrix.org">matrix.org</a>
+                <b>contact: </b><a href="https://discord.gg/Jxt345xFVk">discord</a> <a href="mailto: k@shellfish.racing">email</a>
             </div>
         </div>
         `)
     }
     return html(`
         <div class="neofetch">
-            <img class="neofetch-img u-logo" src="/k/images/096.jpg" width="128" height="128" alt="">
+            <img class="neofetch-img u-logo" src="/k/images/a.jpg" width="128" height="128" alt="">
             <div class="neofetch-text">
                 <b class=""><a href="/k/gpgpub.txt">kieran</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
                 hello i am KIERAN. aka CEO OF SWAG. aka the real D. B. Cooper.
-                welcome to my Website. i am the person on the left. <br>
-                since you're here, why not let me rant about my knowledge of Programming.
-                i know python, C, common command languages (bash, sh), common markup languages.
-                i dont know what else to say.
+                welcome to my Website. i am just TRYING to EXIST. just let me 
+                be. let me do my me thing. if you want to go on the github, go on the github. 
+                do whatever.
                 <br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
-                <b>contact: </b><a href="https://discord.gg/Jxt345xFVk">discord</a> <a href="mailto: k@shellfish.racing">email</a> <a href="https://matrix.to/#/@kiramu:matrix.org">matrix.org</a>
+                <b>contact: </b><a href="https://discord.gg/Jxt345xFVk">discord</a> <a href="mailto: k@shellfish.racing">email</a>
             </div>
         </div>
     `);
