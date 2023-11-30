@@ -137,12 +137,12 @@ function neofetch(args) {
             <div class="neofetch-text">
                 <b class=""><a href="/k/gpgpub.txt">kieran</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
-		i am kieran.<br>
-		i have multiple self-hosted sites using this domain.<br>
-		have fun finding them.<br>
-		also, if you want any of this code, go on the github (lol.)<br>
-		i am going to make some new projects coming up!!!
-                <br><br>
+                <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
+		ceo of swag, founder of apple<br>
+		love yourself more than you love anybody else<br>
+		just as i do, you deserve the best,<br>
+		and you will get the best
+		<br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
                 <b>contact: </b><a href="mailto: k@shellfish.racing">email</a>
             </div>
