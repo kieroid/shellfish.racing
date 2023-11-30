@@ -139,7 +139,7 @@ function neofetch(args) {
                 ------------------------<br>
                 <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
 		ceo of swag, founder of apple<br>
-		love yourself more than you love anybody else<br>
+		love yourself more than you love anybody else.<br>
 		just as i do, you deserve the best,<br>
 		and you will get the best
 		<br><br>
