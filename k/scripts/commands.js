@@ -10,19 +10,31 @@ Concatenate FILE(s) to standard output.`)
     }
     if (args.includes("albums"))  {
         return html(`favorite albums:<br>
-            Dr. Dog - Shame, Shame<br>
-            Ryo Fukui - Scenery<br>
             black midi - Hellfire<br>
-            Radiohead - OK Computer<br>
-            Radiohead - A Moon Shaped Pool<br>
-            Foster The People - Supermodel<br>
-            CASIOPEA - CASIOPEA<br>
-            Tally Hall - Marvin's Marvelous Mechanical Museum<br>
-            Rav - I'm on to Me<br>
-            Mac DeMarco - One Wayne G<br>
-            Sufjan  Stevens - Illinois<br>
-            Black Country, New Road - Ants From Up There<br>
-            Kero Kero Bonito - Civilisation`)
+	    Kero Kero Bonito - Time 'n' Place<br>
+	    Kero Kero Bonito - Civilization<br>
+	    Ichiko Aoba - Windswept Adan<br>
+	    Tatsuro Yamashita - Softly<br>
+	    Death Grips - The Money Store<br>
+	    Liturgy - 93696<br>
+	    Fiona Apple - Fetch The Bolt Cutters<br>
+	    Fiona Apple - The Idler Wheel...<br>
+	    Car Seat Headrest - Twin Fantasy<br>
+	    Irving Gordon - Gordon<br>
+	    SE SO NEON - Nonadaptation<br>
+	    Phoebe Bridgers - Punisher<br>
+	    Soccer Mommy - Sometimes, Forever<br>
+	    Radiohead - OK Computer<br>
+	    Radiohead - In Rainbows<br>
+	    Black Country, New Road - Ants From Up There<br>
+	    The Armed - Perfect Saviors<br>
+	    The Armed - ULTRAPOP<br>
+	    Lingua Ignota - SINNER GET READY<br>
+	    Mitski - Be The Cowboy<br>
+	    Adrianne Lenker - songs<br>
+	    Fleet Foxes - Helplessness Blues<br>
+	    Dr. Dog - Shame, Shame
+	    `)
     }
     if (args.includes("really"))  {
         return html(`i love you`)
@@ -113,7 +125,6 @@ function neofetch(args) {
                 farting is funny (farts are funny) fart fart<br>
                 fart
                 <br><br>
-                <b>pronouns: </b>they/them<br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
                 <b>contact: </b><a href="https://discord.gg/Jxt345xFVk">discord</a> <a href="mailto: k@shellfish.racing">email</a>
             </div>
@@ -126,13 +137,14 @@ function neofetch(args) {
             <div class="neofetch-text">
                 <b class=""><a href="/k/gpgpub.txt">kieran</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
-                hello i am KIERAN. aka CEO OF SWAG. aka the real D. B. Cooper.
-                welcome to my Website. i am just TRYING to EXIST. just let me 
-                be. let me do my me thing. if you want to go on the github, go on the github. 
-                do whatever.
+		i am kieran.<br>
+		i have multiple self-hosted sites using this domain.<br>
+		have fun finding them.<br>
+		also, if you want any of this code, go on the github (lol.)<br>
+		i am going to make some new projects coming up!!!
                 <br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
-                <b>contact: </b><a href="https://discord.gg/Jxt345xFVk">discord</a> <a href="mailto: k@shellfish.racing">email</a>
+                <b>contact: </b><a href="mailto: k@shellfish.racing">email</a>
             </div>
         </div>
     `);
