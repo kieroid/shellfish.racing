@@ -36,12 +36,6 @@ Concatenate FILE(s) to standard output.`)
 	    Dr. Dog - Shame, Shame
 	    `)
     }
-    if (args.includes("really"))  {
-        return html(`i love you`)
-    }
-    if (args.includes(".whois"))  {
-        return html(`you have no idea who i am.`)
-    }
     if (args != "") {
         return html(`cat: file ${args[0]} does not exist`)
     }
@@ -126,7 +120,7 @@ function neofetch(args) {
                 fart
                 <br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
-                <b>contact: </b><a href="https://discord.gg/Jxt345xFVk">discord</a> <a href="mailto: k@shellfish.racing">email</a>
+                <b>contact: </b> <a href="mailto: k@shellfish.racing">email</a>
             </div>
         </div>
         `)
