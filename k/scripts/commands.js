@@ -51,13 +51,13 @@ Mandatory arguments to long options are mandatory for short options too.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;-a, --all do not ignore entries starting with .`)
     }
     if (args.includes("-a") || args.includes("--all"))  {
-        return html(`really<br>albums<br>.whois`)
+        return html(`albums`)
     }
     if (args != "") {
         return html("im too lazy to add a real file system.<br>¯\\_(ツ)_/¯")
     }
 
-    return html(`really<br>albums`)
+    return html(`albums`)
 }
 function exit(args) {
     //help flag
@@ -79,12 +79,12 @@ function exit(args) {
     passwordElement.setAttribute("id","passwordElement")
     passwordElement.focus()
 
-    //do not look (secret)
+    //do not look (lolol)
     const locations = {
-        "dread": 'https://www.youtube.com/watch?v=ZwxDm1p-7To',
+//        "dread": 'https://www.youtube.com/watch?v=ZwxDm1p-7To',
         "2016": 'https://www.youtube.com/watch?v=QF_rMivCwmk',
         "2022": 'https://www.youtube.com/watch?v=b_S-ecnq6j4',
-        "dumb": 'https://governor.nc.gov/news/press-releases/2021/06/03/18-nc-high-school-students-named-national-cyber-scholars-after-winning-nationwide-cybersecurity'
+//        "dumb": 'https://governor.nc.gov/news/press-releases/2021/06/03/18-nc-high-school-students-named-national-cyber-scholars-after-winning-nationwide-cybersecurity'
     };
     document.addEventListener("keydown", function(e) {
         if (e.key === 'Enter') {
@@ -139,10 +139,10 @@ function neofetch(args) {
                 <b class=""><a href="/k/gpgpub.txt">kieran</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
                 <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
-		ceo of swag, founder of apple<br>
-		love yourself more than you love anybody else.<br>
-		just as i do, you deserve the best,<br>
-		and you will get the best
+		ceo of swag, founder of apple, inventor of the wheel.<br>
+		i am a nerd and a loser.<br>
+		i enjoy doing things that people dont enjoy.<br>
+		idk thats about all i have to say lol.
 		<br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
                 <b>contact: </b><a href="mailto: k@shellfish.racing">email</a>
