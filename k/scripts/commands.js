@@ -100,10 +100,6 @@ function help(args) {
     return html(Object.keys(commands).join(", ") +"\n\nuse --help to get more help on a specific command")
 }
 
-function penis(args) {
-	return html('cleo was here')
-}
-
 function neofetch(args) {
     if (args.includes("--help")) {
         // language=HTML
@@ -198,7 +194,6 @@ function executeCommand(inputText,node) {
     }
 }
 const commands = {
-    "penis": penis,
     "help": help,
     "echo": echo,
     "clear": clear,
