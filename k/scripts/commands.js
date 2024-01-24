@@ -81,10 +81,8 @@ function exit(args) {
 
     //do not look (lolol)
     const locations = {
-//        "dread": 'https://www.youtube.com/watch?v=ZwxDm1p-7To',
-        "2016": 'https://www.youtube.com/watch?v=QF_rMivCwmk',
+	"2016": 'https://www.youtube.com/watch?v=QF_rMivCwmk',
         "2022": 'https://www.youtube.com/watch?v=b_S-ecnq6j4',
-//        "dumb": 'https://governor.nc.gov/news/press-releases/2021/06/03/18-nc-high-school-students-named-national-cyber-scholars-after-winning-nationwide-cybersecurity'
     };
     document.addEventListener("keydown", function(e) {
         if (e.key === 'Enter') {
@@ -141,7 +139,7 @@ function neofetch(args) {
 		idk thats about all i have to say lol.
 		<br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
-                <b>contact: </b><a href="mailto: k@shellfish.racing">email</a>
+                <b>contact: </b><a href="mailto: k@shellfish.racing">email</a> <a href="https://tellonym.me/kieroid">tellonym</a>
             </div>
         </div>
     `);
