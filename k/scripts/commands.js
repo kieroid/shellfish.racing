@@ -10,7 +10,7 @@ Concatenate FILE(s) to standard output.`)
     }
     if (args.includes("classes"))  {
         return html(`classes this semester (including note sites:)<br>
-	    MATH 2360 - Linear Algebra (<a href="https://notes.shellfish.racing/share/lH7AzZyXjn3J">my notes</a>)<br>
+	    MATH 2360 - Linear Algebra (<a href="https://math.shellfish.racing/">my notes</a>)<br>
             CS   2413 - Data Structures<br>
 	    ENGL 2311 - Introduction to Technical Writing<br>
             ENGR 2392 - Engineering Ethics and Its Impact on Society<br>
