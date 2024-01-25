@@ -8,7 +8,14 @@ function cat(args) {
         return html(`Usage: cat [OPTION]... [FILE]...<br>
 Concatenate FILE(s) to standard output.`)
     }
-
+    if (args.includes("classes"))  {
+        return html(`classes this semester (including note sites:)<br>
+	    MATH 2360 - Linear Algebra (<a href="https://notes.shellfish.racing/share/lH7AzZyXjn3J">my notes</a>)<br>
+            CS   2413 - Data Structures<br>
+	    ENGL 2311 - Introduction to Technical Writing<br>
+            ENGR 2392 - Engineering Ethics and Its Impact on Society<br>
+	    PHYS 2401 - Principles of Physics II`)
+    }
     
     if (args.includes("albums"))  {
         return html(`favorite albums:<br>
@@ -51,13 +58,13 @@ Mandatory arguments to long options are mandatory for short options too.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;-a, --all do not ignore entries starting with .`)
     }
     if (args.includes("-a") || args.includes("--all"))  {
-        return html(`albums`)
+        return html(`albums classes .momma`)
     }
     if (args != "") {
         return html("im too lazy to add a real file system.<br>¯\\_(ツ)_/¯")
     }
 
-    return html(`albums`)
+    return html(`albums classes`)
 }
 function exit(args) {
     //help flag
