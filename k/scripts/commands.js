@@ -58,7 +58,7 @@ Mandatory arguments to long options are mandatory for short options too.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;-a, --all do not ignore entries starting with .`)
     }
     if (args.includes("-a") || args.includes("--all"))  {
-        return html(`albums classes .momma`)
+        return html(`albums classes`)
     }
     if (args != "") {
         return html("im too lazy to add a real file system.<br>¯\\_(ツ)_/¯")
