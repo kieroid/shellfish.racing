@@ -45,6 +45,11 @@ Concatenate FILE(s) to standard output.`)
 	    Dr. Dog - Shame, Shame
 	    `)
     }
+
+    if (args.includes(".steam"))  {
+        return html(`here is my <a href="https://steamcommunity.com/id/groupshift/">steam</a>`)
+    }
+    
     if (args != "") {
         return html(`cat: file ${args[0]} does not exist`)
     }
@@ -58,10 +63,7 @@ Mandatory arguments to long options are mandatory for short options too.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;-a, --all do not ignore entries starting with .`)
     }
     if (args.includes("-a") || args.includes("--all"))  {
-        return html(`albums classes`)
-    }
-    if (args != "") {
-        return html("im too lazy to add a real file system.<br>¯\\_(ツ)_/¯")
+        return html(`albums classes .steam`)
     }
 
     return html(`albums classes`)
@@ -146,7 +148,7 @@ function neofetch(args) {
 		idk thats about all i have to say lol.
 		<br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
-                <b>contact: </b><a href="mailto: k@shellfish.racing">email</a> <a href="https://tellonym.me/kieroid">tellonym</a>
+                <b>contact: </b><a href="mailto: k@shellfish.racing">email</a> <a href="https://tellonym.me/kieroid">tellonym</a> <a href="https://discord.gg/PMpGUufasG">discord</a>
             </div>
         </div>
     `);
