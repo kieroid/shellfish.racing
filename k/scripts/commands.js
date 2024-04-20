@@ -121,7 +121,7 @@ function neofetch(args) {
         <div class="neofetch">
             <img class="neofetch-img u-logo" src="/k/images/groggy.png" width="128" height="128" alt="">
             <div class="neofetch-text">
-                <b class=""><a href="/k/gpgpub.txt">kieran</a></b>@<b class="magenta">shellfish.racing</b><br>
+                <b class=""><a href="/k/gpgpub.txt">corrin</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
                 fart fart fart, poop poop. fart poop.<br>
                 poop is funny<br>
@@ -130,7 +130,7 @@ function neofetch(args) {
                 fart
                 <br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
-                <b>contact: </b> <a href="mailto: k@shellfish.racing">email</a>
+                <b>contact: </b> <a href="mailto: k@shellfish.racing">email</a> <a href="https://discord.gg/MzBJsuUgtY">discord</a>
             </div>
         </div>
         `)
@@ -148,7 +148,7 @@ function neofetch(args) {
 		idk thats about all i have to say lol.
 		<br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
-                <b>contact: </b><a href="mailto: k@shellfish.racing">email</a> <a href="https://tellonym.me/kieroid">tellonym</a> <a href="https://discord.gg/PMpGUufasG">discord</a>
+                <b>contact: </b><a href="mailto: k@shellfish.racing">email</a> <a href="https://tellonym.me/kieroid">tellonym</a> <a href="https://discord.gg/MzBJsuUgtY">discord</a>
             </div>
         </div>
     `);
