@@ -143,9 +143,9 @@ function neofetch(args) {
                 ------------------------<br>
                 <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
 		ceo of swag, founder of apple, inventor of the wheel.<br>
-		i am a nerd and a loser.<br>
+		i am a nerd, loser, and closeted atheist.<br>
 		i enjoy doing things that people dont enjoy.<br>
-		idk thats about all i have to say lol.
+                thats about it!
 		<br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
                 <b>contact: </b><a href="mailto: k@shellfish.racing">email</a> <a href="https://tellonym.me/kieroid">tellonym</a> <a href="https://discord.gg/MzBJsuUgtY">discord</a>
