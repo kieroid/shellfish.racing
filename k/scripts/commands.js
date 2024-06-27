@@ -143,7 +143,7 @@ function neofetch(args) {
                 ------------------------<br>
                 <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
 		ceo of swag, founder of apple, inventor of the wheel.<br>
-		i am a nerd, loser, and closeted atheist.<br>
+		i am a nerd, loser, and closeted agnostic.<br>
 		i enjoy doing things that people dont enjoy.<br>
                 thats about it!
 		<br><br>
