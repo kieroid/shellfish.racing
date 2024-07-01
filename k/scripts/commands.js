@@ -8,14 +8,6 @@ function cat(args) {
         return html(`Usage: cat [OPTION]... [FILE]...<br>
 Concatenate FILE(s) to standard output.`)
     }
-    if (args.includes("classes"))  {
-        return html(`classes this semester (including note sites:)<br>
-	    MATH 2360 - Linear Algebra (<a href="https://math.shellfish.racing/">my notes</a>)<br>
-            CS   2413 - Data Structures<br>
-	    ENGL 2311 - Introduction to Technical Writing<br>
-            ENGR 2392 - Engineering Ethics and Its Impact on Society<br>
-	    PHYS 2401 - Principles of Physics II`)
-    }
     
     if (args.includes("albums"))  {
         return html(`favorite albums:<br>
@@ -63,10 +55,10 @@ Mandatory arguments to long options are mandatory for short options too.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;-a, --all do not ignore entries starting with .`)
     }
     if (args.includes("-a") || args.includes("--all"))  {
-        return html(`albums classes .steam`)
+        return html(`albums .steam`)
     }
 
-    return html(`albums classes`)
+    return html(`albums`)
 }
 function exit(args) {
     //help flag
@@ -148,7 +140,7 @@ function neofetch(args) {
                 thats about it!
 		<br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
-                <b>contact: </b><a href="mailto: k@shellfish.racing">email</a> <a href="https://tellonym.me/kieroid">tellonym</a>  <a href="https://matrix.to/#/!zvg2OmLNURnEVbLOlP:crab.shellfish.racing?via=crab.shellfish.racing">matrix</a> <a href="https://discord.gg/MzBJsuUgtY">discord</a>
+                <b>contact: </b><a href="mailto: k@shellfish.racing">email</a> <a href="https://matrix.to/#/!zvg2OmLNURnEVbLOlP:crab.shellfish.racing?via=crab.shellfish.racing">matrix</a> <a href="https://discord.gg/MzBJsuUgtY">discord</a>
             </div>
         </div>
     `);
