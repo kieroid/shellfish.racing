@@ -130,7 +130,7 @@ function neofetch(args) {
                 fart
                 <br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
-                <b>contact: </b> <a href="mailto: k@shellfish.racing">email</a> <a href="https://discord.gg/MzBJsuUgtY">discord</a>
+                <b>contact: </b> <a href="mailto: k@shellfish.racing">email</a> <a href="https://matrix.to/#/!zvg2OmLNURnEVbLOlP:crab.shellfish.racing?via=crab.shellfish.racing">matrix</a> <a href="https://discord.gg/MzBJsuUgtY">discord</a>
             </div>
         </div>
         `)
@@ -148,7 +148,7 @@ function neofetch(args) {
                 thats about it!
 		<br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
-                <b>contact: </b><a href="mailto: k@shellfish.racing">email</a> <a href="https://tellonym.me/kieroid">tellonym</a> <a href="https://discord.gg/MzBJsuUgtY">discord</a>
+                <b>contact: </b><a href="mailto: k@shellfish.racing">email</a> <a href="https://tellonym.me/kieroid">tellonym</a>  <a href="https://matrix.to/#/!zvg2OmLNURnEVbLOlP:crab.shellfish.racing?via=crab.shellfish.racing">matrix</a> <a href="https://discord.gg/MzBJsuUgtY">discord</a>
             </div>
         </div>
     `);
