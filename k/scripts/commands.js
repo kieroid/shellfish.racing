@@ -134,10 +134,10 @@ function neofetch(args) {
                 <b class=""><a href="/k/gpgpub.txt">kieran</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
                 <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
-		ceo of swag, founder of apple, inventor of the wheel.<br>
+		a 20 year old ceo of swag, founder of apple, inventor of the wheel.<br>
 		i am a nerd, loser, and an agnostic earth creature.<br>
 		i enjoy doing things that people dont enjoy.<br>
-                thats about it!
+                thats about it! :-)
 		<br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
                 <b>contact: </b><a href="mailto: k@shellfish.racing">email</a> <a href="https://matrix.to/#/#chat:shellfish.racing">matrix</a> <a href="https://discord.com/invite/BDzxE7n4jR">discord</a>
