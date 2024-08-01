@@ -1,10 +1,6 @@
 let messageHistory = [];
 let n = 0;
 
-window.addEventListener("load", (event) => {
-  new cursoreffects.ghostCursor();
-});
-
 let neofetchFirst = document.createElement("li")
 executeCommand('neofetch',neofetchFirst)
 messageHistory.push("neofetch")
