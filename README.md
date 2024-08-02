@@ -1,7 +1,8 @@
-shellfish.racing
+beta.shellfish.racing
 ================
 i made a weird terminal-like thing that i think looks a little silly.
 go do something interesting. like not look at this code.
+this is a beta version. i am fully revamping everything and changing everything up.
 
 dependencies
 ------------
