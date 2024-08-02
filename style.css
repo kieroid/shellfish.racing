@@ -1,0 +1,31 @@
+body {
+    background-color: black;
+    color: red;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
+    gap: 10px;
+    height: 100vh;
+}
+
+.left {
+    grid-row: 1 / span 3;
+}
+
+.right-top {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.right-bottom {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+}
+
+.box {
+    border: 1px solid #000;
+    padding: 20px;
+}
