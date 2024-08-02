@@ -36,7 +36,7 @@ function renderHexViewer(hex) {
 
                 // Check for conditions to add a link. For example, let's say you want to link hex pairs with "4a" or "4b"
                 if (hexPair === "6b") {
-                    hexLine.push(`<a href="https://google.com/" target="_blank">${hexPair}</a>`);
+                    hexLine.push(`<a href="https://github.com/kieroid" target="_blank">${hexPair}</a>`);
                 } else {
                     hexLine.push(hexPair);
                 }
