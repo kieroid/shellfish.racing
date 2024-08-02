@@ -1,11 +1,7 @@
 body {
-    background-color: black;
-    color: red;
     font-family: 'Courier New', Courier, monospace;
-}
-
-#hex-dump {
-    text-align: center
+    background-color: black; /* Optional: Set background color for better contrast */
+    color: red;
 }
 
 .hex-dump {
@@ -19,6 +15,11 @@ body {
 
 #hex-dump-content {
     white-space: pre;
+}
+
+#hex-dump-content a {
+    color: white; /* White color for links */
+    text-decoration: underline; /* Underline to indicate it's a link */
 }
 
 #hex-dump-ascii {

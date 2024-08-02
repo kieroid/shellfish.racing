@@ -31,9 +31,16 @@ function renderHexViewer(hex) {
             const index = lineCount * 16 + j;
             if (index * 2 < hex.length) {
                 const hexPair = getHexPair(hex, index);
-                hexLine.push(hexPair);
                 const charCode = parseInt(hexPair, 16);
                 const char = String.fromCharCode(charCode);
+
+                // Check for conditions to add a link. For example, let's say you want to link hex pairs with "4a" or "4b"
+                if (hexPair === "6b") {
+                    hexLine.push(`<a href="https://google.com/" target="_blank">${hexPair}</a>`);
+                } else {
+                    hexLine.push(hexPair);
+                }
+
                 textLine.push(char.match(/[ -~]/) ? char : '.'); // Replace non-printable characters with '.'
             } else {
                 hexLine.push('..'); // When the line is ending, missing characters are shown as ".."
@@ -48,7 +55,7 @@ function renderHexViewer(hex) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const fileUrl = "https://raw.githubusercontent.com/kieroid/shellfish.racing/main/k/scripts/commands.js"; // Adjust URL accordingly
+    const fileUrl = "https://raw.githubusercontent.com/kieroid/kieroid/main/LICENSE"; // Adjust URL accordingly
 
     fetchFile(fileUrl).then(hex => {
         renderHexViewer(hex);
