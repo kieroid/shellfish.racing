@@ -1,6 +1,7 @@
-body {
+#parent {
     background-color: black;
     color: red;
+    font-family: monospace;
 }
 
 .container {
