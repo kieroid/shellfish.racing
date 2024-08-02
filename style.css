@@ -4,6 +4,10 @@ body {
     font-family: 'Courier New', Courier, monospace;
 }
 
+#hex-dump {
+    text-align: center
+}
+
 .hex-dump {
     display: flex;
 }
