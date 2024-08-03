@@ -23,7 +23,46 @@ function renderHexViewer(hex) {
     hexContent.innerHTML = '';
     hexAscii.innerHTML = '';
 
+    const phrases = ["def", "tuv"];
+
     let lineCount = 0;
+    while (lineCount < Math.ceil(hex.length / 32)) {
+        // this is where the silly code starts
+        const hexLine = []
+        const textLine = []
+        let phrase = "";
+        let phraseStart = null;
+        let phraseEnd = null;
+
+        for (let p of phrases) {
+            let start = word.indexOf(p);
+            if (start !== -1) {
+                phrase = p;
+                phraseStart = start;
+                phraseEnd = start + p.length - 1;
+                break;
+            }
+        }
+
+        for (let j = 0; j < 16; j++) {
+            const index = lineCount * 16 + j;
+
+            if (index * 2 < hex.length) {
+                const hexPair = getHexPair(hex, index);
+                const charCode = parseInt(hexPair, 16);
+                const char = String.fromCharCode(charCode);
+            } else {
+                hexLine.push('..');
+                textLine.push('.');
+            }
+        }
+        hexCount.innerHTML += `${lineCount.toString(16).padStart(3, '0')}<br>`;
+        hexContent.innerHTML += `${hexLine.join(' ')}<br>`;
+        hexAscii.innerHTML += `${textLine.join('').replace(/\s/g, '.')}<br>`;
+        lineCount++;
+    }
+
+    /*  let lineCount = 0;
     while (lineCount < Math.ceil(hex.length / 32)) {
         const hexLine = [];
         const textLine = [];
@@ -51,7 +90,7 @@ function renderHexViewer(hex) {
         hexContent.innerHTML += `${hexLine.join(' ')}<br>`;
         hexAscii.innerHTML += `${textLine.join('').replace(/\s/g, '.')}<br>`;
         lineCount++;
-    }
+    }*/
 }
 
 document.addEventListener("DOMContentLoaded", () => {
