@@ -23,7 +23,7 @@ function renderHexViewer(hex) {
     hexContent.innerHTML = '';
     hexAscii.innerHTML = '';
 
-    const phrases = ["def", "tuv"];
+    /*const phrases = ["def", "tuv"];
 
     let lineCount = 0;
     while (lineCount < Math.ceil(hex.length / 32)) {
@@ -60,9 +60,9 @@ function renderHexViewer(hex) {
         hexContent.innerHTML += `${hexLine.join(' ')}<br>`;
         hexAscii.innerHTML += `${textLine.join('').replace(/\s/g, '.')}<br>`;
         lineCount++;
-    }
+    }*/
 
-    /*  let lineCount = 0;
+    let lineCount = 0;
     while (lineCount < Math.ceil(hex.length / 32)) {
         const hexLine = [];
         const textLine = [];
@@ -90,7 +90,7 @@ function renderHexViewer(hex) {
         hexContent.innerHTML += `${hexLine.join(' ')}<br>`;
         hexAscii.innerHTML += `${textLine.join('').replace(/\s/g, '.')}<br>`;
         lineCount++;
-    }*/
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
