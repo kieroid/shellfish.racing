@@ -133,13 +133,13 @@ function neofetch(args) {
             <div class="neofetch-text">
                 <b class=""><a href="/k/gpgpub.txt">kieran</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
-                20 y.o. <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
+                21 y.o. <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
 		ceo of swag, founder of apple, inventor of the wheel.<br>
 		i am a nerd, loser, and an agnostic earth creature.<br>
 		i enjoy doing things that people dont enjoy.<br>
                 thats about it! :-)
 		<br><br>
-                <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
+                <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <br>
                 <b>contact: </b> <a href="https://matrix.to/#/#general:shellfish.racing">matrix</a> <a href="https://discord.com/invite/BDzxE7n4jR">discord</a>
             </div>
         </div>
