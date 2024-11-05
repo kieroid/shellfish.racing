@@ -140,7 +140,7 @@ function neofetch(args) {
                 thats about it! :-)
 		<br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <br>
-                <b>contact: </b> <a href="https://matrix.to/#/#general:shellfish.racing">matrix</a> <a href="https://discord.com/invite/BDzxE7n4jR">discord</a>
+                <b>contact: </b> <a rel="me" href="https://tech.lgbt/@ki">mastodon</a> <a href="https://matrix.to/#/#general:shellfish.racing">matrix</a> <a href="https://discord.com/invite/BDzxE7n4jR">discord</a>
             </div>
         </div>
     `);
