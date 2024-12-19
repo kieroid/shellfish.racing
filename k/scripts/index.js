@@ -1,10 +1,10 @@
 let messageHistory = [];
 let n = 0;
 
-let neofetchFirst = document.createElement("li")
-executeCommand('neofetch',neofetchFirst)
-messageHistory.push("neofetch")
-document.getElementById("history").appendChild(neofetchFirst)
+let joefetchFirst = document.createElement("li")
+executeCommand('joefetch',joefetchFirst)
+messageHistory.push("joefetch")
+document.getElementById("history").appendChild(joefetchFirst)
 
 document.addEventListener("keydown", function(e) {
     if (e.key === 'Enter') {
