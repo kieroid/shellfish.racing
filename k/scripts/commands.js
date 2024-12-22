@@ -13,27 +13,22 @@ Concatenate FILE(s) to standard output.`)
         return html(`favorite albums:<br>
             black midi - Hellfire<br>
 	    Kero Kero Bonito - Time 'n' Place<br>
-	    Kero Kero Bonito - Civilization<br>
 	    Ichiko Aoba - Windswept Adan<br>
-	    Tatsuro Yamashita - Softly<br>
-	    Death Grips - The Money Store<br>
-	    Liturgy - 93696<br>
+	    湯冷めラジオ - ディストラクション・ガール<br>
 	    Fiona Apple - Fetch The Bolt Cutters<br>
-	    Fiona Apple - The Idler Wheel...<br>
 	    Car Seat Headrest - Twin Fantasy<br>
-	    Irving Gordon - Gordon<br>
-	    SE SO NEON - Nonadaptation<br>
-	    Phoebe Bridgers - Punisher<br>
-	    Soccer Mommy - Sometimes, Forever<br>
 	    Radiohead - OK Computer<br>
 	    Radiohead - In Rainbows<br>
 	    Black Country, New Road - Ants From Up There<br>
-	    The Armed - Perfect Saviors<br>
-	    The Armed - ULTRAPOP<br>
-	    Lingua Ignota - SINNER GET READY<br>
+	    Black Countr, New Road - Live at Bush Hall<br>
 	    Mitski - Be The Cowboy<br>
-	    Adrianne Lenker - songs<br>
+	    Mitski - Bury Me At Makeout Creek<br>
+	    Adrianne Lenker - Songs<br>
+	    Adrianne Lenker - Bright Future<br>
 	    Fleet Foxes - Helplessness Blues<br>
+	    TV Girl - Who Really Cares<br>
+	    Foster The People - Supermodel<br>
+	    Jon Brion - Eternal Sunshine of the Spotless Mind<br>
 	    Dr. Dog - Shame, Shame
 	    `)
     }
@@ -96,24 +91,24 @@ function help(args) {
     if (args[0] === '--help') {
         return html('HEEEELP ME HEEEELP HEEELP HEEELP I AM STUCK HEEEEEEEELP HELP ME HEEEELP')
     }
-    return html(Object.keys(commands).join(", ") +"\n\nuse --help to get more help on a specific command")
+    return html(Object.keys(commands).join(", ") +"<br>use --help to get more help on a specific command")
 }
 
-function neofetch(args) {
+function joefetch(args) {
     if (args.includes("--help")) {
         // language=HTML
-        return html(`Usage: neofetch [OPTION]...<br>
-        Neofetch is a CLI system information tool written in BASH. Neofetch<br>
+        return html(`Usage: joefetch [OPTION]...<br>
+        Joefetch is a CLI system information tool written in CRAsh. Joefetch<br>
         displays information about your system next to an image, your OS logo,<br>
         or any ASCII file of your choice.<br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;--fart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shittin and fartin`)
     }
     if (args.includes("--fart")) {
         return html(`
-        <div class="neofetch">
-            <img class="neofetch-img u-logo" src="/k/images/groggy.png" width="128" height="128" alt="">
-            <div class="neofetch-text">
-                <b class=""><a href="/k/gpgpub.txt">corrin</a></b>@<b class="magenta">shellfish.racing</b><br>
+        <div class="joefetch">
+            <img class="joefetch-img u-logo" src="/k/images/groggy.png" width="128" height="128" alt="">
+            <div class="joefetch-text">
+                <b class=""><a href="https://www.youtube.com/watch?v=RZALXYsc7C0">kiera</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
                 fart fart fart, poop poop. fart poop.<br>
                 poop is funny<br>
@@ -121,26 +116,24 @@ function neofetch(args) {
                 farting is funny (farts are funny) fart fart<br>
                 fart
                 <br><br>
-                <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a><br>
-                <b>contact: </b> <a rel="me" href="https://tech.lgbt/@ki">mastodon</a> <a href="https://matrix.to/#/#general:shellfish.racing">matrix</a> <a href="https://discord.com/invite/BDzxE7n4jR">discord</a>
             </div>
         </div>
         `)
     }
     return html(`
-        <div class="neofetch">
-            <img class="neofetch-img u-logo" src="/k/images/a.jpg" width="128" height="128" alt="">
-            <div class="neofetch-text">
-                <b class=""><a href="/k/gpgpub.txt">kieran</a></b>@<b class="magenta">shellfish.racing</b><br>
+        <div class="joefetch">
+            <img class="joefetch-img u-logo" src="/k/images/a.jpg" width="128" height="128" alt="">
+            <div class="joefetch-text">
+                <b class=""><a href="https://www.youtube.com/watch?v=RZALXYsc7C0">kiera</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
                 21 y.o. <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
-		ceo of swag, founder of apple, inventor of the wheel.<br>
+		ceo of swag, founder of apple, inventor of the wheel, irl wojak.<br>
 		i am a nerd, loser, and an agnostic earth creature.<br>
 		i enjoy doing things that people dont enjoy.<br>
-                thats about it! :-)
+                creator of unfunny. (i am not funny. dont trust the lies.)
 		<br><br>
                 <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <br>
-                <b>contact: </b> <a rel="me" href="https://tech.lgbt/@ki">mastodon</a> <a href="https://matrix.to/#/#general:shellfish.racing">matrix</a> <a href="https://discord.com/invite/BDzxE7n4jR">discord</a>
+                <b>contact: </b> <a rel="me" href="https://tech.lgbt/@ki">mastodon</a> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a> <a href="https://discord.com/invite/BDzxE7n4jR">discord</a>
             </div>
         </div>
     `);
@@ -160,7 +153,7 @@ function sudo(args) {
             let sArgs = args.slice(1);
             return commands[sCommand](sArgs)
         } catch(err) {
-            return html(`bash: sudo ${args}: command not found`)
+            return html(`CRAsh: sudo ${args}: command not found`)
         }
     } else {
         return html("")
@@ -179,7 +172,7 @@ function html(t) {
     return div;
 }
 function executeCommand(inputText,node) {
-    node.appendChild(document.createTextNode(`kieran@shellfish.racing ~ $ ${inputText}`))
+    node.appendChild(document.createTextNode(`kiera@shellfish.racing ~ $ ${inputText}`))
     node.appendChild(document.createElement("br"))
 
     const command = inputText.trim().split(' ')[0];
@@ -188,7 +181,7 @@ function executeCommand(inputText,node) {
         try {
             node.appendChild(commands[command](args))
         } catch(err) {
-            node.appendChild(document.createTextNode(`bash: ${command}: command not found`))
+            node.appendChild(document.createTextNode('CRAsh: ${command}: command not found'))
         }
     }
 }
@@ -197,7 +190,7 @@ const commands = {
     "echo": echo,
     "clear": clear,
     "sudo": sudo,
-    "neofetch": neofetch,
+    "joefetch": joefetch,
     "exit": exit,
     "ls": ls,
     "cat": cat

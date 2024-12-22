@@ -27,7 +27,7 @@ input {
     text-align: left;
 
 }
-.neofetch {
+.joefetch {
     display: flex;
     flex-direction: row;
     height: min-content;
@@ -35,15 +35,15 @@ input {
     gap: 16px;
 
 }
-.neofetch-text {
+.joefetch-text {
     max-width: 600px;
 }
 
 @media screen and (max-width: 790px)  {
-    .neofetch {
+    .joefetch {
         display: block;
     }
-    .neofetch-text {
+    .joefetch-text {
         max-width: 415px;
     }
     * {
