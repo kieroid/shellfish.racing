@@ -132,8 +132,10 @@ function joefetch(args) {
 		i enjoy doing things that people dont enjoy.<br>
                 creator of unfunny. (i am not funny. dont trust the lies.)
 		<br><br>
-                <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://open.spotify.com/user/kieranlavato">spotify</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <br>
-                <b>contact: </b> <a rel="me" href="https://tech.lgbt/@ki">mastodon</a> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a> <a href="https://discord.com/invite/BDzxE7n4jR">discord</a>
+		<b>pronouns: </b>she/her
+		<br><br>
+                <b>links: </b><a href="https://github.com/kieroid">github</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <br>
+                <b>contact: </b> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a> <a href="https://discord.com/invite/BDzxE7n4jR">discord</a>
             </div>
         </div>
     `);
