@@ -127,10 +127,10 @@ function joefetch(args) {
                 <b class=""><a href="https://www.youtube.com/watch?v=RZALXYsc7C0">kiera</a></b>@<b class="magenta">shellfish.racing</b><br>
                 ------------------------<br>
                 21 y.o. <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
-		ceo of swag, founder of apple, inventor of the wheel, irl wojak.<br>
+		ceo of swag, founder of apple, inventor of the wheel.<br>
 		i am a nerd, loser, and an agnostic earth creature.<br>
 		i enjoy doing things that people dont enjoy.<br>
-                creator of unfunny. (i am not funny. dont trust the lies.)
+                creator of unfunny. (i am not funny. its a lie.)
 		<br><br>
 		<b>pronouns: </b>she/her
 		<br><br>
