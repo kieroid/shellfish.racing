@@ -5,6 +5,7 @@
     <link href="style.css" rel="stylesheet">
     <script type="text/javascript" src="k/scripts/commands.js"></script>
     <script type="module" src="k/scripts/index.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/bsky-embed/dist/bsky-embed.es.js" async></script>
     <base href="/">
     <title>shellfish.racing</title>
     <link href="style.css" rel="stylesheet">
@@ -30,11 +31,21 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 <body id="parent">
-    <div id="history"></div>
-    <div id="commandline">
-        <label for="commandinput">kiera@shellfish.racing ~ $ </label><input type="text" id="commandinput" class="js-only" autofocus="" autocomplete="off" autocapitalize="off" spellcheck="false">
-        <br><div id="inputMessage">run help to see commands.</div>
+    <div id="greetblock">
+    	<div id="history"></div>
+    	<div id="commandline">
+    	    <label for="commandinput">kiera@shellfish.racing ~ $ </label><input type="text" id="commandinput" class="js-only" autofocus="" autocomplete="off" autocapitalize="off" spellcheck="false">
+    	    <br><div id="inputMessage">run help to see commands.</div>
+    	</div>
     </div>
+    <bsky-embed
+        username="shellfish.racing"
+        mode="dark"
+	custom-styles=".border-slate-300 { border-color: white; } .bg-blue-500 { background-color: transparent; border-color: white; } .bg-blue-500:hover { background-color: transparent; border-color: white;}"
+	load-more="true"
+	limit="3"
+	id="atproto">
+    </bsky-embed>
     <link rel="me" href="https://tech.lgbt/@ki">
 </body>
 </html>

@@ -25,19 +25,41 @@ input {
     outline: 0;
     display: inline-block;
     text-align: left;
+}
+
+#atproto {
+    font-family: monospace;
+    z-index: 1;
+    display: inline-grid;
+    position: absolute;
+    right: 0;
+    border-color: white;
+}
+
+#greetblock {
+    z-index: 2;
+    display: inline-grid;
 
 }
+
 .joefetch {
     display: flex;
     flex-direction: row;
     height: min-content;
     padding: 16px;
     gap: 16px;
-
 }
+
 .joefetch-text {
     max-width: 600px;
 }
+
+@media screen and (max-width: 1366px) {
+    #atproto {
+        display: none;
+    }
+}
+
 
 @media screen and (max-width: 790px)  {
     .joefetch {
