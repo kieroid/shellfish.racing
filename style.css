@@ -54,7 +54,7 @@ input {
     max-width: 600px;
 }
 
-@media screen and (max-width: 1366px) {
+@media screen and (max-width: 1300px) {
     #atproto {
         display: none;
     }
