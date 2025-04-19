@@ -43,7 +43,8 @@ document.addEventListener("keydown", function(e) {
         let historyHeight = totalHistory.offsetHeight;
         let windowLength = window.innerHeight;
 
-	if(historyHeight >= 0.8 * windowLength) { totalHistory.removeChild(totalHistory.firstElementChild); }
+	
+	while (historyHeight >= 0.8 * windowLength) { totalHistory.removeChild(totalHistory.firstElementChild); }
         
         if (n === 0) {
             document.getElementById("inputMessage").style.visibility = "hidden";
