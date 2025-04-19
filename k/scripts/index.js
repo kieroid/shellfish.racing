@@ -1,12 +1,14 @@
 let messageHistory = [];
 let n = 0;
+let q = 0;
 
+let totalHistory = document.getElementById('history');
 let joefetchFirst = document.createElement("li");
-executeCommand('joefetch',joefetchFirst);
-messageHistory.push("joefetch");
-document.getElementById("history").appendChild(joefetchFirst);
-
 const lastFmDiv = document.getElementById('lastfmplayer');
+executeCommand('joefetch',joefetchFirst);
+
+messageHistory.push("joefetch");
+totalHistory.appendChild(joefetchFirst);
 
 try {
     const API_KEY = 'a819ab108f2696ef5e373bd07946785d';
@@ -17,7 +19,6 @@ try {
         const currentSongTitle = lastFmJson.recenttracks.track[0].name;
         const currentArtistTitle = lastFmJson.recenttracks.track[0].artist['#text'];
         let currentLastFm = (currentArtistTitle + " - " + currentSongTitle);
-        console.log(currentLastFm);
 	lastFmDiv.innerHTML = `${currentLastFm}`;
     }
 }
@@ -33,17 +34,39 @@ document.addEventListener("keydown", function(e) {
         let inputText = input.value;
         input.value = "";
 
-
         executeCommand(inputText,node);
 
         //appending commands
         messageHistory.push(inputText)
-        document.getElementById("history").appendChild(node);
+        totalHistory.appendChild(node);
+        
+        let historyHeight = totalHistory.offsetHeight;
+        let windowLength = window.innerHeight;
 
-        //remove start text
+	if(historyHeight >= 0.8 * windowLength) { totalHistory.removeChild(totalHistory.firstElementChild); }
+        
         if (n === 0) {
             document.getElementById("inputMessage").style.visibility = "hidden";
-            n = 1;
+            n = 0;
+        }
+	q = 0;
+    }
+    if (e.key === 'ArrowUp') {
+        let input = document.getElementById('commandinput');
+	if(q < messageHistory.length) {
+	    input.value = messageHistory[messageHistory.length - q - 1];
+	    q = q + 1;
         }
     }
+    if (e.key === 'ArrowDown') {
+        let input = document.getElementById('commandinput');
+	if(q >= 1) {
+	    input.value = messageHistory[messageHistory.length - q + 1];
+	    q = q-1;
+	    if(q == 0) { input.value = ""; }
+	} else {
+	    input.value = "";
+	}
+    }
+
 });

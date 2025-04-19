@@ -183,7 +183,7 @@ function executeCommand(inputText,node) {
         try {
             node.appendChild(commands[command](args))
         } catch(err) {
-            node.appendChild(document.createTextNode('CRAsh: ${command}: command not found'))
+            node.appendChild(document.createTextNode(`CRAsh: ${command}: command not found`))
         }
     }
 }
