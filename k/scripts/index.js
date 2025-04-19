@@ -44,7 +44,10 @@ document.addEventListener("keydown", function(e) {
         let windowLength = window.innerHeight;
 
 	
-	while (historyHeight >= 0.8 * windowLength) { totalHistory.removeChild(totalHistory.firstElementChild); }
+	while (historyHeight >= 0.8 * windowLength) { 
+	    totalHistory.removeChild(totalHistory.firstElementChild);
+            historyHeight = totalHistory.offsetHeight;
+	}
         
         if (n === 0) {
             document.getElementById("inputMessage").style.visibility = "hidden";
