@@ -34,12 +34,32 @@ input {
     position: absolute;
     right: 0;
     border-color: white;
+    margin-right: 150px;
+    margin-top: 20px;
 }
 
 #greetblock {
     z-index: 2;
     display: inline-grid;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
 
+#lastfmplayer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: 25px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+#lastfm {
+    position: fixed;
+    left: 0;
+    bottom: 25px;
 }
 
 .joefetch {
