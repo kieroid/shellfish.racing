@@ -135,7 +135,7 @@ function joefetch(args) {
 		<b>pronouns: </b>she/her
 		<br><br>
                 <b>links: </b><a href="https://git.shellfish.racing/kiki">git(ea)</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <br>
-                <b>contact: </b> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a>
+                <b>contact: </b> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a> <a href="https://mastodon.shellfish.racing/@kiki">mastodon</a>
             </div>
         </div>
     `);
