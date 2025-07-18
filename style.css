@@ -20,6 +20,11 @@ html, button, input, optgroup, select, textarea {
     margin: 0;
 }
 
+button {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 input {
     border: 0;
     outline: 0;

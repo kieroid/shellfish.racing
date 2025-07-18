@@ -28,13 +28,16 @@ catch {
 
 
 function copyText(btn, text) {
-	console.log('btn is:', btn, 'text is:', text);
 	const original = btn.innerText;
 
 	navigator.clipboard.writeText(text)
 	.then(() => {
 		btn.innerText = 'COPIED';
-		setTimeout(() => btn.innerText = original, 3000);
+
+		setTimeout(() => {
+
+			btn.innerText = original;
+		}, 3000);
 	})
 	.catch(console.error);
 }
