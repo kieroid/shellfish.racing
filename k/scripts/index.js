@@ -26,6 +26,22 @@ catch {
     lastFmDiv.innerHTML = 'N/A';
 }
 
+
+function copyText(btn, text) {
+	console.log('btn is:', btn, 'text is:', text);
+	const original = btn.innerText;
+
+	navigator.clipboard.writeText(text)
+	.then(() => {
+		btn.innerText = 'COPIED';
+		setTimeout(() => btn.innerText = original, 3000);
+	})
+	.catch(console.error);
+}
+window.copyText = copyText;
+
+
+
 document.addEventListener("keydown", function(e) {
     if (e.key === 'Enter') {
         //input
