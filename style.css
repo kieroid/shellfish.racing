@@ -23,6 +23,11 @@ html, button, input, optgroup, select, textarea {
 button {
     text-decoration: underline;
     cursor: pointer;
+    color: white;
+}
+
+button:hover {
+    color: grey;
 }
 
 input {
