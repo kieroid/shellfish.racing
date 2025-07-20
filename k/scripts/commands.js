@@ -4,196 +4,216 @@
 //feel free to take my code. its on the github too.
 //like you'd want it anyway...
 function cat(args) {
-    if (args.includes("--help")) {
-        return html(`Usage: cat [OPTION]... [FILE]...<br>
-Concatenate FILE(s) to standard output.`)
-    }
-    
-    if (args.includes("albums"))  {
-        return html(`favorite albums:<br>
-            black midi - Hellfire<br>
-	    Kero Kero Bonito - Time 'n' Place<br>
-	    Ichiko Aoba - Windswept Adan<br>
-	    湯冷めラジオ - ディストラクション・ガール<br>
-	    Fiona Apple - Fetch The Bolt Cutters<br>
-	    Car Seat Headrest - Twin Fantasy<br>
-	    Radiohead - OK Computer<br>
-	    Radiohead - In Rainbows<br>
-	    Black Country, New Road - Ants From Up There<br>
-	    Black Countr, New Road - Live at Bush Hall<br>
-	    Mitski - Be The Cowboy<br>
-	    Mitski - Bury Me At Makeout Creek<br>
-	    Adrianne Lenker - Songs<br>
-	    Adrianne Lenker - Bright Future<br>
-	    Fleet Foxes - Helplessness Blues<br>
-	    TV Girl - Who Really Cares<br>
-	    Foster The People - Supermodel<br>
-	    Jon Brion - Eternal Sunshine of the Spotless Mind<br>
-	    Dr. Dog - Shame, Shame
-	    `)
-    }
+	if (args.includes("--help")) {
+		return html(`Usage: cat [OPTION]... [FILE]...<br>
+		Concatenate FILE(s) to standard output.`)
+	}
+	if (args.includes("albums"))  {
+	        return html(`favorite albums:<br>
+        	black midi - Hellfire<br>
+		Kero Kero Bonito - Time 'n' Place<br>
+		Ichiko Aoba - Windswept Adan<br>
+		湯冷めラジオ - ディストラクション・ガール<br>
+		Fiona Apple - Fetch The Bolt Cutters<br>
+		Car Seat Headrest - Twin Fantasy<br>
+		Radiohead - OK Computer<br>
+		Radiohead - In Rainbows<br>
+		Black Country, New Road - Ants From Up There<br>
+		Black Country, New Road - Live at Bush Hall<br>
+		Black Country, New Road - Forever Howlong<br>
+		Mitski - Be The Cowboy<br>
+		Mitski - Bury Me At Makeout Creek<br>
+		Adrianne Lenker - Songs<br>
+		Adrianne Lenker - Bright Future<br>
+		Fleet Foxes - Helplessness Blues<br>
+		TV Girl - Who Really Cares<br>
+		Foster The People - Supermodel<br>
+		Jon Brion - Eternal Sunshine of the Spotless Mind<br>
+		Dr. Dog - Shame, Shame
+	`)
+	}
 
-    if (args.includes(".steam"))  {
-        return html(`here is my <a href="https://steamcommunity.com/id/groupshift/">steam</a>`)
-    }
+	if (args.includes(".steam"))  {
+		return html(`here is my <a href="https://steamcommunity.com/id/groupshift/">steam</a>`)
+	}
     
-    if (args != "") {
-        return html(`cat: file ${args[0]} does not exist`)
-    }
-    return html("cat: missing file operand")
+	if (args != "") {
+		return html(`cat: file ${args[0]} does not exist`)
+	}
+	return html("cat: missing file operand")
 }
 function ls(args) {
-    if (args.includes("--help")) {
-        return html(`Usage: ls [OPTION]... [FILE]...<br>
-List information about the FILEs (the current directory by default).<br><br>
-Mandatory arguments to long options are mandatory for short options too.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-a, --all do not ignore entries starting with .`)
-    }
-    if (args.includes("-a") || args.includes("--all"))  {
-        return html(`albums .steam`)
-    }
-
-    return html(`albums`)
+	if (args.includes("--help")) {
+		return html(`Usage: ls [OPTION]... [FILE]...<br>
+		List information about the FILEs (the current directory by default).<br><br>
+		Mandatory arguments to long options are mandatory for short options too.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;-a, --all do not ignore entries starting with .`)
+	}
+	if (args.includes("-a") || args.includes("--all"))  {
+		return html(`albums .steam`)
+	}
+	return html(`albums`)
 }
 function exit(args) {
-    //help flag
-    if (args.includes("--help")) {
-        return html(`exit: exit<br>
-        Exit the shell.`)
-    }
+	//help flag
+	if (args.includes("--help")) {
+    		return html(`exit: exit<br>
+		Exit the shell.`)
+	}
 
-    //password menu
-    let overall = document.getElementById('parent')
-    while (overall.hasChildNodes()) {
-        overall.removeChild(overall.firstChild)
-    }
-    let labelElement = document.createElement("label")
-    let passwordElement = document.createElement("input")
-    overall.appendChild(labelElement)
-    overall.appendChild(passwordElement)
-    labelElement.innerHTML = "Password: "
-    passwordElement.setAttribute("id","passwordElement")
-    passwordElement.focus()
+	//password menu
+	let overall = document.getElementById('parent')
+	while (overall.hasChildNodes()) {
+		overall.removeChild(overall.firstChild)
+	}
+	let labelElement = document.createElement("label")
+	let passwordElement = document.createElement("input")
+	overall.appendChild(labelElement)
+	overall.appendChild(passwordElement)
+	labelElement.innerHTML = "Password: "
+	passwordElement.setAttribute("id","passwordElement")
+	passwordElement.focus()
 
-    //do not look (lolol)
-    const locations = {
-	"2016": 'https://www.youtube.com/watch?v=QF_rMivCwmk',
-        "2022": 'https://www.youtube.com/watch?v=b_S-ecnq6j4',
-    };
-    document.addEventListener("keydown", function(e) {
-        if (e.key === 'Enter') {
-            if (locations[passwordElement.value] != undefined) {window.location.href = locations[passwordElement.value]}
-            passwordElement.value = "";
-        }
-    })
+	//do not look (lolol)
+	const locations = {
+		"2016": 'https://www.youtube.com/watch?v=QF_rMivCwmk',
+		"2022": 'https://www.youtube.com/watch?v=b_S-ecnq6j4',
+	};
+	document.addEventListener("keydown", function(e) {
+	if (e.key === 'Enter') {
+		if (locations[passwordElement.value] != undefined) {window.location.href = locations[passwordElement.value]}
+			passwordElement.value = "";
+		}
+	})
 }
 function help(args) {
-    if (args[0] === '--help') {
-        return html('HEEEELP ME HEEEELP HEEELP HEEELP I AM STUCK HEEEEEEEELP HELP ME HEEEELP')
-    }
-    return html(Object.keys(commands).join(", ") +"<br>use --help to get more help on a specific command")
+	if (args[0] === '--help') {
+		return html('HEEEELP ME HEEEELP HEEELP HEEELP I AM STUCK HEEEEEEEELP HELP ME HEEEELP')
+	}
+	return html(Object.keys(commands).join(", ") +"<br>use --help to get more help on a specific command")
 }
+
+function donate(args) {
+	if (args.includes("--help")) {
+		return html(`Usage: donate [OPTION] <br>
+		Donate is a CLI system tool donation advertising tool written in CRAsh.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;--btc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Bitcoin address.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;--xmr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Monero address.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;--ltc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Litecoin address.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;--eth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Ethereum address.<br>
+		`)
+	}
+	
+	if (args.includes("--btc")) {return html(`BTC Address: bc1qs9cc5dmcrh23kexe6454s28zfh03qp4sy0mj4g`)}
+	if (args.includes("--xmr")) {return html(`XMR Address: 84ob2Xc7PZcUe6gEvaRL8zZrJAS9oGamf9no1gYH5uArQ1rHhLR6EY9CV9xjPEZqCdet2NYWpxW9m9LNJQToR3s2U6pjxbN`)}
+	if (args.includes("--ltc")) {return html(`LTC Address: ltc1qr267ss0yxdecztf86akhky7h7rjv9juuwgfalq`)}
+	if (args.includes("--eth")) {return html(`ETH Address: 0x0Ec64364b1Df9cd62F48516a176413e78c3531e7`)}
+
+	return html(`
+		BTC Address: bc1qs9cc5dmcrh23kexe6454s28zfh03qp4sy0mj4g<br>
+		XMR Address: 84ob2Xc7PZcUe6gEvaRL8zZrJAS9oGamf9no1gYH5uArQ1rHhLR6EY9CV9xjPEZqCdet2NYWpxW9m9LNJQToR3s2U6pjxbN<br>
+		LTC Address: ltc1qr267ss0yxdecztf86akhky7h7rjv9juuwgfalq<br>
+		ETH Address: 0x0Ec64364b1Df9cd62F48516a176413e78c3531e7
+	`);
+}
+
 
 function joefetch(args) {
-    if (args.includes("--help")) {
-        // language=HTML
-        return html(`Usage: joefetch [OPTION]...<br>
-        Joefetch is a CLI system information tool written in CRAsh. Joefetch<br>
-        displays information about your system next to an image, your OS logo,<br>
-        or any ASCII file of your choice.<br><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;--fart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shittin and fartin`)
-    }
-    if (args.includes("--fart")) {
-        return html(`
-        <div class="joefetch">
-            <img class="joefetch-img u-logo" src="/k/images/groggy.png" width="128" height="128" alt="">
-            <div class="joefetch-text">
-                <b class=""><a href="https://www.youtube.com/watch?v=RZALXYsc7C0">kiera</a></b>@<b class="magenta">shellfish.racing</b><br>
-                ------------------------<br>
-                fart fart fart, poop poop. fart poop.<br>
-                poop is funny<br>
-                poop and fart poop<br>
-                farting is funny (farts are funny) fart fart<br>
-                fart
-                <br><br>
-            </div>
-        </div>
-        `)
-    }
-    return html(`
-        <div class="joefetch">
-            <img class="joefetch-img u-logo" src="/k/images/a.jpg" width="128" height="128" alt="">
-            <div class="joefetch-text">
-                <b class=""><a href="https://www.youtube.com/watch?v=RZALXYsc7C0">kiera</a></b>@<b class="magenta">shellfish.racing</b><br>
-                ------------------------<br>
-                21 y.o. <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
-		ceo of swag, founder of apple, inventor of the wheel.<br>
-		i am a nerd, loser, and an agnostic earth creature.<br>
-		i enjoy doing things that people dont enjoy.<br>
-                creator of unfunny. (i am not funny. its a lie.)
-		<br><br>
-		<b>pronouns: </b>she/her
-		<br><br>
-                <b>links: </b><a href="https://git.shellfish.racing/kiki">git(ea)</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <a href="https://mastodon.shellfish.racing/@kiki">mastodon</a> <br>
-                <b>contact: </b> <button onclick="copyText(this, '@lvto')">discord</button> <button onclick="copyText(this, '@kier.99')">signal</button> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a>
-            </div>
-        </div>
-    `);
-
-
-
-
+	if (args.includes("--help")) {
+		return html(`Usage: joefetch [OPTION]...<br>
+		Joefetch is a CLI system information tool written in CRAsh. Joefetch<br>
+		displays information about your system next to an image, your OS logo,<br>
+		or any ASCII file of your choice.<br><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;--fart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shittin and fartin`)
+	}
+	if (args.includes("--fart")) {
+		return html(`
+		<div class="joefetch">
+			<img class="joefetch-img u-logo" src="/k/images/groggy.png" width="128" height="128" alt="">
+			<div class="joefetch-text">
+				<b class=""><a href="https://www.youtube.com/watch?v=RZALXYsc7C0">kiera</a></b>@<b class="magenta">shellfish.racing</b><br>
+				------------------------<br>
+				fart fart fart, poop poop. fart poop.<br>
+				poop is funny<br>
+				poop and fart poop<br>
+				farting is funny (farts are funny) fart fart<br><br>
+			</div>
+		</div>`)
+	}
+	return html(`
+	<div class="joefetch">
+		<img class="joefetch-img u-logo" src="/k/images/a.jpg" width="128" height="128" alt="">
+		<div class="joefetch-text">
+			<b class=""><a href="https://www.youtube.com/watch?v=RZALXYsc7C0">kiera</a></b>@<b class="magenta">shellfish.racing</b><br>
+			------------------------<br>
+			21 y.o. <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
+			ceo of swag, founder of apple, inventor of the wheel.<br>
+			i am a nerd, loser, and an agnostic earth creature.<br>
+			i enjoy doing things that people dont enjoy.<br>
+			creator of unfunny. (i am not funny. its a lie.)
+			<br><br>
+			<b>pronouns: </b>she/her
+			<br><br>
+			<b>links: </b><a href="https://git.shellfish.racing/kiki">git(ea)</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <a href="https://mastodon.shellfish.racing/@kiki">mastodon</a> <br>
+			<b>contact: </b> <button onclick="copyText(this, '@lvto')">discord</button> <button onclick="copyText(this, '@kier.99')">signal</button> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a>
+		</div>
+	</div>`);
 }
+
 function echo(args) {return html(args.join(" "))}
+
 function sudo(args) {
-    if (args[0] === ("--help")) {
-        return html("what am i supposed to say here?")
-    }
-    if (args != "") {
-        try {
-            let sCommand = args[0];
-            let sArgs = args.slice(1);
-            return commands[sCommand](sArgs)
-        } catch(err) {
-            return html(`CRAsh: sudo ${args}: command not found`)
-        }
-    } else {
-        return html("")
-    }
+	if (args[0] === ("--help")) {
+		return html("what am i supposed to say here?")
+	}
+	if (args != "") {
+		try {
+			let sCommand = args[0];
+			let sArgs = args.slice(1);
+			return commands[sCommand](sArgs)
+		} catch(err) {
+			return html(`CRAsh: sudo ${args}: command not found`)
+		}
+	} else {
+		return html("")
+	}
 }
+
 function clear() {
-    let history = document.getElementById('history')
-    while (history.hasChildNodes()) {
-        history.removeChild(history.firstChild)
-    }
-    return html("")
+	let history = document.getElementById('history')
+	while (history.hasChildNodes()) {
+		history.removeChild(history.firstChild)
+	}
+	return html("")
 }
 function html(t) {
-    const div = document.createElement('div');
-    div.innerHTML = t;
-    return div;
+	const div = document.createElement('div');
+	div.innerHTML = t;
+	return div;
 }
-function executeCommand(inputText,node) {
-    node.appendChild(document.createTextNode(`kiera@shellfish.racing ~ $ ${inputText}`))
-    node.appendChild(document.createElement("br"))
 
-    const command = inputText.trim().split(' ')[0];
-    let args = inputText.trim().split(' ').slice(1);
-    if (command !== "") {
-        try {
-            node.appendChild(commands[command](args))
-        } catch(err) {
-            node.appendChild(document.createTextNode(`CRAsh: ${command}: command not found`))
-        }
-    }
+function executeCommand(inputText,node) {
+	node.appendChild(document.createTextNode(`kiera@shellfish.racing ~ $ ${inputText}`))
+	node.appendChild(document.createElement("br"))
+
+	const command = inputText.trim().split(' ')[0];
+	let args = inputText.trim().split(' ').slice(1);
+	if (command !== "") {
+		try {
+			node.appendChild(commands[command](args))
+		} catch(err) {
+			node.appendChild(document.createTextNode(`CRAsh: ${command}: command not found`))
+		}
+	}
 }
 const commands = {
-    "help": help,
-    "echo": echo,
-    "clear": clear,
-    "sudo": sudo,
-    "joefetch": joefetch,
-    "exit": exit,
-    "ls": ls,
-    "cat": cat
+	"help": help,
+	"echo": echo,
+	"clear": clear,
+	"sudo": sudo,
+	"joefetch": joefetch,
+	"exit": exit,
+	"ls": ls,
+	"cat": cat,
+	"donate": donate
 };

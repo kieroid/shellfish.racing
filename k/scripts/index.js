@@ -11,19 +11,19 @@ messageHistory.push("joefetch");
 totalHistory.appendChild(joefetchFirst);
 
 try {
-    const API_KEY = 'a819ab108f2696ef5e373bd07946785d';
-    const USERNAME = 'kieroid';
-    const lastFmResponse = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=1`);
-    const lastFmJson = await lastFmResponse.json();
-    if(lastFmJson.recenttracks.track[0]['@attr'].nowplaying == 'true') {
-        const currentSongTitle = lastFmJson.recenttracks.track[0].name;
-        const currentArtistTitle = lastFmJson.recenttracks.track[0].artist['#text'];
-        let currentLastFm = (currentArtistTitle + " - " + currentSongTitle);
-	lastFmDiv.innerHTML = `${currentLastFm}`;
-    }
-}
+	const API_KEY = 'a819ab108f2696ef5e373bd07946785d';
+	const USERNAME = 'kieroid';
+	const lastFmResponse = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=1`);
+	const lastFmJson = await lastFmResponse.json();
+	if(lastFmJson.recenttracks.track[0]['@attr'].nowplaying == 'true') {
+		const currentSongTitle = lastFmJson.recenttracks.track[0].name;
+		const currentArtistTitle = lastFmJson.recenttracks.track[0].artist['#text'];
+		let currentLastFm = (currentArtistTitle + " - " + currentSongTitle);
+		lastFmDiv.innerHTML = `${currentLastFm}`;
+	}
+} 
 catch {
-    lastFmDiv.innerHTML = 'N/A';
+	lastFmDiv.innerHTML = 'N/A';
 }
 
 
@@ -46,50 +46,49 @@ window.copyText = copyText;
 
 
 document.addEventListener("keydown", function(e) {
-    if (e.key === 'Enter') {
-        //input
-        let input = document.getElementById("commandinput");
-        let node = document.createElement("li");
-        let inputText = input.value;
-        input.value = "";
+	if (e.key === 'Enter') {
+		//input
+		let input = document.getElementById("commandinput");
+		let node = document.createElement("li");
+		let inputText = input.value;
+		input.value = "";
 
-        executeCommand(inputText,node);
+		executeCommand(inputText,node);
 
-        //appending commands
-        messageHistory.push(inputText)
-        totalHistory.appendChild(node);
+		//appending commands
+		messageHistory.push(inputText)
+		totalHistory.appendChild(node);
+        	let historyHeight = totalHistory.offsetHeight;
+		let windowLength = window.innerHeight;
+
+		while (historyHeight >= 0.8 * windowLength) { 
+			totalHistory.removeChild(totalHistory.firstElementChild);
+			historyHeight = totalHistory.offsetHeight;
+		}
         
-        let historyHeight = totalHistory.offsetHeight;
-        let windowLength = window.innerHeight;
+		if (n === 0) {
+			document.getElementById("inputMessage").style.visibility = "hidden";
+			n = 0;
+		}
 
-	
-	while (historyHeight >= 0.8 * windowLength) { 
-	    totalHistory.removeChild(totalHistory.firstElementChild);
-            historyHeight = totalHistory.offsetHeight;
+		q = 0;
 	}
-        
-        if (n === 0) {
-            document.getElementById("inputMessage").style.visibility = "hidden";
-            n = 0;
-        }
-	q = 0;
-    }
-    if (e.key === 'ArrowUp') {
-        let input = document.getElementById('commandinput');
-	if(q < messageHistory.length) {
-	    input.value = messageHistory[messageHistory.length - q - 1];
-	    q = q + 1;
-        }
-    }
-    if (e.key === 'ArrowDown') {
-        let input = document.getElementById('commandinput');
-	if(q >= 1) {
-	    input.value = messageHistory[messageHistory.length - q + 1];
-	    q = q-1;
-	    if(q == 0) { input.value = ""; }
-	} else {
-	    input.value = "";
-	}
-    }
 
+	if (e.key === 'ArrowUp') {
+        	let input = document.getElementById('commandinput');
+		if(q < messageHistory.length) {
+			input.value = messageHistory[messageHistory.length - q - 1];
+			q = q + 1;
+		}
+	}
+	if (e.key === 'ArrowDown') {
+		let input = document.getElementById('commandinput');
+		if(q >= 1) {
+			input.value = messageHistory[messageHistory.length - q + 1];
+			q = q-1;
+			if(q == 0) { input.value = ""; }
+		} else {
+			input.value = "";
+		}
+	}
 });
