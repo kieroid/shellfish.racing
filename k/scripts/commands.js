@@ -154,7 +154,7 @@ function joefetch(args) {
 			<br><br>
 			<b>pronouns: </b>she/her
 			<br><br>
-			<b>links: </b><a href="https://git.shellfish.racing/kiki">git(ea)</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <a href="https://mastodon.shellfish.racing/@kiki">mastodon</a> <br>
+			<b>links: </b><a href="https://git.shellfish.racing/kiki">git(ea)</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <br>
 			<b>contact: </b> <button onclick="copyText(this, '@lvto')">discord</button> <button onclick="copyText(this, '@kier.99')">signal</button> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a>
 		</div>
 	</div>`);
