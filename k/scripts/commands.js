@@ -157,7 +157,7 @@ function joefetch(args) {
 			<br>			
 			<b>IMPORTANT QUESTION:</b> do you like <b>LEMONS</b>? <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-a', result)"><b>YES</b></button> or <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-b', result)"><b>NO</b></button><br>
 			<br>
-			&nbsp;&nbsp;&nbsp;&nbsp;<div id="result"><b>THE AUDIENCE VOTES:</b> ???</div>
+			<div id="result">&nbsp;&nbsp;&nbsp;&nbsp;THE COLLECTIVE VOTED: ???</div>
 		</div>
 	</div>`);
 }
