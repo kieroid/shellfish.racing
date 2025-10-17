@@ -146,16 +146,17 @@ function joefetch(args) {
 		<div class="joefetch-text">
 			<b class=""><a href="https://www.youtube.com/watch?v=RZALXYsc7C0">kiera</a></b>@<b class="magenta">shellfish.racing</b><br>
 			------------------------<br>
-			21 y.o. <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
-			ceo of swag, founder of apple, inventor of the wheel.<br>
-			i am a nerd, loser, and an agnostic earth creature.<br>
-			i enjoy doing things that people dont enjoy.<br>
-			creator of unfunny. (i am not funny. its a lie.)
-			<br><br>
+			22 y.o. <a href="https://www.coreboot.org/">coreboot</a> and linux enthusiast<br>
+			inventor of leaded fuel, teflon, and CFCs.<br>
+			i am a nerd, loser, and a mischevious gremlin.<br>
+			<br>
 			<b>pronouns: </b>she/her
 			<br><br>
-			<b>links: </b><a href="https://git.shellfish.racing/kiki">git(ea)</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a> <br>
+			<b>links: </b><a href="https://git.shellfish.racing/kiki">git(ea)</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <br> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a>
 			<b>contact: </b> <button onclick="copyText(this, '@lvto')">discord</button> <button onclick="copyText(this, '@kier.99')">signal</button> <a href="https://matrix.to/#/@kiera:shellfish.racing">matrix</a>
+			<br>
+			&nbsp;&nbsp;IMPORTANT QUESTION: do you like LEMONS? <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-a', result)">YES</button> or <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-b', result)">NO</button><br>
+			<div id="result"></div>
 		</div>
 	</div>`);
 }
