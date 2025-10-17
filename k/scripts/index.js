@@ -48,7 +48,7 @@ function sendVote(url, resultEl) {
 		.then(res => res.json())
 		.then(data => {
 			if (data.average !== undefined) {
-				resultEl.innerText = `THE AUDIENCE VOTES... ${(data.average * 100).toFixed(0)}%`;
+				resultEl.innerText = `<b>THE AUDIENCE VOTES: ${(data.average * 100).toFixed(0)}% YES</b>`;
 			}
 		})
 	.catch(console.error);
