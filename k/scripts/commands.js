@@ -152,11 +152,12 @@ function joefetch(args) {
 			<br>
 			<b>pronouns: </b>she/her
 			<br><br>
-			<b>links: </b><a href="https://git.shellfish.racing/kiki">git(ea)</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <br> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a>
-			<b>contact: </b> <button onclick="copyText(this, '@lvto')">discord</button> <button onclick="copyText(this, '@kier.99')">signal</button> <a href="https://matrix.to/#/@kiera:shellfish.racing">matrix</a>
+			<b>links: </b><a href="https://git.shellfish.racing/kiki">git(ea)</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a><br>
+			<b>contact: </b> <button onclick="copyText(this, '@lvto')">discord</button> <button onclick="copyText(this, '@kier.99')">signal</button> <a href="https://matrix.to/#/@kiera:shellfish.racing">matrix</a><br>
+			<br>			
+			IMPORTANT QUESTION: do you like LEMONS? <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-a', result)">YES</button> or <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-b', result)">NO</button><br>
 			<br>
-			&nbsp;&nbsp;IMPORTANT QUESTION: do you like LEMONS? <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-a', result)">YES</button> or <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-b', result)">NO</button><br>
-			<div id="result"></div>
+			&nbsp;&nbsp;&nbsp;&nbsp<div id="result"></div>
 		</div>
 	</div>`);
 }
