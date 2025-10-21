@@ -155,8 +155,9 @@ function joefetch(args) {
 			<b>links: </b><a href="https://git.shellfish.racing/kiki">git(ea)</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <a href="https://bsky.app/profile/shellfish.racing">bluesky</a><br>
 			<b>contact: </b> <button onclick="copyText(this, '@lvto')">discord</button> <button onclick="copyText(this, '@kier.99')">signal</button> <a href="https://matrix.to/#/@kiera:shellfish.racing">matrix</a><br>
 			<br>			
-			<b>IMPORTANT QUESTION:</b> do you like <b>LEMONS</b>? <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-a', result)"><b>YES</b></button> or <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-b', result)"><b>NO</b></button><br>
-			<div id="result">&nbsp;&nbsp;?% of Survey Respondents voted YES.</div>
+			<div style="text-align: center;"><b><u>IMPORTANT SURVEY</u>:</b><br></div>
+			<div style="text-align: center;">are <b>SQUIRRELS</b> at the top of the food chain? <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-a', result)"><b>YES</b></button> or <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-b', result)"><b>NO</b></button></div>
+			<div id="result" style="text-align: center;">&nbsp;&nbsp;__ of survey respondents voted YES.</div>
 		</div>
 	</div>`);
 }
