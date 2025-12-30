@@ -156,8 +156,8 @@ function joefetch(args) {
 			<b>contact: </b> <button onclick="copyText(this, '@lvto')">discord</button> <button onclick="copyText(this, '@kier.99')">signal</button> <a href="https://matrix.to/#/@kiera:shellfish.racing">matrix</a><br>
 			<br>			
 			<div style="text-align: center;"><b><u>IMPORTANT SURVEY</u>:</b><br></div>
-			<div style="text-align: center;">are <b>SQUIRRELS</b> at the top of the food chain? <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-a', result)"><b>YES</b></button> or <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-b', result)"><b>NO</b></button></div>
-			<div id="result" style="text-align: center;">&nbsp;&nbsp;__ of survey respondents voted YES.</div>
+			<div style="text-align: center;">should you wipe <b>BEFORE</b> or <b>AFTER</b> you poop? <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-a', result)"><b>BEFORE</b></button> or <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-b', result)"><b>AFTER</b></button></div>
+			<div id="result" style="text-align: center;">&nbsp;&nbsp;__ of survey respondents voted AFTER.</div>
 		</div>
 	</div>`);
 }
