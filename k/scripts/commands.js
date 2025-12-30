@@ -157,7 +157,7 @@ function joefetch(args) {
 			<br>			
 			<div style="text-align: center;"><b><u>IMPORTANT SURVEY</u>:</b><br></div>
 			<div style="text-align: center;">should you wipe <b>BEFORE</b> or <b>AFTER</b> you poop? <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-a', result)"><b>BEFORE</b></button> or <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-b', result)"><b>AFTER</b></button></div>
-			<div id="result" style="text-align: center;">&nbsp;&nbsp;__ of survey respondents voted AFTER.</div>
+			<div id="result" style="text-align: center;">&nbsp;&nbsp;__ of survey respondents voted BEFORE.</div>
 		</div>
 	</div>`);
 }
