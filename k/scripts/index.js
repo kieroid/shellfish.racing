@@ -43,20 +43,6 @@ function copyText(btn, text) {
 }
 window.copyText = copyText;
 
-function sendVote(url, resultEl) {
-	fetch(url)
-		.then(res => res.json())
-		.then(data => {
-			if (data.average !== undefined) {
-				resultEl.innerText = `${(data.average * 100).toFixed(0)}% of survey respondents voted BEFORE.`;
-			}
-		})
-	.catch(console.error);
-}
-
-window.sendVote = sendVote;
-
-
 document.addEventListener("keydown", function(e) {
 	if (e.key === 'Enter') {
 		//input

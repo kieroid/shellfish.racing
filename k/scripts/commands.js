@@ -152,12 +152,8 @@ function joefetch(args) {
 			<br>
 			<b>pronouns: </b>she/her
 			<br><br>
-			<b>links: </b><a href="https://git.shellfish.racing/kiki">git(ea)</a> <a href="https://www.last.fm/user/kieroid">last.fm</a><br>
+			<b>links: </b><a href="https://git.shellfish.racing/kiki">git(ea)</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <a href="https://tech.lgbt/@ki">mastodon</a><br>
 			<b>contact: </b> <button onclick="copyText(this, '@lvto')">discord</button> <button onclick="copyText(this, '@kier.99')">signal</button> <a href="https://matrix.to/#/@kiera:shellfish.racing">matrix</a><br>
-			<br>			
-			<div style="text-align: center;"><b><u>IMPORTANT SURVEY</u>:</b><br></div>
-			<div style="text-align: center;">should you wipe <b>BEFORE</b> or <b>AFTER</b> you poop?<br><button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-a', result)"><b>BEFORE</b></button> or <button onclick="sendVote('https://api.shellfish.racing/webhook/poll-1-answer-b', result)"><b>AFTER</b></button></div>
-			<div id="result" style="text-align: center;">&nbsp;&nbsp;__ of survey respondents voted BEFORE.</div>
 		</div>
 	</div>`);
 }
