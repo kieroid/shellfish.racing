@@ -96,12 +96,15 @@ function escapeHtml(s) {
 	return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-function shellPrompt() {
-	return 'kiera@shellfish.racing ' + currentPath() + ' $ ';
+function promptHtml() {
+	return '<span class="prompt-user">kiera</span>@<span class="prompt-host">shellfish.racing</span> ' + escapeHtml(currentPath()) + ' $ ';
 }
 
 function executeCommand(inputText, node) {
-	node.appendChild(document.createTextNode(shellPrompt() + inputText))
+	const promptEl = document.createElement('span');
+	promptEl.innerHTML = promptHtml();
+	node.appendChild(promptEl)
+	node.appendChild(document.createTextNode(inputText))
 	node.appendChild(document.createElement("br"))
 
 	const parts = inputText.trim().split(/\s+/);
@@ -121,5 +124,5 @@ function executeCommand(inputText, node) {
 	}
 
 	const label = document.getElementById('prompt');
-	if (label) label.textContent = shellPrompt();
+	if (label) label.innerHTML = promptHtml();
 }

@@ -1,13 +1,13 @@
 :root {
-	/* swap --phosphor to #ffb000 for an amber screen */
-	--phosphor: #33ff33;
-	--phosphor-dim: #1f9f22;
-	--screen-bg: #050805;
+	--text: #ffffff;
+	--screen-bg: #050505;
+	--prompt-user: #ff4d4d;
+	--prompt-host: #8b1a1a;
 }
 
 * {
 	background-color: transparent;
-	color: var(--phosphor);
+	color: var(--text);
 	font-size: 16px;
 }
 
@@ -24,7 +24,7 @@ html, button, input, optgroup, select, textarea {
 	margin: 0;
 }
 
-/* phosphor glow on every glyph */
+/* soft CRT glow on every glyph */
 body {
 	text-shadow: 0 0 5px currentColor;
 }
@@ -58,11 +58,11 @@ body::before {
 button {
 	text-decoration: underline;
 	cursor: pointer;
-	color: var(--phosphor);
+	color: var(--text);
 }
 
 button:hover {
-	color: var(--phosphor-dim);
+	color: grey;
 }
 
 input {
@@ -70,12 +70,20 @@ input {
 	outline: 0;
 	display: inline-block;
 	text-align: left;
-	caret-color: var(--phosphor);
+	caret-color: var(--text);
 	caret-shape: block;
 }
 
 li {
 	list-style: none;
+}
+
+.prompt-user {
+	color: var(--prompt-user);
+}
+
+.prompt-host {
+	color: var(--prompt-host);
 }
 
 .fs-dir {
