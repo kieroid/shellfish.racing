@@ -24,6 +24,7 @@ html, button, input, optgroup, select, textarea {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
+	text-shadow: inherit;
 }
 
 /* soft CRT glow on every glyph */
