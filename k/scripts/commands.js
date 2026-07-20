@@ -74,13 +74,6 @@ function joefetch() {
 	</div>`);
 }
 
-function help(args) {
-	if (args[0] === '--help') {
-		return html('HEEEELP ME HEEEELP HEEELP HEEELP I AM STUCK HEEEEEEEELP HELP ME HEEEELP')
-	}
-	return html(Object.keys(resolvePath('/bin').node).join(", ") +"<br>use --help to get more help on a specific command")
-}
-
 function clear() {
 	let history = document.getElementById('history')
 	while (history.hasChildNodes()) {
