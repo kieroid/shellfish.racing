@@ -3,20 +3,29 @@
 // and a program is a function that returns a node. commands live in /bin.
 const PATH = ['/bin'];
 
-const filesystem = {
+// programs are functions; they can't be persisted, so they live only in code
+// and get (re-)injected into /bin on every load.
+const programs = {
+	"ls": ls,
+	"cd": cd,
+	"cat": cat,
+	"pwd": pwd,
+	"joefetch": joefetch,
+	"clear": clear,
+	"touch": touch,
+	"mkdir": mkdir
+};
+
+let filesystem = {
 	"about.txt": html("testing"),
-	"bin": {
-		"ls": ls,
-		"cd": cd,
-		"cat": cat,
-		"pwd": pwd,
-		"joefetch": joefetch,
-		"clear": clear
-	}
+	"bin": Object.assign({}, programs)
 };
 
 // where we currently are, as an array of directory names from root.
 let cwd = [];
+
+// restore any files/dirs the user created on a previous visit.
+loadFilesystem();
 
 // the current directory as a "/"-path string ("/", "/bin", "/a/b", ...).
 function currentPath() {
@@ -120,4 +129,73 @@ function completeInput(value) {
 		return { text: head + dirPart + lcp, options: null };
 	}
 	return { text: value, options: matches };
+}
+
+// --- persistence -----------------------------------------------------------
+
+// resolve the parent directory of a path plus the final name, for creating a
+// new entry there. returns { parent, name } or null if the parent isn't a dir.
+function resolveParent(input) {
+	const trimmed = input.replace(/\/+$/, '');
+	const idx = trimmed.lastIndexOf('/');
+	const parentPath = idx === -1 ? '.' : (idx === 0 ? '/' : trimmed.slice(0, idx));
+	const name = trimmed.slice(idx + 1);
+	if (name === '' || name === '.' || name === '..') return null;
+	const r = resolvePath(parentPath);
+	if (!r || !isDirectory(r.node)) return null;
+	return { parent: r.node, name };
+}
+
+// turn the live filesystem into a JSON-safe tree: directories become { d: {...} },
+// files keep their html as { f: "..." }, and programs (functions) are dropped.
+function serializeFs(node) {
+	if (typeof node === 'function') return undefined;
+	if (isDirectory(node)) {
+		const children = {};
+		for (const key of Object.keys(node)) {
+			const child = serializeFs(node[key]);
+			if (child !== undefined) children[key] = child;
+		}
+		return { d: children };
+	}
+	return { f: node.innerHTML };
+}
+
+// rebuild a filesystem node from serializeFs output.
+function deserializeFs(obj) {
+	if (obj && typeof obj === 'object') {
+		if (obj.d !== undefined) {
+			const dir = {};
+			for (const key of Object.keys(obj.d)) {
+				dir[key] = deserializeFs(obj.d[key]);
+			}
+			return dir;
+		}
+		if (obj.f !== undefined) return html(obj.f);
+	}
+	return html('');
+}
+
+function saveFilesystem() {
+	try {
+		localStorage.setItem('shellfish.fs', JSON.stringify(serializeFs(filesystem)));
+	} catch (e) { /* localStorage unavailable or full: stay in-memory */ }
+}
+
+function loadFilesystem() {
+	let saved;
+	try {
+		saved = localStorage.getItem('shellfish.fs');
+	} catch (e) {
+		return;
+	}
+	if (saved) {
+		try {
+			const restored = deserializeFs(JSON.parse(saved));
+			if (isDirectory(restored)) filesystem = restored;
+		} catch (e) { /* corrupt data: fall back to the built-in filesystem */ }
+	}
+	// programs never persist, so make sure /bin always has the real ones.
+	if (!isDirectory(filesystem.bin)) filesystem.bin = {};
+	Object.assign(filesystem.bin, programs);
 }

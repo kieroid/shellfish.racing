@@ -1,11 +1,10 @@
-let messageHistory = [];
+let messageHistory = loadHistory();
 let q = 0;
 
 let totalHistory = document.getElementById('history');
 let joefetchFirst = document.createElement("li");
 executeCommand('joefetch',joefetchFirst);
 
-messageHistory.push("joefetch");
 totalHistory.appendChild(joefetchFirst);
 
 
@@ -25,6 +24,23 @@ function copyText(btn, text) {
 }
 window.copyText = copyText;
 
+// command history persists across reloads so the up/down arrows still recall it,
+// but we never re-print it on load -- only joefetch greets you.
+function loadHistory() {
+	try {
+		const saved = localStorage.getItem('shellfish.history');
+		const arr = saved ? JSON.parse(saved) : null;
+		if (Array.isArray(arr)) return arr;
+	} catch (e) { /* ignore */ }
+	return [];
+}
+
+function saveHistory() {
+	try {
+		localStorage.setItem('shellfish.history', JSON.stringify(messageHistory));
+	} catch (e) { /* ignore */ }
+}
+
 document.addEventListener("keydown", function(e) {
 	if (e.key === 'Enter') {
 		//input
@@ -39,6 +55,7 @@ document.addEventListener("keydown", function(e) {
 		//appending commands
 		if (inputText.trim() !== "" && inputText !== messageHistory[messageHistory.length - 1]) {
 			messageHistory.push(inputText);
+			saveHistory();
 		}
 		let greetblock = document.getElementById('greetblock');
 

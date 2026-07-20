@@ -82,6 +82,52 @@ function clear() {
 	return html("")
 }
 
+function mkdir(args) {
+	if (args.length === 0) {
+		return html('mkdir: missing operand');
+	}
+	const errors = [];
+	let changed = false;
+	for (const target of args) {
+		const p = resolveParent(target);
+		if (p === null) {
+			errors.push(`mkdir: cannot create directory '${escapeHtml(target)}': No such file or directory`);
+			continue;
+		}
+		if (Object.prototype.hasOwnProperty.call(p.parent, p.name)) {
+			errors.push(`mkdir: cannot create directory '${escapeHtml(target)}': File exists`);
+			continue;
+		}
+		p.parent[p.name] = {};
+		changed = true;
+	}
+	if (changed) saveFilesystem();
+	return html(errors.join('<br>'));
+}
+
+function touch(args) {
+	if (args.length === 0) {
+		return html('touch: missing file operand');
+	}
+	const errors = [];
+	let changed = false;
+	for (const target of args) {
+		const p = resolveParent(target);
+		if (p === null) {
+			errors.push(`touch: cannot touch '${escapeHtml(target)}': No such file or directory`);
+			continue;
+		}
+		// existing entry -> no-op (we have no mtime to bump).
+		if (Object.prototype.hasOwnProperty.call(p.parent, p.name)) {
+			continue;
+		}
+		p.parent[p.name] = html('');
+		changed = true;
+	}
+	if (changed) saveFilesystem();
+	return html(errors.join('<br>'));
+}
+
 function html(t) {
 	const div = document.createElement('div');
 	div.innerHTML = t;
