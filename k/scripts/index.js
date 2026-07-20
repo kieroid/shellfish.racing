@@ -33,13 +33,13 @@ document.addEventListener("keydown", function(e) {
 		let inputText = input.value;
 		input.value = "";
 
+		totalHistory.appendChild(node);
 		executeCommand(inputText,node);
 
 		//appending commands
 		if (inputText.trim() !== "" && inputText !== messageHistory[messageHistory.length - 1]) {
 			messageHistory.push(inputText);
 		}
-		totalHistory.appendChild(node);
 		let greetblock = document.getElementById('greetblock');
 
 		while (greetblock.offsetHeight > window.innerHeight && totalHistory.childElementCount > 1) {

@@ -1,8 +1,10 @@
 :root {
+	--screen-bg: #0a0b12;
 	--text: #ffffff;
-	--screen-bg: #050505;
-	--prompt-user: #ff4d4d;
-	--prompt-host: #8b1a1a;
+	--prompt-user: #f7768e;
+	--prompt-host: #b4637a;
+	--fs-dir: #9ece6a;
+	--fs-exec: #7aa2f7;
 }
 
 * {
@@ -62,7 +64,7 @@ button {
 }
 
 button:hover {
-	color: grey;
+	color: #565f89;
 }
 
 input {
@@ -87,11 +89,11 @@ li {
 }
 
 .fs-dir {
-	color: #87fa8c;
+	color: var(--fs-dir);
 }
 
 .fs-exec {
-	color: #87cefa;
+	color: var(--fs-exec);
 }
 
 #greetblock {
