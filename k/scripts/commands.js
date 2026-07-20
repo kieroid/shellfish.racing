@@ -1,8 +1,3 @@
-//so if you didn't know, this is my first time doing javascript.
-//yeah, no. im kind of dumb. you will see many errors, many
-//repeatitive if statements, and a slow webpage. oh well.
-//feel free to take my code. its on the github too.
-//like you'd want it anyway...
 function joefetch(args) {
 	if (args.includes("--help")) {
 		return html(`Usage: joefetch [OPTION]...<br>
