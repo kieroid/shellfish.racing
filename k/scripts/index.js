@@ -4,27 +4,10 @@ let q = 0;
 
 let totalHistory = document.getElementById('history');
 let joefetchFirst = document.createElement("li");
-const lastFmDiv = document.getElementById('lastfmplayer');
 executeCommand('joefetch',joefetchFirst);
 
 messageHistory.push("joefetch");
 totalHistory.appendChild(joefetchFirst);
-
-try {
-	const API_KEY = 'a819ab108f2696ef5e373bd07946785d';
-	const USERNAME = 'kieroid';
-	const lastFmResponse = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=1`);
-	const lastFmJson = await lastFmResponse.json();
-	if(lastFmJson.recenttracks.track[0]['@attr'].nowplaying == 'true') {
-		const currentSongTitle = lastFmJson.recenttracks.track[0].name;
-		const currentArtistTitle = lastFmJson.recenttracks.track[0].artist['#text'];
-		let currentLastFm = (currentArtistTitle + " - " + currentSongTitle);
-		lastFmDiv.innerHTML = `${currentLastFm}`;
-	}
-} 
-catch {
-	lastFmDiv.innerHTML = 'N/A';
-}
 
 
 function copyText(btn, text) {
