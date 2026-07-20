@@ -20,6 +20,11 @@ const filesystem = {
 // where we currently are, as an array of directory names from root.
 let cwd = [];
 
+// the current directory as a "/"-path string ("/", "/bin", "/a/b", ...).
+function currentPath() {
+	return '/' + cwd.join('/');
+}
+
 // a directory is a plain object; anything else (a DOM node or a program) is a file.
 function isDirectory(node) {
 	return node !== null && typeof node === 'object' && !(node instanceof Node);

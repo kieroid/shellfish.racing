@@ -49,7 +49,7 @@ function cat(args) {
 }
 
 function pwd() {
-	return html('/' + cwd.join('/'));
+	return html(currentPath());
 }
 
 function joefetch() {
@@ -100,8 +100,12 @@ function escapeHtml(s) {
 	return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+function shellPrompt() {
+	return 'kiera@shellfish.racing ' + currentPath() + ' $ ';
+}
+
 function executeCommand(inputText, node) {
-	node.appendChild(document.createTextNode(`kiera@shellfish.racing ~ $ ${inputText}`))
+	node.appendChild(document.createTextNode(shellPrompt() + inputText))
 	node.appendChild(document.createElement("br"))
 
 	const parts = inputText.trim().split(' ');
@@ -119,4 +123,7 @@ function executeCommand(inputText, node) {
 			}
 		}
 	}
+
+	const label = document.getElementById('prompt');
+	if (label) label.textContent = shellPrompt();
 }
