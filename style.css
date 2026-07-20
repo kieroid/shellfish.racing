@@ -34,6 +34,18 @@ input {
 	text-align: left;
 }
 
+li {
+	list-style: none;
+}
+
+.fs-dir {
+	color: #87fa8c;
+}
+
+.fs-exec {
+	color: #87cefa;
+}
+
 #greetblock {
 	z-index: 2;
 	display: inline-grid;

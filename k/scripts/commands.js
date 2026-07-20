@@ -2,15 +2,15 @@ function ls(args) {
 	const target = args[0] === undefined ? '.' : args[0];
 	const resolved = resolvePath(target);
 	if (resolved === null) {
-		return html(`ls: cannot access '${target}': No such file or directory`);
+		return html(`ls: cannot access '${escapeHtml(target)}': No such file or directory`);
 	}
 	if (!isDirectory(resolved.node)) {
-		return html(target);
+		return html(escapeHtml(target));
 	}
 	const names = Object.keys(resolved.node).map(name => {
 		const child = resolved.node[name];
-		if (isDirectory(child)) return `<span style="color: #87fa8c">${name}/</span>`;
-		if (typeof child === 'function') return `<span style="color: #87cefa">${name}</span>`;
+		if (isDirectory(child)) return `<span class="fs-dir">${name}/</span>`;
+		if (typeof child === 'function') return `<span class="fs-exec">${name}</span>`;
 		return name;
 	});
 	return html(names.join('  '));
@@ -24,10 +24,10 @@ function cd(args) {
 	}
 	const resolved = resolvePath(target);
 	if (resolved === null) {
-		return html(`cd: ${target}: no such file or directory`);
+		return html(`cd: ${escapeHtml(target)}: no such file or directory`);
 	}
 	if (!isDirectory(resolved.node)) {
-		return html(`cd: ${target}: not a directory`);
+		return html(`cd: ${escapeHtml(target)}: not a directory`);
 	}
 	cwd = resolved.segments;
 	return html('');
@@ -39,10 +39,10 @@ function cat(args) {
 	}
 	const resolved = resolvePath(args[0]);
 	if (resolved === null) {
-		return html(`cat: ${args[0]}: No such file or directory`);
+		return html(`cat: ${escapeHtml(args[0])}: No such file or directory`);
 	}
 	if (isDirectory(resolved.node)) {
-		return html(`cat: ${args[0]}: Is a directory`);
+		return html(`cat: ${escapeHtml(args[0])}: Is a directory`);
 	}
 	// a program is a function -> print its source. a file is a node -> print it.
 	if (typeof resolved.node === 'function') {
@@ -111,7 +111,7 @@ function executeCommand(inputText, node) {
 	node.appendChild(document.createTextNode(shellPrompt() + inputText))
 	node.appendChild(document.createElement("br"))
 
-	const parts = inputText.trim().split(' ');
+	const parts = inputText.trim().split(/\s+/);
 	const command = parts[0];
 	const args = parts.slice(1);
 	if (command !== "") {

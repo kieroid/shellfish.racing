@@ -36,12 +36,14 @@ document.addEventListener("keydown", function(e) {
 		executeCommand(inputText,node);
 
 		//appending commands
-		messageHistory.push(inputText)
+		if (inputText.trim() !== "" && inputText !== messageHistory[messageHistory.length - 1]) {
+			messageHistory.push(inputText);
+		}
 		totalHistory.appendChild(node);
 		let historyHeight = totalHistory.offsetHeight;
 		let windowLength = window.innerHeight;
 
-		while (historyHeight >= 0.8 * windowLength) {
+		while (historyHeight >= 0.8 * windowLength && totalHistory.childElementCount > 1) {
 			totalHistory.removeChild(totalHistory.firstElementChild);
 			historyHeight = totalHistory.offsetHeight;
 		}
@@ -52,13 +54,16 @@ document.addEventListener("keydown", function(e) {
 	}
 
 	if (e.key === 'ArrowUp') {
+		e.preventDefault();
 		let input = document.getElementById('commandinput');
 		if(q < messageHistory.length) {
 			input.value = messageHistory[messageHistory.length - q - 1];
 			q = q + 1;
 		}
+		input.setSelectionRange(input.value.length, input.value.length);
 	}
 	if (e.key === 'ArrowDown') {
+		e.preventDefault();
 		let input = document.getElementById('commandinput');
 		if(q >= 1) {
 			input.value = messageHistory[messageHistory.length - q + 1];
@@ -66,6 +71,21 @@ document.addEventListener("keydown", function(e) {
 			if(q == 0) { input.value = ""; }
 		} else {
 			input.value = "";
+		}
+		input.setSelectionRange(input.value.length, input.value.length);
+	}
+	if (e.key === 'Tab') {
+		e.preventDefault();
+		let input = document.getElementById('commandinput');
+		const result = completeInput(input.value);
+		if (result) {
+			input.value = result.text;
+			if (result.options) {
+				const optNode = document.createElement('li');
+				optNode.appendChild(document.createTextNode(result.options.join('  ')));
+				totalHistory.appendChild(optNode);
+			}
+			input.setSelectionRange(input.value.length, input.value.length);
 		}
 	}
 });
