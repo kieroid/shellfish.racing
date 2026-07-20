@@ -42,8 +42,8 @@ body::after {
 		to bottom,
 		transparent 0,
 		transparent 2px,
-		rgba(0, 0, 0, 0.25) 2px,
-		rgba(0, 0, 0, 0.25) 3px
+		rgba(0, 0, 0, 0.125) 2px,
+		rgba(0, 0, 0, 0.125) 3px
 	);
 }
 
