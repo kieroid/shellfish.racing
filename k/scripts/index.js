@@ -40,12 +40,10 @@ document.addEventListener("keydown", function(e) {
 			messageHistory.push(inputText);
 		}
 		totalHistory.appendChild(node);
-		let historyHeight = totalHistory.offsetHeight;
-		let windowLength = window.innerHeight;
+		let greetblock = document.getElementById('greetblock');
 
-		while (historyHeight >= 0.8 * windowLength && totalHistory.childElementCount > 1) {
+		while (greetblock.offsetHeight > window.innerHeight && totalHistory.childElementCount > 1) {
 			totalHistory.removeChild(totalHistory.firstElementChild);
-			historyHeight = totalHistory.offsetHeight;
 		}
 
 		document.getElementById("inputMessage").style.visibility = "hidden";
