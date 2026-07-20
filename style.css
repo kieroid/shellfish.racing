@@ -48,17 +48,6 @@ body::after {
 	);
 }
 
-/* CRT edge vignette */
-/* body::before {
-	content: "";
-	position: fixed;
-	inset: 0;
-	z-index: 9;
-	pointer-events: none;
-	background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
-}
-*/
-
 button {
 	text-decoration: underline;
 	cursor: pointer;
