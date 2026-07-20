@@ -7,9 +7,12 @@ function ls(args) {
 	if (!isDirectory(resolved.node)) {
 		return html(target);
 	}
-	const names = Object.keys(resolved.node).map(name =>
-		isDirectory(resolved.node[name]) ? name + '/' : name
-	);
+	const names = Object.keys(resolved.node).map(name => {
+		const child = resolved.node[name];
+		if (isDirectory(child)) return `<span style="color: #87fa8c">${name}/</span>`;
+		if (typeof child === 'function') return `<span style="color: #87cefa">${name}</span>`;
+		return name;
+	});
 	return html(names.join('  '));
 }
 
