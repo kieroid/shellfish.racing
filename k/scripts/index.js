@@ -1,5 +1,4 @@
 let messageHistory = [];
-let n = 0;
 let q = 0;
 
 let totalHistory = document.getElementById('history');
@@ -39,24 +38,21 @@ document.addEventListener("keydown", function(e) {
 		//appending commands
 		messageHistory.push(inputText)
 		totalHistory.appendChild(node);
-        	let historyHeight = totalHistory.offsetHeight;
+		let historyHeight = totalHistory.offsetHeight;
 		let windowLength = window.innerHeight;
 
-		while (historyHeight >= 0.8 * windowLength) { 
+		while (historyHeight >= 0.8 * windowLength) {
 			totalHistory.removeChild(totalHistory.firstElementChild);
 			historyHeight = totalHistory.offsetHeight;
 		}
-        
-		if (n === 0) {
-			document.getElementById("inputMessage").style.visibility = "hidden";
-			n = 0;
-		}
+
+		document.getElementById("inputMessage").style.visibility = "hidden";
 
 		q = 0;
 	}
 
 	if (e.key === 'ArrowUp') {
-        	let input = document.getElementById('commandinput');
+		let input = document.getElementById('commandinput');
 		if(q < messageHistory.length) {
 			input.value = messageHistory[messageHistory.length - q - 1];
 			q = q + 1;
