@@ -82,10 +82,6 @@ function clear() {
 	return html("")
 }
 
-function exit(args) {
-	return html("")
-}
-
 function html(t) {
 	const div = document.createElement('div');
 	div.innerHTML = t;

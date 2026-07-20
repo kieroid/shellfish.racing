@@ -11,8 +11,7 @@ const filesystem = {
 		"cat": cat,
 		"pwd": pwd,
 		"joefetch": joefetch,
-		"clear": clear,
-		"exit": exit
+		"clear": clear
 	}
 };
 
