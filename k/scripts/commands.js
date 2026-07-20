@@ -1,3 +1,76 @@
+const filesystem = {
+	"about.txt": "testing",
+};
+
+let cwd = [];
+
+function resolvePath(input) {
+	let segments = input.startsWith('/') ? [] : cwd.slice();
+	for (const part of input.split('/')) {
+		if (part === '' || part === '.') continue;
+		if (part === '..') { segments.pop(); continue; }
+		segments.push(part);
+	}
+	let node = filesystem;
+	for (const seg of segments) {
+		if (typeof node !== 'object' || !Object.prototype.hasOwnProperty.call(node, seg)) {
+			return null;
+		}
+		node = node[seg];
+	}
+	return { segments, node };
+}
+
+function pwd() {
+	return html('/' + cwd.join('/'));
+}
+
+function cd(args) {
+	const target = args[0];
+	if (target === undefined || target === '') {
+		cwd = [];
+		return html('');
+	}
+	const resolved = resolvePath(target);
+	if (resolved === null) {
+		return html(`cd: ${target}: no such file or directory`);
+	}
+	if (typeof resolved.node !== 'object') {
+		return html(`cd: ${target}: not a directory`);
+	}
+	cwd = resolved.segments;
+	return html('');
+}
+
+function ls(args) {
+	const target = args[0] === undefined ? '.' : args[0];
+	const resolved = resolvePath(target);
+	if (resolved === null) {
+		return html(`ls: cannot access '${target}': No such file or directory`);
+	}
+	if (typeof resolved.node !== 'object') {
+		return html(target);
+	}
+	const names = Object.keys(resolved.node).map(name =>
+		typeof resolved.node[name] === 'object' ? name + '/' : name
+	);
+	return html(names.join('  '));
+}
+
+function cat(args) {
+	if (args[0] === undefined || args[0] === '') {
+		return html('cat: missing file operand');
+	}
+	const resolved = resolvePath(args[0]);
+	if (resolved === null) {
+		return html(`cat: ${args[0]}: No such file or directory`);
+	}
+	if (typeof resolved.node === 'object') {
+		return html(`cat: ${args[0]}: Is a directory`);
+	}
+	return html(resolved.node.replace(/\n/g, '<br>'));
+}
+
 function joefetch() {
 	return html(`
 	<div class="joefetch">
@@ -60,5 +133,9 @@ const commands = {
 	"help": help,
 	"clear": clear,
 	"joefetch": joefetch,
+	"ls": ls,
+	"cd": cd,
+	"cat": cat,
+	"pwd": pwd,
 	"exit": exit
 };
