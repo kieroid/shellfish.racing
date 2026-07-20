@@ -13,7 +13,9 @@ const programs = {
 	"joefetch": joefetch,
 	"clear": clear,
 	"touch": touch,
-	"mkdir": mkdir
+	"mkdir": mkdir,
+	"rm": rm,
+	"rmdir": rmdir
 };
 
 let filesystem = {
@@ -144,6 +146,14 @@ function resolveParent(input) {
 	const r = resolvePath(parentPath);
 	if (!r || !isDirectory(r.node)) return null;
 	return { parent: r.node, name };
+}
+
+// after a removal, make sure cwd still points at a real directory; walk up to
+// the nearest surviving ancestor (root at worst) so the prompt never strands.
+function normalizeCwd() {
+	while (cwd.length > 0 && resolvePath('/' + cwd.join('/')) === null) {
+		cwd.pop();
+	}
 }
 
 // turn the live filesystem into a JSON-safe tree: directories become { d: {...} },

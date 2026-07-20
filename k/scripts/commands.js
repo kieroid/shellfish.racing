@@ -128,6 +128,82 @@ function touch(args) {
 	return html(errors.join('<br>'));
 }
 
+function rm(args) {
+	let recursive = false;
+	const targets = [];
+	for (const a of args) {
+		// flags: -r/-R recurse into directories, -f is tolerated and ignored.
+		if (a.startsWith('-') && a.length > 1) {
+			if (/[rR]/.test(a)) recursive = true;
+		} else {
+			targets.push(a);
+		}
+	}
+	if (targets.length === 0) {
+		return html('rm: missing operand');
+	}
+	const errors = [];
+	let changed = false;
+	for (const target of targets) {
+		const resolved = resolvePath(target);
+		if (resolved === null) {
+			errors.push(`rm: cannot remove '${escapeHtml(target)}': No such file or directory`);
+			continue;
+		}
+		if (isDirectory(resolved.node) && !recursive) {
+			errors.push(`rm: cannot remove '${escapeHtml(target)}': Is a directory`);
+			continue;
+		}
+		const p = resolveParent(target);
+		if (p === null) {
+			errors.push(`rm: cannot remove '${escapeHtml(target)}': Invalid argument`);
+			continue;
+		}
+		delete p.parent[p.name];
+		changed = true;
+	}
+	if (changed) {
+		normalizeCwd();
+		saveFilesystem();
+	}
+	return html(errors.join('<br>'));
+}
+
+function rmdir(args) {
+	if (args.length === 0) {
+		return html('rmdir: missing operand');
+	}
+	const errors = [];
+	let changed = false;
+	for (const target of args) {
+		const resolved = resolvePath(target);
+		if (resolved === null) {
+			errors.push(`rmdir: failed to remove '${escapeHtml(target)}': No such file or directory`);
+			continue;
+		}
+		if (!isDirectory(resolved.node)) {
+			errors.push(`rmdir: failed to remove '${escapeHtml(target)}': Not a directory`);
+			continue;
+		}
+		if (Object.keys(resolved.node).length > 0) {
+			errors.push(`rmdir: failed to remove '${escapeHtml(target)}': Directory not empty`);
+			continue;
+		}
+		const p = resolveParent(target);
+		if (p === null) {
+			errors.push(`rmdir: failed to remove '${escapeHtml(target)}': Invalid argument`);
+			continue;
+		}
+		delete p.parent[p.name];
+		changed = true;
+	}
+	if (changed) {
+		normalizeCwd();
+		saveFilesystem();
+	}
+	return html(errors.join('<br>'));
+}
+
 function html(t) {
 	const div = document.createElement('div');
 	div.innerHTML = t;
