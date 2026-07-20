@@ -1,25 +1,4 @@
-function joefetch(args) {
-	if (args.includes("--help")) {
-		return html(`Usage: joefetch [OPTION]...<br>
-		Joefetch is a CLI system information tool written in CRAsh. Joefetch<br>
-		displays information about your system next to an image, your OS logo,<br>
-		or any ASCII file of your choice.<br><br>
-		&nbsp;&nbsp;&nbsp;&nbsp;--fart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shittin and fartin`)
-	}
-	if (args.includes("--fart")) {
-		return html(`
-		<div class="joefetch">
-			<img class="joefetch-img u-logo" src="/k/images/groggy.png" width="128" height="128" alt="">
-			<div class="joefetch-text">
-				<b><a href="https://www.youtube.com/watch?v=RZALXYsc7C0">kiera</a></b>@<b>shellfish.racing</b><br>
-				------------------------<br>
-				fart fart fart, poop poop. fart poop.<br>
-				poop is funny<br>
-				poop and fart poop<br>
-				farting is funny (farts are funny) fart fart<br><br>
-			</div>
-		</div>`)
-	}
+function joefetch() {
 	return html(`
 	<div class="joefetch">
 		<img class="joefetch-img u-logo" src="/k/images/a.jpg" width="128" height="128" alt="">
