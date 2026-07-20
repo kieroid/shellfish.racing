@@ -1,28 +1,16 @@
-const filesystem = {
-	"about.txt": "testing",
-};
-
-let cwd = [];
-
-function resolvePath(input) {
-	let segments = input.startsWith('/') ? [] : cwd.slice();
-	for (const part of input.split('/')) {
-		if (part === '' || part === '.') continue;
-		if (part === '..') { segments.pop(); continue; }
-		segments.push(part);
+function ls(args) {
+	const target = args[0] === undefined ? '.' : args[0];
+	const resolved = resolvePath(target);
+	if (resolved === null) {
+		return html(`ls: cannot access '${target}': No such file or directory`);
 	}
-	let node = filesystem;
-	for (const seg of segments) {
-		if (typeof node !== 'object' || !Object.prototype.hasOwnProperty.call(node, seg)) {
-			return null;
-		}
-		node = node[seg];
+	if (!isDirectory(resolved.node)) {
+		return html(target);
 	}
-	return { segments, node };
-}
-
-function pwd() {
-	return html('/' + cwd.join('/'));
+	const names = Object.keys(resolved.node).map(name =>
+		isDirectory(resolved.node[name]) ? name + '/' : name
+	);
+	return html(names.join('  '));
 }
 
 function cd(args) {
@@ -35,26 +23,11 @@ function cd(args) {
 	if (resolved === null) {
 		return html(`cd: ${target}: no such file or directory`);
 	}
-	if (typeof resolved.node !== 'object') {
+	if (!isDirectory(resolved.node)) {
 		return html(`cd: ${target}: not a directory`);
 	}
 	cwd = resolved.segments;
 	return html('');
-}
-
-function ls(args) {
-	const target = args[0] === undefined ? '.' : args[0];
-	const resolved = resolvePath(target);
-	if (resolved === null) {
-		return html(`ls: cannot access '${target}': No such file or directory`);
-	}
-	if (typeof resolved.node !== 'object') {
-		return html(target);
-	}
-	const names = Object.keys(resolved.node).map(name =>
-		typeof resolved.node[name] === 'object' ? name + '/' : name
-	);
-	return html(names.join('  '));
 }
 
 function cat(args) {
@@ -65,10 +38,18 @@ function cat(args) {
 	if (resolved === null) {
 		return html(`cat: ${args[0]}: No such file or directory`);
 	}
-	if (typeof resolved.node === 'object') {
+	if (isDirectory(resolved.node)) {
 		return html(`cat: ${args[0]}: Is a directory`);
 	}
-	return html(resolved.node.replace(/\n/g, '<br>'));
+	// a program is a function -> print its source. a file is a node -> print it.
+	if (typeof resolved.node === 'function') {
+		return html('<pre style="margin: 0">' + escapeHtml(resolved.node.toString()) + '</pre>');
+	}
+	return resolved.node.cloneNode(true);
+}
+
+function pwd() {
+	return html('/' + cwd.join('/'));
 }
 
 function joefetch() {
@@ -94,7 +75,7 @@ function help(args) {
 	if (args[0] === '--help') {
 		return html('HEEEELP ME HEEEELP HEEELP HEEELP I AM STUCK HEEEEEEEELP HELP ME HEEEELP')
 	}
-	return html(Object.keys(commands).join(", ") +"<br>use --help to get more help on a specific command")
+	return html(Object.keys(resolvePath('/bin').node).join(", ") +"<br>use --help to get more help on a specific command")
 }
 
 function clear() {
@@ -115,27 +96,27 @@ function html(t) {
 	return div;
 }
 
-function executeCommand(inputText,node) {
+function escapeHtml(s) {
+	return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function executeCommand(inputText, node) {
 	node.appendChild(document.createTextNode(`kiera@shellfish.racing ~ $ ${inputText}`))
 	node.appendChild(document.createElement("br"))
 
-	const command = inputText.trim().split(' ')[0];
-	let args = inputText.trim().split(' ').slice(1);
+	const parts = inputText.trim().split(' ');
+	const command = parts[0];
+	const args = parts.slice(1);
 	if (command !== "") {
-		try {
-			node.appendChild(commands[command](args))
-		} catch(err) {
+		const program = resolveCommand(command);
+		if (typeof program !== 'function') {
 			node.appendChild(document.createTextNode(`CRAsh: ${command}: command not found`))
+		} else {
+			try {
+				node.appendChild(program(args))
+			} catch (err) {
+				node.appendChild(document.createTextNode(`CRAsh: ${command}: ${err}`))
+			}
 		}
 	}
 }
-const commands = {
-	"help": help,
-	"clear": clear,
-	"joefetch": joefetch,
-	"ls": ls,
-	"cd": cd,
-	"cat": cat,
-	"pwd": pwd,
-	"exit": exit
-};
