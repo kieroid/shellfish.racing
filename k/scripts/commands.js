@@ -204,6 +204,93 @@ function rmdir(args) {
 	return html(errors.join('<br>'));
 }
 
+// shared core for mv/cp. moves (remove=true) or copies (remove=false) src to
+// dest, returning an error string (already verb-prefixed) or null on success.
+function transferEntry(verb, src, dest, destIsDir, remove) {
+	const srcResolved = resolvePath(src);
+	if (srcResolved === null) {
+		return `${verb}: cannot stat '${escapeHtml(src)}': No such file or directory`;
+	}
+	const action = remove ? 'move' : 'copy';
+	const finalSegs = destIsDir ? pathSegments(dest).concat(basename(src)) : pathSegments(dest);
+	const name = finalSegs[finalSegs.length - 1];
+	if (name === undefined || name === '') {
+		return `${verb}: cannot ${action} '${escapeHtml(src)}' to '${escapeHtml(dest)}': Invalid argument`;
+	}
+	const parentSegs = finalSegs.slice(0, -1);
+	const parentResolved = resolvePath(parentSegs.length ? '/' + parentSegs.join('/') : '/');
+	if (parentResolved === null || !isDirectory(parentResolved.node)) {
+		return `${verb}: cannot ${action} '${escapeHtml(src)}' to '${escapeHtml(dest)}': No such file or directory`;
+	}
+	if (segEqual(srcResolved.segments, finalSegs)) {
+		return `${verb}: '${escapeHtml(src)}' and '${escapeHtml(dest)}' are the same file`;
+	}
+	if (isDirectory(srcResolved.node) && segPrefix(srcResolved.segments, finalSegs)) {
+		return `${verb}: cannot ${action} '${escapeHtml(src)}' to a subdirectory of itself, '${escapeHtml(dest)}'`;
+	}
+	parentResolved.node[name] = remove ? srcResolved.node : cloneFsNode(srcResolved.node);
+	if (remove) {
+		const srcParent = resolveParent(src);
+		if (srcParent) delete srcParent.parent[srcParent.name];
+	}
+	return null;
+}
+
+function mv(args) {
+	if (args.length === 0) {
+		return html('mv: missing file operand');
+	}
+	if (args.length === 1) {
+		return html(`mv: missing destination file operand after '${escapeHtml(args[0])}'`);
+	}
+	const dest = args[args.length - 1];
+	const sources = args.slice(0, -1);
+	const destResolved = resolvePath(dest);
+	const destIsDir = destResolved !== null && isDirectory(destResolved.node);
+	if (sources.length > 1 && !destIsDir) {
+		return html(`mv: target '${escapeHtml(dest)}' is not a directory`);
+	}
+	const errors = [];
+	let changed = false;
+	for (const src of sources) {
+		const err = transferEntry('mv', src, dest, destIsDir, true);
+		if (err) errors.push(err);
+		else changed = true;
+	}
+	if (changed) {
+		normalizeCwd();
+		saveFilesystem();
+	}
+	return html(errors.join('<br>'));
+}
+
+function cp(args) {
+	if (args.length === 0) {
+		return html('cp: missing file operand');
+	}
+	if (args.length === 1) {
+		return html(`cp: missing destination file operand after '${escapeHtml(args[0])}'`);
+	}
+	const dest = args[args.length - 1];
+	const sources = args.slice(0, -1);
+	const destResolved = resolvePath(dest);
+	const destIsDir = destResolved !== null && isDirectory(destResolved.node);
+	if (sources.length > 1 && !destIsDir) {
+		return html(`cp: target '${escapeHtml(dest)}' is not a directory`);
+	}
+	const errors = [];
+	let changed = false;
+	for (const src of sources) {
+		const err = transferEntry('cp', src, dest, destIsDir, false);
+		if (err) errors.push(err);
+		else changed = true;
+	}
+	if (changed) {
+		saveFilesystem();
+	}
+	return html(errors.join('<br>'));
+}
+
 function html(t) {
 	const div = document.createElement('div');
 	div.innerHTML = t;

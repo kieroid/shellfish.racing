@@ -15,7 +15,9 @@ const programs = {
 	"touch": touch,
 	"mkdir": mkdir,
 	"rm": rm,
-	"rmdir": rmdir
+	"rmdir": rmdir,
+	"mv": mv,
+	"cp": cp
 };
 
 let filesystem = {
@@ -154,6 +156,46 @@ function normalizeCwd() {
 	while (cwd.length > 0 && resolvePath('/' + cwd.join('/')) === null) {
 		cwd.pop();
 	}
+}
+
+// split a path into segments, resolving "." and ".." against cwd, WITHOUT
+// checking that anything exists (used to compute a move/copy destination).
+function pathSegments(input) {
+	let segments = input.startsWith('/') ? [] : cwd.slice();
+	for (const part of input.split('/')) {
+		if (part === '' || part === '.') continue;
+		if (part === '..') { segments.pop(); continue; }
+		segments.push(part);
+	}
+	return segments;
+}
+
+// last segment of a path ("a/b/c" -> "c", "foo" -> "foo").
+function basename(input) {
+	const trimmed = input.replace(/\/+$/, '');
+	const idx = trimmed.lastIndexOf('/');
+	return trimmed.slice(idx + 1);
+}
+
+// segment-array helpers for spotting no-op moves and self-nesting.
+function segEqual(a, b) {
+	return a.length === b.length && a.every((s, i) => b[i] === s);
+}
+
+function segPrefix(a, b) {
+	return a.length <= b.length && a.every((s, i) => b[i] === s);
+}
+
+// deep-copy a filesystem node: directories recurse, files clone their DOM node,
+// programs (functions) are shared by reference since they can't be cloned.
+function cloneFsNode(node) {
+	if (typeof node === 'function') return node;
+	if (isDirectory(node)) {
+		const copy = {};
+		for (const key of Object.keys(node)) copy[key] = cloneFsNode(node[key]);
+		return copy;
+	}
+	return node.cloneNode(true);
 }
 
 // turn the live filesystem into a JSON-safe tree: directories become { d: {...} },
