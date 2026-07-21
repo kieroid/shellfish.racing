@@ -7,12 +7,7 @@ function ls(args) {
 	if (!isDirectory(resolved.node)) {
 		return html(escapeHtml(target));
 	}
-	const names = Object.keys(resolved.node).map(name => {
-		const child = resolved.node[name];
-		if (isDirectory(child)) return `<span class="fs-dir">${name}/</span>`;
-		if (isRunnable(child)) return `<span class="fs-exec">${name}</span>`;
-		return name;
-	});
+	const names = Object.keys(resolved.node).map(name => colorName(name, resolved.node[name]));
 	return html(names.join('  '));
 }
 
@@ -83,11 +78,8 @@ function joefetch() {
 }
 
 function clear() {
-	let history = document.getElementById('history')
-	while (history.hasChildNodes()) {
-		history.removeChild(history.firstChild)
-	}
-	return html("")
+	document.getElementById('history').replaceChildren();
+	return html("");
 }
 
 function mkdir(args) {
@@ -331,6 +323,145 @@ function chmod(args) {
 	return html(errors.join('<br>'));
 }
 
+// color a filesystem entry the way ls/tree do: dirs green, runnables blue.
+function colorName(name, child) {
+	if (isDirectory(child)) return `<span class="fs-dir">${escapeHtml(name)}/</span>`;
+	if (isRunnable(child)) return `<span class="fs-exec">${escapeHtml(name)}</span>`;
+	return escapeHtml(name);
+}
+
+function tree(args) {
+	const target = args[0] === undefined ? '.' : args[0];
+	const resolved = resolvePath(target);
+	if (resolved === null) {
+		return html(`tree: ${escapeHtml(target)}: No such file or directory`);
+	}
+	if (!isDirectory(resolved.node)) {
+		return html(escapeHtml(target));
+	}
+	const lines = [target === '.' ? '.' : escapeHtml(target)];
+	buildTree(resolved.node, '', lines);
+	return html('<pre style="margin: 0">' + lines.join('\n') + '</pre>');
+}
+
+// recursively append a directory's entries to `lines` with tree-drawing prefixes.
+function buildTree(dir, prefix, lines) {
+	const keys = Object.keys(dir);
+	keys.forEach((name, i) => {
+		const child = dir[name];
+		const last = i === keys.length - 1;
+		lines.push(prefix + (last ? '└── ' : '├── ') + colorName(name, child));
+		if (isDirectory(child)) {
+			buildTree(child, prefix + (last ? '    ' : '│   '), lines);
+		}
+	});
+}
+
+// --- text plumbing for pipes -----------------------------------------------
+
+// extract a node's content as plain text for piping: <br> becomes a newline and
+// remaining markup is stripped, so line-oriented filters see real lines.
+function nodeToText(node) {
+	if (!node) return '';
+	const markup = node.innerHTML.replace(/<br\s*\/?>/gi, '\n');
+	const tmp = document.createElement('div');
+	tmp.innerHTML = markup;
+	return tmp.textContent;
+}
+
+// wrap plain text (newline-separated) back into a rendered node: lines become
+// <br>-separated and the text is escaped so file content can't inject markup.
+function textNode(text) {
+	return html(escapeHtml(text).replace(/\n/g, '<br>'));
+}
+
+// a filter's input: the named file's text if given, else piped stdin. returns
+// { text } or { error } (an unescaped message for textNode to render).
+function readInput(name, file, stdin) {
+	if (file !== undefined) {
+		const resolved = resolvePath(file);
+		if (resolved === null) return { error: `${name}: ${file}: No such file or directory` };
+		if (isDirectory(resolved.node)) return { error: `${name}: ${file}: Is a directory` };
+		// a built-in program has no content of its own; read its source, like cat.
+		if (typeof resolved.node === 'function') return { text: resolved.node.toString() };
+		return { text: nodeToText(resolved.node) };
+	}
+	return { text: stdin === null || stdin === undefined ? '' : stdin };
+}
+
+function grep(args, stdin) {
+	let ignoreCase = false;
+	const rest = [];
+	for (const a of args) {
+		if (a.startsWith('-') && a.length > 1) {
+			if (/i/.test(a)) ignoreCase = true;
+		} else rest.push(a);
+	}
+	if (rest[0] === undefined) return html('grep: missing pattern');
+	const input = readInput('grep', rest[1], stdin);
+	if (input.error) return textNode(input.error);
+	let re;
+	try {
+		re = new RegExp(rest[0], ignoreCase ? 'i' : '');
+	} catch (e) {
+		return textNode(`grep: invalid pattern: ${rest[0]}`);
+	}
+	const matched = input.text.split('\n').filter(line => re.test(line));
+	return textNode(matched.join('\n'));
+}
+
+// shared -n / -<num> count parsing for head/tail. returns { count, file }.
+function countArgs(args) {
+	let count = 10;
+	const files = [];
+	for (let i = 0; i < args.length; i++) {
+		const a = args[i];
+		if (a === '-n') { count = parseInt(args[++i], 10); }
+		else if (a.startsWith('-n')) { count = parseInt(a.slice(2), 10); }
+		else if (/^-\d+$/.test(a)) { count = parseInt(a.slice(1), 10); }
+		else files.push(a);
+	}
+	if (!Number.isFinite(count) || count < 0) count = 10;
+	return { count, file: files[0] };
+}
+
+function head(args, stdin) {
+	const { count, file } = countArgs(args);
+	const input = readInput('head', file, stdin);
+	if (input.error) return textNode(input.error);
+	return textNode(input.text.split('\n').slice(0, count).join('\n'));
+}
+
+function tail(args, stdin) {
+	const { count, file } = countArgs(args);
+	const input = readInput('tail', file, stdin);
+	if (input.error) return textNode(input.error);
+	const lines = input.text.split('\n');
+	return textNode(count === 0 ? '' : lines.slice(-count).join('\n'));
+}
+
+function wc(args, stdin) {
+	let showLines = false, showWords = false, showChars = false;
+	const rest = [];
+	for (const a of args) {
+		if (a.startsWith('-') && a.length > 1) {
+			if (/l/.test(a)) showLines = true;
+			if (/w/.test(a)) showWords = true;
+			if (/c/.test(a)) showChars = true;
+		} else rest.push(a);
+	}
+	if (!showLines && !showWords && !showChars) showLines = showWords = showChars = true;
+	const input = readInput('wc', rest[0], stdin);
+	if (input.error) return textNode(input.error);
+	const text = input.text;
+	const out = [];
+	if (showLines) out.push(text === '' ? 0 : text.split('\n').length);
+	if (showWords) out.push(text.split(/\s+/).filter(Boolean).length);
+	if (showChars) out.push(text.length);
+	if (rest[0] !== undefined) out.push(rest[0]);
+	return textNode(out.join(' '));
+}
+
 function html(t) {
 	const div = document.createElement('div');
 	div.innerHTML = t;
@@ -376,15 +507,50 @@ function writeToFile(target, node, append) {
 }
 
 // run a resolved command: a built-in function, or an executable file whose text
-// is executed as a JS function body (with access to html(), args, the fs, ...).
-function runProgram(program, args) {
+// is executed as a JS function body (with access to html(), args, stdin, ...).
+function runProgram(program, args, stdin) {
 	if (typeof program === 'function') {
-		return program(args);
+		return program(args, stdin);
 	}
-	const fn = new Function('args', program.textContent);
-	const out = fn(args);
+	const fn = new Function('args', 'stdin', program.textContent);
+	const out = fn(args, stdin);
 	if (out instanceof Node) return out;
 	return html(out === undefined || out === null ? '' : escapeHtml(String(out)));
+}
+
+// split a command line into tokens. single/double quotes group text (and are
+// stripped); the shell operators | > >> become their own tokens, but only when
+// unquoted. returns [{ value, op }], where op flags an operator token.
+function tokenize(input) {
+	const tokens = [];
+	let i = 0;
+	while (i < input.length) {
+		const c = input[i];
+		if (c === ' ' || c === '\t') { i += 1; continue; }
+		if (c === '>') {
+			if (input[i + 1] === '>') { tokens.push({ value: '>>', op: true }); i += 2; }
+			else { tokens.push({ value: '>', op: true }); i += 1; }
+			continue;
+		}
+		if (c === '|') { tokens.push({ value: '|', op: true }); i += 1; continue; }
+		// a word: accumulate until whitespace or an operator, honoring quotes.
+		let value = '';
+		while (i < input.length) {
+			const ch = input[i];
+			if (ch === ' ' || ch === '\t' || ch === '>' || ch === '|') break;
+			if (ch === '"' || ch === "'") {
+				const quote = ch;
+				i += 1;
+				while (i < input.length && input[i] !== quote) { value += input[i]; i += 1; }
+				i += 1; // skip the closing quote (an unterminated quote just ends the word)
+				continue;
+			}
+			value += ch;
+			i += 1;
+		}
+		tokens.push({ value, op: false });
+	}
+	return tokens;
 }
 
 function executeCommand(inputText, node) {
@@ -394,38 +560,70 @@ function executeCommand(inputText, node) {
 	node.appendChild(document.createTextNode(inputText))
 	node.appendChild(document.createElement("br"))
 
-	// split off a trailing `>`/`>>` redirection, tolerating attached forms (a>b).
-	const parts = inputText.replace(/>>?/g, m => ' ' + m + ' ').trim().split(/\s+/);
-	let redirect = null;
-	const opIdx = parts.findIndex(p => p === '>' || p === '>>');
-	if (opIdx !== -1) {
-		redirect = { append: parts[opIdx] === '>>', target: parts[opIdx + 1] };
-		parts.splice(opIdx);
+	// tokenize, split into pipeline stages on `|`, and pull a trailing
+	// redirection (>/>>) off the final stage.
+	const tokens = tokenize(inputText);
+	const stages = [[]];
+	for (const t of tokens) {
+		if (t.op && t.value === '|') stages.push([]);
+		else stages[stages.length - 1].push(t);
 	}
-	const command = parts[0] === undefined ? "" : parts[0];
-	const args = parts.slice(1);
+
+	let redirect = null;
+	const lastStage = stages[stages.length - 1];
+	const opIdx = lastStage.findIndex(t => t.op && (t.value === '>' || t.value === '>>'));
+	if (opIdx !== -1) {
+		const targetTok = lastStage[opIdx + 1];
+		redirect = { append: lastStage[opIdx].value === '>>', target: targetTok ? targetTok.value : undefined };
+		lastStage.splice(opIdx);
+	}
+
+	// each stage becomes { command, args }; stray operator tokens are dropped.
+	const commands = stages.map(stage => {
+		const words = stage.filter(t => !t.op).map(t => t.value);
+		return { command: words[0] === undefined ? "" : words[0], args: words.slice(1) };
+	});
+	const multi = commands.length > 1;
 
 	if (redirect && (redirect.target === undefined || redirect.target === '')) {
 		node.appendChild(document.createTextNode('CRAsh: syntax error near unexpected token `newline`'))
-	} else if (command === "" && redirect) {
+	} else if (!multi && commands[0].command === "" && redirect) {
 		// bare redirection like `> a` just truncates/creates an empty file.
 		const err = writeToFile(redirect.target, null, redirect.append);
 		if (err) node.appendChild(document.createTextNode(err))
-	} else if (command !== "") {
-		const program = resolveCommand(command);
-		if (program === null) {
-			node.appendChild(document.createTextNode(`CRAsh: ${command}: command not found`))
-		} else {
+	} else if (commands.some(c => c.command === "")) {
+		// an empty stage in a pipeline/redirect is a syntax error; a blank line isn't.
+		if (multi || redirect) {
+			node.appendChild(document.createTextNode('CRAsh: syntax error near unexpected token `|`'))
+		}
+	} else {
+		// run each stage left-to-right, threading the previous stage's text as stdin.
+		let stdin = null;
+		let result = null;
+		let failed = false;
+		for (let s = 0; s < commands.length; s++) {
+			const { command, args } = commands[s];
+			const program = resolveCommand(command);
+			if (program === null) {
+				node.appendChild(document.createTextNode(`CRAsh: ${command}: command not found`))
+				failed = true;
+				break;
+			}
 			try {
-				const result = runProgram(program, args);
-				if (redirect) {
-					const err = writeToFile(redirect.target, result, redirect.append);
-					if (err) node.appendChild(document.createTextNode(err))
-				} else {
-					node.appendChild(result)
-				}
+				result = runProgram(program, args, stdin);
 			} catch (err) {
 				node.appendChild(document.createTextNode(`CRAsh: ${command}: ${err}`))
+				failed = true;
+				break;
+			}
+			if (s < commands.length - 1) stdin = nodeToText(result);
+		}
+		if (!failed) {
+			if (redirect) {
+				const err = writeToFile(redirect.target, result, redirect.append);
+				if (err) node.appendChild(document.createTextNode(err))
+			} else {
+				node.appendChild(result)
 			}
 		}
 	}

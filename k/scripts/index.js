@@ -42,9 +42,9 @@ function saveHistory() {
 }
 
 document.addEventListener("keydown", function(e) {
+	const input = document.getElementById("commandinput");
 	if (e.key === 'Enter') {
 		//input
-		let input = document.getElementById("commandinput");
 		let node = document.createElement("li");
 		let inputText = input.value;
 		input.value = "";
@@ -70,7 +70,6 @@ document.addEventListener("keydown", function(e) {
 
 	if (e.key === 'ArrowUp') {
 		e.preventDefault();
-		let input = document.getElementById('commandinput');
 		if(q < messageHistory.length) {
 			input.value = messageHistory[messageHistory.length - q - 1];
 			q = q + 1;
@@ -79,7 +78,6 @@ document.addEventListener("keydown", function(e) {
 	}
 	if (e.key === 'ArrowDown') {
 		e.preventDefault();
-		let input = document.getElementById('commandinput');
 		if(q >= 1) {
 			input.value = messageHistory[messageHistory.length - q + 1];
 			q = q-1;
@@ -91,7 +89,6 @@ document.addEventListener("keydown", function(e) {
 	}
 	if (e.key === 'Tab') {
 		e.preventDefault();
-		let input = document.getElementById('commandinput');
 		const result = completeInput(input.value);
 		if (result) {
 			input.value = result.text;

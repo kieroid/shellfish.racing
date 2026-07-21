@@ -19,7 +19,12 @@ const programs = {
 	"rmdir": rmdir,
 	"mv": mv,
 	"cp": cp,
-	"chmod": chmod
+	"chmod": chmod,
+	"grep": grep,
+	"head": head,
+	"tail": tail,
+	"wc": wc,
+	"tree": tree
 };
 
 let filesystem = {
@@ -57,12 +62,7 @@ function isRunnable(node) {
 // turn a path (absolute or relative) into { segments, node }, or null if it
 // does not exist. handles "." and "..".
 function resolvePath(input) {
-	let segments = input.startsWith('/') ? [] : cwd.slice();
-	for (const part of input.split('/')) {
-		if (part === '' || part === '.') continue;
-		if (part === '..') { segments.pop(); continue; }
-		segments.push(part);
-	}
+	const segments = pathSegments(input);
 	let node = filesystem;
 	for (const seg of segments) {
 		if (!isDirectory(node) || !Object.prototype.hasOwnProperty.call(node, seg)) {
@@ -172,7 +172,8 @@ function normalizeCwd() {
 }
 
 // split a path into segments, resolving "." and ".." against cwd, WITHOUT
-// checking that anything exists (used to compute a move/copy destination).
+// checking that anything exists. the shared normalizer behind resolvePath and
+// move/copy destinations.
 function pathSegments(input) {
 	let segments = input.startsWith('/') ? [] : cwd.slice();
 	for (const part of input.split('/')) {
