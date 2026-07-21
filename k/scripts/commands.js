@@ -1,14 +1,30 @@
 function ls(args) {
-	const target = args[0] === undefined ? '.' : args[0];
-	const resolved = resolvePath(target);
-	if (resolved === null) {
-		return html(`ls: cannot access '${escapeHtml(target)}': No such file or directory`);
+	const targets = args.length === 0 ? ['.'] : args;
+	const errors = [];
+	const files = [];       // non-directory operands, listed together on one line
+	const dirs = [];        // { target, listing } for directory operands
+	for (const target of targets) {
+		const resolved = resolvePath(target);
+		if (resolved === null) {
+			errors.push(`ls: cannot access '${escapeHtml(target)}': No such file or directory`);
+			continue;
+		}
+		if (isDirectory(resolved.node)) {
+			const listing = Object.keys(resolved.node).map(name => colorName(name, resolved.node[name])).join('  ');
+			dirs.push({ target, listing });
+		} else {
+			files.push(colorName(target, resolved.node));
+		}
 	}
-	if (!isDirectory(resolved.node)) {
-		return html(escapeHtml(target));
+	// with more than one operand, directories get a "name:" header, like real ls.
+	const header = targets.length > 1;
+	const blocks = [];
+	if (errors.length) blocks.push(errors.join('<br>'));
+	if (files.length) blocks.push(files.join('  '));
+	for (const d of dirs) {
+		blocks.push(header ? `${escapeHtml(d.target)}:<br>${d.listing}` : d.listing);
 	}
-	const names = Object.keys(resolved.node).map(name => colorName(name, resolved.node[name]));
-	return html(names.join('  '));
+	return html(blocks.join('<br>'));
 }
 
 function cd(args) {
@@ -29,25 +45,31 @@ function cd(args) {
 }
 
 function cat(args) {
-	if (args[0] === undefined || args[0] === '') {
+	if (args.length === 0) {
 		return html('cat: missing file operand');
 	}
-	const resolved = resolvePath(args[0]);
-	if (resolved === null) {
-		return html(`cat: ${escapeHtml(args[0])}: No such file or directory`);
+	const out = html('');
+	for (const target of args) {
+		const resolved = resolvePath(target);
+		if (resolved === null) {
+			out.appendChild(html(`cat: ${escapeHtml(target)}: No such file or directory`));
+			continue;
+		}
+		if (isDirectory(resolved.node)) {
+			out.appendChild(html(`cat: ${escapeHtml(target)}: Is a directory`));
+			continue;
+		}
+		// a program (function) or executable file -> print its source. a plain file
+		// is a node -> render a clone.
+		if (typeof resolved.node === 'function') {
+			out.appendChild(html('<pre style="margin: 0">' + escapeHtml(resolved.node.toString()) + '</pre>'));
+		} else if (isExecutableFile(resolved.node)) {
+			out.appendChild(html('<pre style="margin: 0">' + escapeHtml(resolved.node.textContent) + '</pre>'));
+		} else {
+			out.appendChild(resolved.node.cloneNode(true));
+		}
 	}
-	if (isDirectory(resolved.node)) {
-		return html(`cat: ${escapeHtml(args[0])}: Is a directory`);
-	}
-	// a program (function) or executable file -> print its source. a plain file
-	// is a node -> render it.
-	if (typeof resolved.node === 'function') {
-		return html('<pre style="margin: 0">' + escapeHtml(resolved.node.toString()) + '</pre>');
-	}
-	if (isExecutableFile(resolved.node)) {
-		return html('<pre style="margin: 0">' + escapeHtml(resolved.node.textContent) + '</pre>');
-	}
-	return resolved.node.cloneNode(true);
+	return out;
 }
 
 function pwd() {
@@ -533,13 +555,16 @@ function tokenize(input) {
 			continue;
 		}
 		if (c === '|') { tokens.push({ value: '|', op: true }); i += 1; continue; }
-		// a word: accumulate until whitespace or an operator, honoring quotes.
+		// a word: accumulate until whitespace or an operator, honoring quotes. we
+		// remember whether any part was quoted so globbing skips quoted words.
 		let value = '';
+		let quoted = false;
 		while (i < input.length) {
 			const ch = input[i];
 			if (ch === ' ' || ch === '\t' || ch === '>' || ch === '|') break;
 			if (ch === '"' || ch === "'") {
 				const quote = ch;
+				quoted = true;
 				i += 1;
 				while (i < input.length && input[i] !== quote) { value += input[i]; i += 1; }
 				i += 1; // skip the closing quote (an unterminated quote just ends the word)
@@ -548,9 +573,42 @@ function tokenize(input) {
 			value += ch;
 			i += 1;
 		}
-		tokens.push({ value, op: false });
+		tokens.push({ value, op: false, quoted });
 	}
 	return tokens;
+}
+
+// does this word contain glob metacharacters worth expanding?
+function hasGlob(s) {
+	return /[*?]/.test(s);
+}
+
+// build an anchored RegExp from one path component's glob: * -> any run of chars,
+// ? -> any single char, everything else matched literally.
+function globToRegExp(glob) {
+	let re = '^';
+	for (const ch of glob) {
+		if (ch === '*') re += '.*';
+		else if (ch === '?') re += '.';
+		else re += ch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	return new RegExp(re + '$');
+}
+
+// expand a glob against the filesystem. only the last path component globs; the
+// directory prefix is taken literally. returns matching paths sorted, or [] if
+// nothing matches (the caller then leaves the pattern literal, like bash).
+function expandGlob(pattern) {
+	const slash = pattern.lastIndexOf('/');
+	const dirPart = slash === -1 ? '' : pattern.slice(0, slash + 1);
+	const globPart = slash === -1 ? pattern : pattern.slice(slash + 1);
+	const dir = resolvePath(dirPart === '' ? '.' : dirPart);
+	if (dir === null || !isDirectory(dir.node)) return [];
+	const re = globToRegExp(globPart);
+	return Object.keys(dir.node)
+		.filter(name => re.test(name))
+		.sort()
+		.map(name => dirPart + name);
 }
 
 function executeCommand(inputText, node) {
@@ -578,10 +636,19 @@ function executeCommand(inputText, node) {
 		lastStage.splice(opIdx);
 	}
 
-	// each stage becomes { command, args }; stray operator tokens are dropped.
+	// each stage becomes { command, args }; stray operator tokens are dropped, and
+	// unquoted argument words with glob chars are expanded against the filesystem.
 	const commands = stages.map(stage => {
-		const words = stage.filter(t => !t.op).map(t => t.value);
-		return { command: words[0] === undefined ? "" : words[0], args: words.slice(1) };
+		const words = stage.filter(t => !t.op);
+		const expanded = [];
+		words.forEach((t, i) => {
+			if (i > 0 && !t.quoted && hasGlob(t.value)) {
+				const matches = expandGlob(t.value);
+				if (matches.length > 0) { expanded.push(...matches); return; }
+			}
+			expanded.push(t.value);
+		});
+		return { command: expanded[0] === undefined ? "" : expanded[0], args: expanded.slice(1) };
 	});
 	const multi = commands.length > 1;
 
