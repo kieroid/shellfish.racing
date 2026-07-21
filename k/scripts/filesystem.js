@@ -13,6 +13,7 @@ const programs = {
 	"echo": echo,
 	"joefetch": joefetch,
 	"clear": clear,
+	"exit": exit,
 	"touch": touch,
 	"mkdir": mkdir,
 	"rm": rm,
@@ -24,6 +25,8 @@ const programs = {
 	"head": head,
 	"tail": tail,
 	"wc": wc,
+	"sort": sort,
+	"uniq": uniq,
 	"tree": tree
 };
 

@@ -104,6 +104,13 @@ function clear() {
 	return html("");
 }
 
+function exit() {
+	window.close();
+	// browsers only let window.close() shut tabs a script opened; if we got here,
+	// it was blocked (a directly-opened tab), so say so instead of doing nothing.
+	return html('exit: the browser will not let me close this tab. close it yourself :)');
+}
+
 function mkdir(args) {
 	if (args.length === 0) {
 		return html('mkdir: missing operand');
@@ -484,6 +491,54 @@ function wc(args, stdin) {
 	return textNode(out.join(' '));
 }
 
+function sort(args, stdin) {
+	// -r reverse, -n numeric, -u drop duplicates (like sort -u).
+	let reverse = false, numeric = false, unique = false;
+	const rest = [];
+	for (const a of args) {
+		if (a.startsWith('-') && a.length > 1) {
+			if (/r/.test(a)) reverse = true;
+			if (/n/.test(a)) numeric = true;
+			if (/u/.test(a)) unique = true;
+		} else rest.push(a);
+	}
+	const input = readInput('sort', rest[0], stdin);
+	if (input.error) return textNode(input.error);
+	let lines = input.text === '' ? [] : input.text.split('\n');
+	lines.sort(numeric
+		? (a, b) => (parseFloat(a) || 0) - (parseFloat(b) || 0)
+		: (a, b) => a < b ? -1 : (a > b ? 1 : 0));
+	if (reverse) lines.reverse();
+	if (unique) lines = lines.filter((line, i) => i === 0 || line !== lines[i - 1]);
+	return textNode(lines.join('\n'));
+}
+
+function uniq(args, stdin) {
+	// -c prefix each line with its count, -d show only duplicated lines.
+	let count = false, dupsOnly = false;
+	const rest = [];
+	for (const a of args) {
+		if (a.startsWith('-') && a.length > 1) {
+			if (/c/.test(a)) count = true;
+			if (/d/.test(a)) dupsOnly = true;
+		} else rest.push(a);
+	}
+	const input = readInput('uniq', rest[0], stdin);
+	if (input.error) return textNode(input.error);
+	const lines = input.text === '' ? [] : input.text.split('\n');
+	// uniq only collapses *adjacent* duplicate lines, like the real thing.
+	const groups = [];
+	for (const line of lines) {
+		const last = groups[groups.length - 1];
+		if (last && last.line === line) last.n += 1;
+		else groups.push({ line, n: 1 });
+	}
+	const out = groups
+		.filter(g => !dupsOnly || g.n > 1)
+		.map(g => count ? `${g.n} ${g.line}` : g.line);
+	return textNode(out.join('\n'));
+}
+
 function html(t) {
 	const div = document.createElement('div');
 	div.innerHTML = t;
@@ -541,7 +596,7 @@ function runProgram(program, args, stdin) {
 }
 
 // split a command line into tokens. single/double quotes group text (and are
-// stripped); the shell operators | > >> become their own tokens, but only when
+// stripped); the shell operators ; | > >> become their own tokens, but only when
 // unquoted. returns [{ value, op }], where op flags an operator token.
 function tokenize(input) {
 	const tokens = [];
@@ -555,13 +610,14 @@ function tokenize(input) {
 			continue;
 		}
 		if (c === '|') { tokens.push({ value: '|', op: true }); i += 1; continue; }
+		if (c === ';') { tokens.push({ value: ';', op: true }); i += 1; continue; }
 		// a word: accumulate until whitespace or an operator, honoring quotes. we
 		// remember whether any part was quoted so globbing skips quoted words.
 		let value = '';
 		let quoted = false;
 		while (i < input.length) {
 			const ch = input[i];
-			if (ch === ' ' || ch === '\t' || ch === '>' || ch === '|') break;
+			if (ch === ' ' || ch === '\t' || ch === '>' || ch === '|' || ch === ';') break;
 			if (ch === '"' || ch === "'") {
 				const quote = ch;
 				quoted = true;
@@ -618,9 +674,25 @@ function executeCommand(inputText, node) {
 	node.appendChild(document.createTextNode(inputText))
 	node.appendChild(document.createElement("br"))
 
-	// tokenize, split into pipeline stages on `|`, and pull a trailing
-	// redirection (>/>>) off the final stage.
+	// split the line into `;`-separated command lines and run each in order.
 	const tokens = tokenize(inputText);
+	const lines = [[]];
+	for (const t of tokens) {
+		if (t.op && t.value === ';') lines.push([]);
+		else lines[lines.length - 1].push(t);
+	}
+	for (const lineTokens of lines) {
+		runPipeline(lineTokens, node);
+	}
+
+	const label = document.getElementById('prompt');
+	if (label) label.innerHTML = promptHtml();
+}
+
+// run one command line (a token list): split into pipeline stages on `|`, pull a
+// trailing redirect off the final stage, expand globs, then execute the stages,
+// appending output or errors to `node`.
+function runPipeline(tokens, node) {
 	const stages = [[]];
 	for (const t of tokens) {
 		if (t.op && t.value === '|') stages.push([]);
@@ -694,7 +766,4 @@ function executeCommand(inputText, node) {
 			}
 		}
 	}
-
-	const label = document.getElementById('prompt');
-	if (label) label.innerHTML = promptHtml();
 }
