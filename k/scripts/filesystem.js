@@ -18,7 +18,8 @@ const programs = {
 	"rm": rm,
 	"rmdir": rmdir,
 	"mv": mv,
-	"cp": cp
+	"cp": cp,
+	"chmod": chmod
 };
 
 let filesystem = {
@@ -42,6 +43,17 @@ function isDirectory(node) {
 	return node !== null && typeof node === 'object' && !(node instanceof Node);
 }
 
+// an executable file is a file node flagged by chmod +x. it stays a DOM node
+// (so it persists); we just run its text as a program when invoked.
+function isExecutableFile(node) {
+	return node instanceof Node && node.executable === true;
+}
+
+// something you can run: a built-in program (function) or an executable file.
+function isRunnable(node) {
+	return typeof node === 'function' || isExecutableFile(node);
+}
+
 // turn a path (absolute or relative) into { segments, node }, or null if it
 // does not exist. handles "." and "..".
 function resolvePath(input) {
@@ -61,16 +73,16 @@ function resolvePath(input) {
 	return { segments, node };
 }
 
-// find a runnable program by name: an explicit path, or a bare name searched
-// across PATH. returns the program function, or null if not found/not runnable.
+// find something runnable by name: an explicit path, or a bare name searched
+// across PATH. returns the program (function or executable file node), or null.
 function resolveCommand(name) {
 	if (name.includes('/')) {
 		const r = resolvePath(name);
-		return r && typeof r.node === 'function' ? r.node : null;
+		return r && isRunnable(r.node) ? r.node : null;
 	}
 	for (const dir of PATH) {
 		const r = resolvePath(`${dir}/${name}`);
-		if (r && typeof r.node === 'function') return r.node;
+		if (r && isRunnable(r.node)) return r.node;
 	}
 	return null;
 }
@@ -211,7 +223,9 @@ function serializeFs(node) {
 		}
 		return { d: children };
 	}
-	return { f: node.innerHTML };
+	const file = { f: node.innerHTML };
+	if (node.executable === true) file.x = true;
+	return file;
 }
 
 // rebuild a filesystem node from serializeFs output.
@@ -224,7 +238,11 @@ function deserializeFs(obj) {
 			}
 			return dir;
 		}
-		if (obj.f !== undefined) return html(obj.f);
+		if (obj.f !== undefined) {
+			const file = html(obj.f);
+			if (obj.x === true) file.executable = true;
+			return file;
+		}
 	}
 	return html('');
 }

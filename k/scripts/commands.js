@@ -10,7 +10,7 @@ function ls(args) {
 	const names = Object.keys(resolved.node).map(name => {
 		const child = resolved.node[name];
 		if (isDirectory(child)) return `<span class="fs-dir">${name}/</span>`;
-		if (typeof child === 'function') return `<span class="fs-exec">${name}</span>`;
+		if (isRunnable(child)) return `<span class="fs-exec">${name}</span>`;
 		return name;
 	});
 	return html(names.join('  '));
@@ -44,9 +44,13 @@ function cat(args) {
 	if (isDirectory(resolved.node)) {
 		return html(`cat: ${escapeHtml(args[0])}: Is a directory`);
 	}
-	// a program is a function -> print its source. a file is a node -> print it.
+	// a program (function) or executable file -> print its source. a plain file
+	// is a node -> render it.
 	if (typeof resolved.node === 'function') {
 		return html('<pre style="margin: 0">' + escapeHtml(resolved.node.toString()) + '</pre>');
+	}
+	if (isExecutableFile(resolved.node)) {
+		return html('<pre style="margin: 0">' + escapeHtml(resolved.node.textContent) + '</pre>');
 	}
 	return resolved.node.cloneNode(true);
 }
@@ -295,6 +299,38 @@ function cp(args) {
 	return html(errors.join('<br>'));
 }
 
+function chmod(args) {
+	if (args.length < 2) {
+		return html('chmod: missing operand');
+	}
+	const mode = args[0];
+	let executable;
+	if (mode === '+x') executable = true;
+	else if (mode === '-x') executable = false;
+	else return html(`chmod: invalid mode: '${escapeHtml(mode)}'`);
+	const errors = [];
+	let changed = false;
+	for (const target of args.slice(1)) {
+		const resolved = resolvePath(target);
+		if (resolved === null) {
+			errors.push(`chmod: cannot access '${escapeHtml(target)}': No such file or directory`);
+			continue;
+		}
+		if (isDirectory(resolved.node)) {
+			errors.push(`chmod: '${escapeHtml(target)}': is a directory`);
+			continue;
+		}
+		if (typeof resolved.node === 'function') {
+			errors.push(`chmod: '${escapeHtml(target)}': is a built-in program`);
+			continue;
+		}
+		resolved.node.executable = executable;
+		changed = true;
+	}
+	if (changed) saveFilesystem();
+	return html(errors.join('<br>'));
+}
+
 function html(t) {
 	const div = document.createElement('div');
 	div.innerHTML = t;
@@ -329,9 +365,26 @@ function writeToFile(target, node, append) {
 		const existingInner = existing.innerHTML;
 		content = existingInner && incoming ? existingInner + '<br>' + incoming : existingInner + incoming;
 	}
-	p.parent[p.name] = html(content);
+	const result = html(content);
+	// editing an existing executable file keeps its exec bit, like a real chmod.
+	if (existing instanceof Node && existing.executable === true) {
+		result.executable = true;
+	}
+	p.parent[p.name] = result;
 	saveFilesystem();
 	return null;
+}
+
+// run a resolved command: a built-in function, or an executable file whose text
+// is executed as a JS function body (with access to html(), args, the fs, ...).
+function runProgram(program, args) {
+	if (typeof program === 'function') {
+		return program(args);
+	}
+	const fn = new Function('args', program.textContent);
+	const out = fn(args);
+	if (out instanceof Node) return out;
+	return html(out === undefined || out === null ? '' : escapeHtml(String(out)));
 }
 
 function executeCommand(inputText, node) {
@@ -360,11 +413,11 @@ function executeCommand(inputText, node) {
 		if (err) node.appendChild(document.createTextNode(err))
 	} else if (command !== "") {
 		const program = resolveCommand(command);
-		if (typeof program !== 'function') {
+		if (program === null) {
 			node.appendChild(document.createTextNode(`CRAsh: ${command}: command not found`))
 		} else {
 			try {
-				const result = program(args);
+				const result = runProgram(program, args);
 				if (redirect) {
 					const err = writeToFile(redirect.target, result, redirect.append);
 					if (err) node.appendChild(document.createTextNode(err))
