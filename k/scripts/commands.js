@@ -55,6 +55,10 @@ function pwd() {
 	return html(currentPath());
 }
 
+function echo(args) {
+	return html(escapeHtml(args.join(' ')));
+}
+
 function joefetch() {
 	return html(`
 	<div class="joefetch">
@@ -305,6 +309,31 @@ function promptHtml() {
 	return '<span class="prompt-user">kiera</span>@<span class="prompt-host">shellfish.racing</span> ' + escapeHtml(currentPath()) + ' $ ';
 }
 
+// redirect a command's output node into a file. `>` overwrites, `>>` appends.
+// returns an error string or null. programs (in /bin) can't be clobbered.
+function writeToFile(target, node, append) {
+	const p = resolveParent(target);
+	if (p === null) {
+		return `CRAsh: ${escapeHtml(target)}: No such file or directory`;
+	}
+	const existing = p.parent[p.name];
+	if (isDirectory(existing)) {
+		return `CRAsh: ${escapeHtml(target)}: Is a directory`;
+	}
+	if (typeof existing === 'function') {
+		return `CRAsh: ${escapeHtml(target)}: cannot overwrite program`;
+	}
+	const incoming = node ? node.innerHTML : '';
+	let content = incoming;
+	if (append && existing) {
+		const existingInner = existing.innerHTML;
+		content = existingInner && incoming ? existingInner + '<br>' + incoming : existingInner + incoming;
+	}
+	p.parent[p.name] = html(content);
+	saveFilesystem();
+	return null;
+}
+
 function executeCommand(inputText, node) {
 	const promptEl = document.createElement('span');
 	promptEl.innerHTML = promptHtml();
@@ -312,16 +341,36 @@ function executeCommand(inputText, node) {
 	node.appendChild(document.createTextNode(inputText))
 	node.appendChild(document.createElement("br"))
 
-	const parts = inputText.trim().split(/\s+/);
-	const command = parts[0];
+	// split off a trailing `>`/`>>` redirection, tolerating attached forms (a>b).
+	const parts = inputText.replace(/>>?/g, m => ' ' + m + ' ').trim().split(/\s+/);
+	let redirect = null;
+	const opIdx = parts.findIndex(p => p === '>' || p === '>>');
+	if (opIdx !== -1) {
+		redirect = { append: parts[opIdx] === '>>', target: parts[opIdx + 1] };
+		parts.splice(opIdx);
+	}
+	const command = parts[0] === undefined ? "" : parts[0];
 	const args = parts.slice(1);
-	if (command !== "") {
+
+	if (redirect && (redirect.target === undefined || redirect.target === '')) {
+		node.appendChild(document.createTextNode('CRAsh: syntax error near unexpected token `newline`'))
+	} else if (command === "" && redirect) {
+		// bare redirection like `> a` just truncates/creates an empty file.
+		const err = writeToFile(redirect.target, null, redirect.append);
+		if (err) node.appendChild(document.createTextNode(err))
+	} else if (command !== "") {
 		const program = resolveCommand(command);
 		if (typeof program !== 'function') {
 			node.appendChild(document.createTextNode(`CRAsh: ${command}: command not found`))
 		} else {
 			try {
-				node.appendChild(program(args))
+				const result = program(args);
+				if (redirect) {
+					const err = writeToFile(redirect.target, result, redirect.append);
+					if (err) node.appendChild(document.createTextNode(err))
+				} else {
+					node.appendChild(result)
+				}
 			} catch (err) {
 				node.appendChild(document.createTextNode(`CRAsh: ${command}: ${err}`))
 			}

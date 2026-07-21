@@ -10,6 +10,7 @@ const programs = {
 	"cd": cd,
 	"cat": cat,
 	"pwd": pwd,
+	"echo": echo,
 	"joefetch": joefetch,
 	"clear": clear,
 	"touch": touch,
