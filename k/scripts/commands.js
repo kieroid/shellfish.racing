@@ -93,7 +93,7 @@ function joefetch() {
 			<br>
 			<b>pronouns: </b>she/her
 			<br><br>
-			<b>links: </b><a href="https://git.shellfish.racing/kiki">forgejo</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <a href="https://tech.lgbt/@ki">mastodon</a><br>
+			<b>links: </b><a href="https://forgejo.toe.quest/kiki">forgejo</a> <a href="https://www.last.fm/user/kieroid">last.fm</a> <a href="https://tech.lgbt/@ki">mastodon</a><br>
 			<b>contact: </b> <button onclick="copyText(this, '@lvto')">discord</button> <button onclick="copyText(this, '@kier.99')">signal</button> <a href="https://matrix.to/#/@kiera:shellfish.racing">matrix</a><br>
 		</div>
 	</div>`);
